@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Salespeople</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+      <th>Phone no</th>
+      <th>Amount of box</th>
+      <th>Amount of gallon</th>
+      <th>For him</th>
+      <th>To him</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salespeople.each do |salesperson| %>
+      <tr>
+        <td><%= salesperson.name %></td>
+        <td><%= salesperson.city %></td>
+        <td><%= salesperson.phone_NO %></td>
+        <td><%= salesperson.amount_of_box %></td>
+        <td><%= salesperson.amount_of_gallon %></td>
+        <td><%= salesperson.for_him %></td>
+        <td><%= salesperson.to_him %></td>
+        <td><%= link_to 'Show', salesperson %></td>
+        <td><%= link_to 'Edit', edit_salesperson_path(salesperson) %></td>
+        <td><%= link_to 'Destroy', salesperson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Salesperson', new_salesperson_path %>

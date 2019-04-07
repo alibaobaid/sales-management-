@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @salesperson.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @salesperson.city %>
+</p>
+
+<p>
+  <strong>Phone no:</strong>
+  <%= @salesperson.phone_NO %>
+</p>
+
+<p>
+  <strong>Amount of box:</strong>
+  <%= @salesperson.amount_of_box %>
+</p>
+
+<p>
+  <strong>Amount of gallon:</strong>
+  <%= @salesperson.amount_of_gallon %>
+</p>
+
+<p>
+  <strong>For him:</strong>
+  <%= @salesperson.for_him %>
+</p>
+
+<p>
+  <strong>To him:</strong>
+  <%= @salesperson.to_him %>
+</p>
+
+<%= link_to 'Edit', edit_salesperson_path(@salesperson) %> |
+<%= link_to 'Back', salespeople_path %>
