@@ -1,52 +1,46 @@
-<%= form_with(model: salesperson, local: true) do |form| %>
-  <% if salesperson.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(salesperson.errors.count, "error") %> prohibited this salesperson from being saved:</h2>
+<div  class="form-group">
+  <%= form_with(model: salesperson, local: true) do |form|  %>
+    <% if salesperson.errors.any? %>
+      <div  class="alert alert-warning" role="alert" style="text-align: center;" >
+        <h2> يرجئ التاكد من التالي </h2>
+        <ul>
+        <% salesperson.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% salesperson.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="form-group">
+      <%= form.text_field :name, class: "form-control" , placeholder: "الاسم"  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :city, class: "form-control" , placeholder: "المدينه" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :phone_NO, class: "form-control" , placeholder:"رقم الجوال" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :amount_of_box, class: "form-control", placeholder: "عدد الصناديق" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :amount_of_gallon, class: "form-control", placeholder:"عدد الجوالين" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :for_him, class: "form-control", placeholder:"المبلغ المستحق" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :to_him, class: "form-control", placeholder: "المبلغ المطلوب"%>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "موافقه",class:"btn btn-light" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone_NO %>
-    <%= form.text_field :phone_NO %>
-  </div>
-
-  <div class="field">
-    <%= form.label :amount_of_box %>
-    <%= form.number_field :amount_of_box %>
-  </div>
-
-  <div class="field">
-    <%= form.label :amount_of_gallon %>
-    <%= form.number_field :amount_of_gallon %>
-  </div>
-
-  <div class="field">
-    <%= form.label :for_him %>
-    <%= form.number_field :for_him %>
-  </div>
-
-  <div class="field">
-    <%= form.label :to_him %>
-    <%= form.number_field :to_him %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

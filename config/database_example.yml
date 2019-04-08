@@ -1,0 +1,23 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: username
+  password: password
+  host: localhost
+
+development:
+  <<: *default
+  database: sales_management_development
+
+
+test:
+  <<: *default
+  database: sales_management_test
+
+production:
+  <<: *default
+  database: sales_management_production
+  username: sales_management
+  password: <%= ENV['SALES_MANAGEMENT_DATABASE_PASSWORD'] %>

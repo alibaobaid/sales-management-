@@ -28,7 +28,7 @@ class SalespeopleController < ApplicationController
 
     respond_to do |format|
       if @salesperson.save
-        format.html { redirect_to @salesperson, notice: 'Salesperson was successfully created.' }
+        format.html { redirect_to @salesperson, notice: 'تمت عملية الاضافة بنجاح' }
         format.json { render :show, status: :created, location: @salesperson }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SalespeopleController < ApplicationController
   def update
     respond_to do |format|
       if @salesperson.update(salesperson_params)
-        format.html { redirect_to @salesperson, notice: 'Salesperson was successfully updated.' }
+        format.html { redirect_to @salesperson, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @salesperson }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SalespeopleController < ApplicationController
   def destroy
     @salesperson.destroy
     respond_to do |format|
-      format.html { redirect_to salespeople_url, notice: 'Salesperson was successfully destroyed.' }
+      format.html { redirect_to salespeople_url, notice: 'تمت عملية الحذف بنجاح' }
       format.json { head :no_content }
     end
   end

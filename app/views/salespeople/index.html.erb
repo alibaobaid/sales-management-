@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Salespeople</h1>
+  <p  id="notice"  style="text-align: center;" ><%= notice %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>City</th>
-      <th>Phone no</th>
-      <th>Amount of box</th>
-      <th>Amount of gallon</th>
-      <th>For him</th>
-      <th>To him</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @salespeople.each do |salesperson| %>
-      <tr>
-        <td><%= salesperson.name %></td>
-        <td><%= salesperson.city %></td>
-        <td><%= salesperson.phone_NO %></td>
-        <td><%= salesperson.amount_of_box %></td>
-        <td><%= salesperson.amount_of_gallon %></td>
-        <td><%= salesperson.for_him %></td>
-        <td><%= salesperson.to_him %></td>
-        <td><%= link_to 'Show', salesperson %></td>
-        <td><%= link_to 'Edit', edit_salesperson_path(salesperson) %></td>
-        <td><%= link_to 'Destroy', salesperson, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<h1 style="text-align: center;">قائمة المندوبين</h1>
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light"  >
+      <tr  >
+        <th>الاسم</th>
+        <th>المدينه</th>
+        <th>رقم الجوال</th>
+        <th>عدد العلب</th>
+        <th>عدد الجوالين</th>
+        <th>المبلغ المستحق</th>
+        <th>المبلغ المطلوب</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody style="text-align: center;" >
+      <% @salespeople.each do |salesperson| %>
+        <tr  >
+          <td><%= salesperson.name %></td>
+          <td><%= salesperson.city %></td>
+          <td><%= salesperson.phone_NO %></td>
+          <td><%= salesperson.amount_of_box %></td>
+          <td><%= salesperson.amount_of_gallon %></td>
+          <td><%= salesperson.for_him %></td>
+          <td><%= salesperson.to_him %></td>
+          <td><%= link_to 'عرض', salesperson , class: "stretched-link"%></td>
+          <td><%= link_to 'تعديل', edit_salesperson_path(salesperson) , class: "stretched-link" %></td>
+          <td><%= link_to 'حذف', salesperson, method: :delete, data: { confirm: 'هل انت مناكد من عملية الحذف؟' }, class: "stretched-link" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Salesperson', new_salesperson_path %>
+<%= link_to 'إضافة مندوب', new_salesperson_path , class: "btn btn-primary stretched-link"%>
