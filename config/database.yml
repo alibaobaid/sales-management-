@@ -4,7 +4,7 @@ default: &default
   encoding: unicode
   pool: 5
   username: ali_amrah
-  password: click227
+  password: <%= ENV['db_password'] %>
   host: localhost
 
 development:

@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# use gem 'figaro' to set environment varibule
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
