@@ -18,11 +18,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/salespeople#index"> المندوبين <span class="sr-only">(current)</span></a>
+          <li class="<%= params[:controller] == 'delegates'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/delegates#index"> المندوبين<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"> تسليم البضائع</a>
+          <li class="<%= params[:controller] == 'deliveries'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/deliveries#index"> تسليم البضائع</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#"> المسوقين</a>
@@ -34,7 +34,7 @@
             <a class="nav-link" href="#">المبيعات</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="#">الحوالات</a>
           </li>
         </ul>
       </div>

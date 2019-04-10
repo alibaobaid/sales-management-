@@ -1,6 +1,6 @@
-class CreateSalespeople < ActiveRecord::Migration[5.2]
+class CreateDelegates < ActiveRecord::Migration[5.2]
   def change
-    create_table :salespeople do |t|
+    create_table :delegates do |t|
       t.string :name
       t.string :city
       t.string :phone_NO

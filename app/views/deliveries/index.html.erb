@@ -1,0 +1,35 @@
+<p id="notice" style="text-align: center;"><%= notice %></p>
+
+<h2 style="text-align: center;">عمليات التسليم </h2>
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>نوع البضاعه </th>
+        <th>الكمية</th>
+        <th>المندوب </th>
+        <th>تاريخ التسليم</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% @deliveries.each do |delivery| %>
+        <tr>
+          <td><%= delivery.commodity_type %></td>
+          <td><%= delivery.commodity_amount %></td>
+          <td><%= delivery.delegate.name %></td>
+          <td><%= delivery.delivery_time.to_date %></td>
+          <td><%= link_to 'عرض', delivery , class: "stretched-link" %></td>
+          <td><%= link_to 'تعديل', edit_delivery_path(delivery),class: "stretched-link"  %></td>
+          <td><%= link_to 'حذف', delivery, method: :delete, data: { confirm: 'هل انت متاكد من الحذف؟' },class: "stretched-link"  %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة عملية تلسيم', new_delivery_path ,class: "btn btn-primary stretched-link" %>
+<%= link_to "استخراج  اكسل", deliveries_path(format: "xlsx"),class: "btn btn-primary stretched-link" %>

@@ -1,0 +1,23 @@
+<br>
+<p id="notice" style="text-align: center;" ><%= notice %></p>
+
+<dl class="row" style="text-align: right;">
+  <dt class="col-sm-3">الاسم </dt>
+  <dd class="col-sm-9"><%= @delegate.name %></dd>
+  <dt class="col-sm-3">المدينه </dt>
+  <dd class="col-sm-9"><%= @delegate.city %></dd>
+  <dt class="col-sm-3">رقم الجوال </dt>
+  <dd class="col-sm-9"><%= @delegate.phone_NO %></dd>
+  <dt class="col-sm-3">عدد العلب </dt>
+  <dd class="col-sm-9"><%= @delegate.amount_of_box %></dd>
+  <dt class="col-sm-3">عدد الجوالين </dt>
+  <dd class="col-sm-9"><%= @delegate.amount_of_gallon %></dd>
+  <dt class="col-sm-3">المبلغ المستحق  </dt>
+  <dd class="col-sm-9"><%= @delegate.for_him %></dd>
+  <dt class="col-sm-3">المبلغ المطلوب  </dt>
+  <dd class="col-sm-9"><%= @delegate.to_him %></dd>
+
+</dl>
+
+<%= link_to 'تعديل', edit_delegate_path(@delegate) , class: "btn btn-primary stretched-link"%> |
+<%= link_to 'عودة', delegates_path , class: "btn btn-primary stretched-link" %>

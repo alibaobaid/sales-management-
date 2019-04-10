@@ -1,0 +1,45 @@
+
+<br>
+<p  id="notice"  style="text-align: center;" ><%= notice %></p>
+
+<h2 style="text-align: center;">قائمة المندوبين</h2>
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light"  >
+      <tr  >
+        <th>الاسم</th>
+        <th>المدينه</th>
+        <th>رقم الجوال</th>
+        <th>عدد العلب</th>
+        <th>عدد الجوالين</th>
+        <th>المبلغ المستحق</th>
+        <th>المبلغ المطلوب</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: center;" >
+      <% @delegates.each do |delegate| %>
+        <tr  >
+          <td><%= delegate.name %></td>
+          <td><%= delegate.city %></td>
+          <td><%= delegate.phone_NO %></td>
+          <td><%= delegate.amount_of_box %></td>
+          <td><%= delegate.amount_of_gallon %></td>
+          <td><%= delegate.for_him %></td>
+          <td><%= delegate.to_him %></td>
+          <td><%= link_to 'عرض', delegate , class: "stretched-link"%></td>
+          <td><%= link_to 'تعديل', edit_delegate_path(delegate) , class: "stretched-link" %></td>
+          <td><%= link_to 'حذف', delegate, method: :delete, data: { confirm: 'هل انت مناكد من عملية الحذف؟' }, class: "stretched-link" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة مندوب', new_delegate_path , class: "btn btn-primary stretched-link"%>
+<%= link_to "استخراج  اكسل", delegates_path(format: "xlsx"),class: "btn btn-primary stretched-link" %>
+
+
