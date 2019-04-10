@@ -1,0 +1,34 @@
+<div  class="form-group">
+  <%= form_with(model: @delivery, local: true) do |form| %>
+    <% if @delivery.errors.any? %>
+      <div  class="alert alert-warning" role="alert" style="text-align: center;" >
+          <h2> يرجئ التاكد من التالي </h2>
+          <ul>
+          <% @delivery.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.select(:commodity_type, options_for_select(["جالون","علب"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "اختر نوع البضاعه"})  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.number_field :commodity_amount, class: "form-control" , placeholder: "الكمية" %>
+    </div>
+
+    <div class="form-group">    
+      <%= form.collection_select(:delegate_id, Delegate.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب المستلم"})  %>
+    </div>
+
+    <div class="form-group">
+     <%= form.date_field :delivery_time, class: "form-control",placeholder: "تاريخ التسليم"%>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "موافق",class:"btn btn-light"  %>
+    </div>
+  <% end %>
+</div>

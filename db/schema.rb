@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_07_072922) do
+ActiveRecord::Schema.define(version: 2019_04_10_140830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "salespeople", force: :cascade do |t|
+  create_table "delegates", force: :cascade do |t|
     t.string "name"
     t.string "city"
     t.string "phone_NO"
@@ -27,4 +27,13 @@ ActiveRecord::Schema.define(version: 2019_04_07_072922) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string "commodity_type"
+    t.integer "commodity_amount"
+    t.datetime "delivery_time"
+    t.bigint "delegate_id"
+    t.index ["delegate_id"], name: "index_deliveries_on_delegate_id"
+  end
+
+  add_foreign_key "deliveries", "delegates"
 end

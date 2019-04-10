@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "المندوبين") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row ["name","city"]
+  
+  # each user is a row on your spreadsheet
+  @delegates.each do |delegate|
+    sheet.add_row [ delegate.name, delegate.city]
+  end
+end

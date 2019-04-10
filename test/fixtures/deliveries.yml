@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commodity_type: MyString
+  commodity_amount: 1
+  delegate: one
+
+two:
+  commodity_type: MyString
+  commodity_amount: 1
+  delegate: two

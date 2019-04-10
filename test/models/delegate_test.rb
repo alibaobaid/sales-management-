@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SalespersonTest < ActiveSupport::TestCase
+class DelegateTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

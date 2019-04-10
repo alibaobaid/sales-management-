@@ -1,0 +1,16 @@
+
+<p id="notice" style="text-align: center;" ><%= notice %></p>
+
+<dl class="row" style="text-align: right;">
+  <dt class="col-sm-3">نوع البضاعه </dt>
+  <dd class="col-sm-9"><%= @delivery.commodity_type %></dd>
+  <dt class="col-sm-3">الكمية </dt>
+  <dd class="col-sm-9"><%= @delivery.commodity_amount %></dd>
+  <dt class="col-sm-3">المندوب </dt>
+  <dd class="col-sm-9"><%= @delivery.delegate.name %></dd>
+  <dt class="col-sm-3">تاريخ التسليم </dt>
+  <dd class="col-sm-9"><%= @delivery.delivery_time.to_date %></dd>
+</dl>
+
+<%= link_to 'تعديل', edit_delivery_path(@delivery) , class: "btn btn-primary stretched-link"%> |
+<%= link_to 'عودة', deliveries_path , class: "btn btn-primary stretched-link" %>
