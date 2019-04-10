@@ -25,7 +25,7 @@ class Delivery < ApplicationRecord
   # Validations
   validates_presence_of :commodity_type, message:'لا يكمن ترك خانت نوع البضاعه فارغه'
   validates_presence_of :commodity_amount, message:'لا يكمن ترك خانت الكمية فارغه'
-  validates_presence_of :delivery_time, message:'لا يكمن ترك خانت نوع تاريخ التسليم فارغه'
+  validates_presence_of :delivery_time, message:'لا يكمن ترك خانت  تاريخ التسليم فارغه'
   validates_presence_of :delegate_id, message:'لا يكمن ترك خانت المندوب فارغه'
 
   # Callbacks
