@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: deliveries
+#
+#  id               :bigint(8)        not null, primary key
+#  commodity_amount :integer
+#  commodity_type   :string
+#  delivery_time    :datetime
+#  delegate_id      :bigint(8)
+#
+# Indexes
+#
+#  index_deliveries_on_delegate_id  (delegate_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (delegate_id => delegates.id)
+#
+
 class Delivery < ApplicationRecord
   
   # Associations
