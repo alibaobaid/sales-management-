@@ -4,7 +4,17 @@ class DeliveriesController < ApplicationController
   # GET /deliveries
   # GET /deliveries.json
   def index
-    @deliveries = Delivery.all
+    @deliveries = if params[:search].present?
+      Delivery.joins(:delegate).where(
+        "
+          lower(delegates.name) LIKE :search OR
+          lower(deliveries.commodity_type) LIKE :search
+        ",
+        search: "%#{params[:search].downcase}%"
+      )
+    else
+      Delivery.all
+    end
     
     respond_to do |format|
       format.html

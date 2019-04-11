@@ -2,10 +2,10 @@ wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "المندوبين") do |sheet|
   # this is the head row of your spreadsheet
-  sheet.add_row ["name","city"]
+  sheet.add_row ["name","city","phone_NO","amount_of_box","amount_of_gallon","for_him","to_him"]
   
   # each user is a row on your spreadsheet
   @delegates.each do |delegate|
-    sheet.add_row [ delegate.name, delegate.city]
+    sheet.add_row [ delegate.name, delegate.city,delegate.phone_NO,delegate.amount_of_box,delegate.amount_of_gallon,delegate.for_him,delegate.to_him]
   end
 end

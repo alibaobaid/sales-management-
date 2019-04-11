@@ -2,7 +2,7 @@
   <%= form_with(model: delegate, local: true) do |form|  %>
     <% if delegate.errors.any? %>
       <div  class="alert alert-warning" role="alert" style="text-align: center;" >
-        <h2> يرجئ التاكد من التالي </h2>
+        <h3> يرجئ التاكد من التالي </h3>
         <ul>
         <% delegate.errors.full_messages.each do |message| %>
           <li><%= message %></li>

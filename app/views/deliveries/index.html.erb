@@ -9,7 +9,16 @@
         <th>الكمية</th>
         <th>المندوب </th>
         <th>تاريخ التسليم</th>
-        <th colspan="3"></th>
+        <th colspan="3">
+          <%= form_tag(deliveries_path, :method => "get", class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= search_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> بحث</button> 
+              </div>
+            </div>
+          <% end %>
+        </th>
       </tr>
     </thead>
 
@@ -31,5 +40,5 @@
 
 <br>
 
-<%= link_to 'إضافة عملية تلسيم', new_delivery_path ,class: "btn btn-primary stretched-link" %>
-<%= link_to "استخراج  اكسل", deliveries_path(format: "xlsx"),class: "btn btn-primary stretched-link" %>
+<%= link_to 'إضافة عملية تسليم', new_delivery_path ,class: "btn btn-primary stretched-link" %>
+<%= link_to "استخراج ملف اكسل", "./deliveries.xlsx?search=#{params[:search]}" ,class: "btn btn-primary stretched-link" %>
