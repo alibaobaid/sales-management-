@@ -41,6 +41,12 @@
     </nav>
     <div class="container">
       <%= yield %>
+      <% if controller.action_name == 'index' &&  controller.controller_name != 'home'%>
+        <div>
+          <%= link_to_prev_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة السابقة' %>
+          <%= link_to_next_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة التالية' %>
+        </div>
+      <% end %>
     </div>
   </body>
 </html>
