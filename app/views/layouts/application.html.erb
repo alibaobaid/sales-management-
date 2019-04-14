@@ -24,11 +24,14 @@
           <li class="<%= params[:controller] == 'deliveries'? "nav-item active" : "nav-item" %>">
             <a class="nav-link" href="/deliveries#index"> تسليم البضائع</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"> المسوقين</a>
+          <li class="<%= params[:controller] == 'marketers'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/marketers#index"> المسوقين</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">المساعدين</a>
+          <li class="<%= params[:controller] == 'assistants'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/assistants#index">المساعدين</a>
+          </li>
+          <li class="<%= params[:controller] == 'mangers'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/mangers#index">المدير</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">المبيعات</a>

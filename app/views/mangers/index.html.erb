@@ -1,0 +1,38 @@
+<br>
+<p id="notice"  style="text-align: center;" ><%= notice %></p>
+
+<h2 style="text-align: center;">المدراء</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>الاسم</th>
+        <th>المدينه</th>
+        <th>رقم الجوال</th>
+        <th>المبلغ المستحق</th>
+        <th>المبلغ المطلوب</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: center;">
+      <% @mangers.each do |manger| %>
+        <tr>
+          <td><%= manger.name %></td>
+          <td><%= manger.city %></td>
+          <td><%= manger.phone_NO %></td>
+          <td><%= manger.for_him %></td>
+          <td><%= manger.to_him %></td>
+          <td><%= link_to 'عرض', manger, class: "stretched-link"%></td>
+          <td><%= link_to 'تعديل', edit_manger_path(manger), class: "stretched-link" %></td>
+          <td><%= link_to 'حذف', manger, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة مدير', new_marketer_path, class: "btn btn-outline-success my-2 my-sm-0"%>
