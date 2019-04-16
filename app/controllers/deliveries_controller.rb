@@ -14,7 +14,7 @@ class DeliveriesController < ApplicationController
       )
     else
       Delivery.all
-    end
+    end.page(params[:page])
     
     respond_to do |format|
       format.html

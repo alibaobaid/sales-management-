@@ -4,7 +4,7 @@ class DelegatesController < ApplicationController
   # GET /delegates
   # GET /delegates.json
   def index
-    @delegates = Delegate.all
+    @delegates = Delegate.page(params[:page])
     
     respond_to do |format|
       format.html
