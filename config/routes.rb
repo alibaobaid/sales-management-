@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :mangers
+  resources :assistants
+  resources :marketers
   resources :deliveries
   resources :delegates
   resource  :home,                      only: [:index]

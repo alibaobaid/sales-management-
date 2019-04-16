@@ -1,0 +1,19 @@
+<br>
+<p id="notice" style="text-align: center;" ><%= notice %></p>
+
+<dl class="row" style="text-align: right;">
+  <dt class="col-sm-3">الاسم </dt>
+  <dd class="col-sm-9"><%=  @marketer.name %></dd>
+  <dt class="col-sm-3">المدينه </dt>
+  <dd class="col-sm-9"><%= @marketer.city %></dd>
+  <dt class="col-sm-3">رقم الجوال </dt>
+  <dd class="col-sm-9"><%= @marketer.phone_NO %></dd>
+  <dt class="col-sm-3">المبلغ المستحق  </dt>
+  <dd class="col-sm-9"><%= @marketer.for_him %></dd>
+  <dt class="col-sm-3">المبلغ المطلوب  </dt>
+  <dd class="col-sm-9"><%=@marketer.to_him %></dd>
+
+</dl>
+
+<%= link_to 'تعديل', edit_marketer_path(@marketer) , class: "btn btn-outline-success my-2 my-sm-0"%> |
+<%= link_to 'عودة', marketers_path , class: "btn btn-outline-success my-2 my-sm-0" %>

@@ -1,0 +1,19 @@
+<br>
+<p id="notice" style="text-align: center;" ><%= notice %></p>
+
+<dl class="row" style="text-align: right;">
+  <dt class="col-sm-3">الاسم </dt>
+  <dd class="col-sm-9"><%=  @assistant.name %></dd>
+  <dt class="col-sm-3">المدينه </dt>
+  <dd class="col-sm-9"><%= @assistant.city %></dd>
+  <dt class="col-sm-3">رقم الجوال </dt>
+  <dd class="col-sm-9"><%= @assistant.phone_NO %></dd>
+  <dt class="col-sm-3">المبلغ المستحق  </dt>
+  <dd class="col-sm-9"><%= @assistant.for_him %></dd>
+  <dt class="col-sm-3">المبلغ المطلوب  </dt>
+  <dd class="col-sm-9"><%=@assistant.to_him %></dd>
+
+</dl>
+
+<%= link_to 'تعديل', edit_assistant_path(@assistant) , class: "btn btn-outline-success my-2 my-sm-0"%> |
+<%= link_to 'عودة', assistants_path , class: "btn btn-outline-success my-2 my-sm-0" %>

@@ -1,0 +1,38 @@
+<div  class="form-group">
+  <%= form_with(model: marketer, local: true) do |form| %>
+    <% if marketer.errors.any? %>
+      <div  class="alert alert-warning" role="alert" style="text-align: center;" >
+        <h3> يرجئ التاكد من التالي </h3>
+        <ul>
+        <% marketer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.text_field :name, class: "form-control" , placeholder: "الاسم"  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :city, class: "form-control" , placeholder: "المدينه" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :phone_NO, class: "form-control" , placeholder:"رقم الجوال" %>
+    </div>
+
+   <div class="form-group">
+      <%= form.number_field :for_him, class: "form-control", placeholder:"المبلغ المستحق" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.number_field :to_him, class: "form-control", placeholder: "المبلغ المطلوب"%>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "موافق",class:"btn btn-outline-success my-2 my-sm-0" %>
+    </div>
+  <% end %>
+</div>

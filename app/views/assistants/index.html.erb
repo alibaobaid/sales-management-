@@ -1,0 +1,38 @@
+<br>
+<p id="notice"  style="text-align: center;" ><%= notice %></p>
+
+<h2 style="text-align: center;">المساعدين</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>الاسم</th>
+        <th>المدينه</th>
+        <th>رقم الجوال</th>
+        <th>المبلغ المستحق</th>
+        <th>المبلغ المطلوب</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: center;">
+      <% @assistants.each do |assistant| %>
+        <tr>
+          <td><%= assistant.name %></td>
+          <td><%= assistant.city %></td>
+          <td><%= assistant.phone_NO %></td>
+          <td><%= assistant.for_him %></td>
+          <td><%= assistant.to_him %></td>
+          <td><%= link_to 'عرض', assistant, class: "stretched-link"%></td>
+          <td><%= link_to 'تعديل', edit_assistant_path(assistant), class: "stretched-link" %></td>
+          <td><%= link_to 'حذف', assistant, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة مسوق', new_assistant_path, class: "btn btn-outline-success my-2 my-sm-0"%>

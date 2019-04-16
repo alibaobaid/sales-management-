@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @manger.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @manger.city %>
+</p>
+
+<p>
+  <strong>Phone no:</strong>
+  <%= @manger.phone_NO %>
+</p>
+
+<p>
+  <strong>For him:</strong>
+  <%= @manger.for_him %>
+</p>
+
+<p>
+  <strong>To him:</strong>
+  <%= @manger.to_him %>
+</p>
+
+<%= link_to 'Edit', edit_manger_path(@manger) %> |
+<%= link_to 'Back', mangers_path %>
+
+<br>
+<p id="notice" style="text-align: center;" ><%= notice %></p>
+
+<dl class="row" style="text-align: right;">
+  <dt class="col-sm-3">الاسم </dt>
+  <dd class="col-sm-9"><%= @manger.name %></dd>
+  <dt class="col-sm-3">المدينه </dt>
+  <dd class="col-sm-9"><%= @manger.city %></dd>
+  <dt class="col-sm-3">رقم الجوال </dt>
+  <dd class="col-sm-9"><%= @manger.phone_NO %></dd>
+  <dt class="col-sm-3">المبلغ المستحق  </dt>
+  <dd class="col-sm-9"><%= @manger.for_him %></dd>
+  <dt class="col-sm-3">المبلغ المطلوب  </dt>
+  <dd class="col-sm-9"><%= @manger.to_him %></dd>
+</dl>
+
+<%= link_to 'تعديل', edit_manger_path(@manger) , class: "btn btn-outline-success my-2 my-sm-0"%> |
+<%= link_to 'عودة', mangers_path , class: "btn btn-outline-success my-2 my-sm-0" %>
