@@ -34,10 +34,6 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-# use to export xlxs
-gem 'rubyzip', '>= 1.2.1'
-gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
-gem 'axlsx_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -54,6 +50,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
+
+# Spreadsheet Architect is a library that allows you to create XLSX, ODS, or CSV spreadsheets
+# super easily from ActiveRecord relations, plain Ruby objects, or tabular data
+gem 'spreadsheet_architect'
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -74,4 +74,3 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
-
