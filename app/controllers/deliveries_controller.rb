@@ -18,7 +18,7 @@ class DeliveriesController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.xlsx
+      format.xlsx {render xlsx: @deliveries.to_xlsx }
     end
   end
 

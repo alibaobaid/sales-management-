@@ -18,9 +18,10 @@
 #
 
 class Delivery < ApplicationRecord
+  include SpreadsheetArchitect
   
   # Associations
-  belongs_to :delegate
+  belongs_to :delegate, inverse_of: :deliveries
 
   # Validations
   validates_presence_of :commodity_type, message:'لا يكمن ترك خانت نوع البضاعه فارغه'
@@ -38,5 +39,14 @@ class Delivery < ApplicationRecord
     else 
       @current_delegate.update(amount_of_gallon: @current_delegate.amount_of_gallon.to_i + commodity_amount )
     end
+  end
+
+  def spreadsheet_columns
+    [
+      ['المندوب', delegate.name],
+      ['نوع البضاعه', :commodity_type],
+      ['الكميه', :commodity_amount],
+      ['تاريخ التسليم', delivery_time.to_date]
+    ]
   end
 end

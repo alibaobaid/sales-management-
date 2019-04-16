@@ -17,7 +17,7 @@
 class Delegate < ApplicationRecord
 
     # Associations
-    has_many   :deliveries, dependent: :destroy
+    has_many   :deliveries, dependent: :destroy, inverse_of: :delegate
 
     # Validations
     validates_presence_of :name, message:'لا يكمن ترك خانت الاسم فارغه'
