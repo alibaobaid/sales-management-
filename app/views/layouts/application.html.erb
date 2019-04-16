@@ -45,10 +45,16 @@
     <div class="container">
       <%= yield %>
       <% if controller.action_name == 'index' &&  controller.controller_name != 'home'%>
-        <div>
-          <%= link_to_prev_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة السابقة' %>
-          <%= link_to_next_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة التالية' %>
-        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <%= link_to_prev_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة السابقة' , class:"page-link" %>
+            </li>
+            <li class="pagination justify-content-center" >
+               <%= link_to_next_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة التالية', class:"page-link" %>
+            </li>
+          </ul>
+        </nav>
       <% end %>
     </div>
   </body>
