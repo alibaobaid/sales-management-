@@ -62,13 +62,13 @@ class AssistantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_assistant
-      @assistant = Assistant.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_assistant
+    @assistant = Assistant.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def assistant_params
-      params.require(:assistant).permit(:name, :city, :phone_NO, :for_him, :to_him)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def assistant_params
+    params.require(:assistant).permit(:name, :city, :phone_NO, :for_him, :to_him)
+  end
 end

@@ -1,0 +1,14 @@
+ar:
+  activerecord:
+    attributes:
+      marketer:
+        name: 'الاسم'
+        city: 'المدينة'
+    errors:
+      models:
+        marketer:
+          attributes:
+            name:
+              blank: 'لايمكن تركه فارغا'
+            city:
+              blank: 'لا يمكن ترها فارغه'

@@ -1,0 +1,14 @@
+ar:
+  activerecord:
+    attributes:
+      delegate:
+        name: 'الاسم'
+        city: 'المدينة'
+    errors:
+      models:
+        delegate:
+          attributes:
+            name:
+              blank: 'لايمكن تركه فارغا'
+            city:
+              blank: 'لا يمكن ترها فارغه'
