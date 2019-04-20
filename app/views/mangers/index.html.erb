@@ -11,7 +11,7 @@
         <th>المدينه</th>
         <th>رقم الجوال</th>
         <th>المبلغ المستحق</th>
-        <th>المبلغ المطلوب</th>
+        <th>الرصيد الحالي </th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -23,7 +23,6 @@
           <td><%= manger.city %></td>
           <td><%= manger.phone_NO %></td>
           <td><%= manger.for_him %></td>
-          <td><%= manger.to_him %></td>
           <td><%= link_to 'عرض', manger, class: "stretched-link"%></td>
           <td><%= link_to 'تعديل', edit_manger_path(manger), class: "stretched-link" %></td>
           <td><%= link_to 'حذف', manger, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>

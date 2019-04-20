@@ -12,8 +12,7 @@
         <th>رقم الجوال</th>
         <th>عدد العلب</th>
         <th>عدد الجوالين</th>
-        <th>المبلغ المستحق</th>
-        <th>المبلغ المطلوب</th>
+        <th>الرصيدالحالي</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -27,7 +26,6 @@
           <td><%= delegate.amount_of_box %></td>
           <td><%= delegate.amount_of_gallon %></td>
           <td><%= delegate.for_him %></td>
-          <td><%= delegate.to_him %></td>
           <td><%= link_to 'عرض', delegate , class: "stretched-link"%></td>
           <td><%= link_to 'تعديل', edit_delegate_path(delegate) , class: "stretched-link" %></td>
           <td><%= link_to 'حذف', delegate, method: :delete, data: { confirm: 'هل انت مناكد من عملية الحذف؟' }, class: "stretched-link" %></td>

@@ -12,11 +12,8 @@
   <dd class="col-sm-9"><%= @delegate.amount_of_box %></dd>
   <dt class="col-sm-3">عدد الجوالين </dt>
   <dd class="col-sm-9"><%= @delegate.amount_of_gallon %></dd>
-  <dt class="col-sm-3">المبلغ المستحق  </dt>
+  <dt class="col-sm-3">الرصيد الحالي </dt>
   <dd class="col-sm-9"><%= @delegate.for_him %></dd>
-  <dt class="col-sm-3">المبلغ المطلوب  </dt>
-  <dd class="col-sm-9"><%= @delegate.to_him %></dd>
-
 </dl>
 
 <%= link_to 'تعديل', edit_delegate_path(@delegate) , class: "btn btn-outline-success my-2 my-sm-0"%> |

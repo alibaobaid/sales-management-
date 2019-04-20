@@ -1,25 +1,91 @@
+<head>
 
+ <style type="text/css"> 
+  .carousel { 
+   background: #2f4357; 
+   margin-top: 20px; 
+  } 
+   
+  .carousel .item img { 
+   margin: 0 auto; 
+   /* Align slide image horizontally center */ 
+  } 
+   
+  .bs-example { 
+   margin: 20px; 
+  } 
+
+  .home-wrap {
+ 	clip: rect(0, auto, auto, 0);
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	width: 100%;
+ 	height: 100%;
+}
+#home {
+	background-image: url(<%= asset_path 'background.jpg' %>);
+ 	position: fixed;
+ 	display: table;
+ 	top: 0;
+ 	left: 0;
+ 	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center center;
+	-webkit-transform: translateZ(0);
+          transform: translateZ(0);
+	will-change: transform;
+	z-index: -1;
+}
+.landing-text {
+	z-index: 100;
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+ </style> 
+</head>
 <main role="main">
-  <div class="jumbotron" style="background: url(<%= asset_path '2.jpg' %>) no-repeat center center;background-size: cover;">
-      <div class="container" style="text-align: right;">
-        <h1 class="display-3">مؤسسة بلا حدود</h1>
-        <p>مؤسسة رائده في توفير افضل خلطات الدهون لعلاج مشاكل الشعر المختلفه التي يعاني منها الكثير </p>
-        <p><a class="btn btn-outline-success my-2 my-sm-0" href="#" role="button">معرفة المزيد &raquo;</a></p>
+  <div id ="home" class="jumbotron" >
+      <div class="landing-text" >
+        <h1 class="display-3"> نظام مؤسسة بلا حدود</h1>
+        <p>نظام اتمتة المهام اليومية للمؤسسه  </p>
+        <%= link_to 'دخول الاداره', "/" , class: "btn btn-outline-dark" %>
       </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
 
-  <!-- FOOTER -->
+  <%# <div class = "padding">
+    <div class = "container">
+      <div class = "row">
+        <div class = "col-lg-6 col-md-12  text-center">
+          <h2> فوايد الزيت</h2>
+         <p class="lead">
+        اطاله الشعر
+        انبات الفراغات 
+        تكثيف الشعر 
+        ايقاف التساقط
+        يفتح مسامات الشعر
+        ينشط خلايا الشعر
+       ينعم الشعر
+        يشيل التقصف
+        يشيل القشره
+         يستخدم للحيه والدقن والشنب ايضا
+        </p>
+        </div>
+        <div class= "col-lg-6 col-md-12 text-center">
+         <h2> يمانتبمناتمنباتممنبم</h2>
+         <p class="lead">kldfjglkdfjlkgdjflkgjdfgdfjglglkdfjlkjdfllkjdflgkvvdfglkj
+         fldkggggggmdfgjfdklsgjlkjlkjlk lkjfkldjflkjdlkn lkdfjlkdjlkjfdlk
+         fdlkgjlkfdjglkfdjlkgjdflk lkfdgklfdgjlkfdjg</p>
+         <p class="lead">kldfjglkdfjlkgdjflkgjdfgdfjglglkdfjlkjdfllkjdflgkvvdfglkj
+         fldkggggggmdfgjfdklsgjlkjlkjlk lkjfkldjflkjdlkn lkdfjlkdjlkjfdlk
+         fdlkgjlkfdjglkfdjlkgjdflk lkfdgklfdgjlkfdjg</p>
+        </div>
+      </div>
+    </div>
+  </div> %>
+
+     
+  
 </main>
