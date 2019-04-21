@@ -10,8 +10,7 @@
         <th>الاسم</th>
         <th>المدينه</th>
         <th>رقم الجوال</th>
-        <th>المبلغ المستحق</th>
-        <th>المبلغ المطلوب</th>
+        <th>الرصيد الحالي</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -23,7 +22,6 @@
           <td><%= marketer.city %></td>
           <td><%= marketer.phone_NO %></td>
           <td><%= marketer.for_him %></td>
-          <td><%= marketer.to_him %></td>
           <td><%= link_to 'عرض', marketer, class: "stretched-link"%></td>
           <td><%= link_to 'تعديل', edit_marketer_path(marketer), class: "stretched-link" %></td>
           <td><%= link_to 'حذف', marketer, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>

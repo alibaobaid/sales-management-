@@ -11,27 +11,24 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">مؤسسة بلا حدود</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+      <a class="navbar-brand" href="/"> مؤسسة بلا حدود</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <li class="<%= params[:controller] == 'mangers'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/mangers#index">المدير</a>
+          </li>
           <li class="<%= params[:controller] == 'delegates'? "nav-item active" : "nav-item" %>">
             <a class="nav-link" href="/delegates#index"> المندوبين<span class="sr-only">(current)</span></a>
           </li>
-          <li class="<%= params[:controller] == 'deliveries'? "nav-item active" : "nav-item" %>">
-            <a class="nav-link" href="/deliveries#index"> تسليم البضائع</a>
-          </li>
-          <li class="<%= params[:controller] == 'marketers'? "nav-item active" : "nav-item" %>">
+           <li class="<%= params[:controller] == 'marketers'? "nav-item active" : "nav-item" %>">
             <a class="nav-link" href="/marketers#index"> المسوقين</a>
           </li>
-          <li class="<%= params[:controller] == 'assistants'? "nav-item active" : "nav-item" %>">
-            <a class="nav-link" href="/assistants#index">المساعدين</a>
-          </li>
-          <li class="<%= params[:controller] == 'mangers'? "nav-item active" : "nav-item" %>">
-            <a class="nav-link" href="/mangers#index">المدير</a>
+          <li class="<%= params[:controller] == 'deliveries'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/deliveries#index"> تسليم البضائع</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">المبيعات</a>
@@ -45,10 +42,16 @@
     <div class="container">
       <%= yield %>
       <% if controller.action_name == 'index' &&  controller.controller_name != 'home'%>
-        <div>
-          <%= link_to_prev_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة السابقة' %>
-          <%= link_to_next_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة التالية' %>
-        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <%= link_to_prev_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة السابقة' , class:"page-link" %>
+            </li>
+            <li class="pagination justify-content-center" >
+               <%= link_to_next_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة التالية', class:"page-link" %>
+            </li>
+          </ul>
+        </nav>
       <% end %>
     </div>
   </body>
