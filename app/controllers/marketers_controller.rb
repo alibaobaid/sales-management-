@@ -25,7 +25,6 @@ class MarketersController < ApplicationController
   # POST /marketers.json
   def create
     @marketer = Marketer.new(marketer_params)
-    @marketers = Marketer.all
 
     respond_to do |format|
       if @marketer.save

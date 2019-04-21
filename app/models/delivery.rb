@@ -24,20 +24,16 @@ class Delivery < ApplicationRecord
   belongs_to :delegate, inverse_of: :deliveries
 
   # Validations
-  validates_presence_of :commodity_type, message:'لا يكمن ترك خانت نوع البضاعه فارغه'
-  validates_presence_of :commodity_amount, message:'لا يكمن ترك خانت الكمية فارغه'
-  validates_presence_of :delivery_time, message:'لا يكمن ترك خانت  تاريخ التسليم فارغه'
-  validates_presence_of :delegate_id, message:'لا يكمن ترك خانت المندوب فارغه'
+  validates :commodity_type, :commodity_amount, :delivery_time, :delegate_id, presence: true
 
   # Callbacks
   after_create :set_amount_to_delegate
   # instance method
   def set_amount_to_delegate
-    @current_delegate = Delegate.find(self.delegate_id) 
     if commodity_type == 'علب'
-      @current_delegate.update(amount_of_box: @current_delegate.amount_of_box.to_i + commodity_amount )
+      delegate.update(amount_of_box: delegate.amount_of_box + commodity_amount )
     else 
-      @current_delegate.update(amount_of_gallon: @current_delegate.amount_of_gallon.to_i + commodity_amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon + commodity_amount )
     end
   end
 

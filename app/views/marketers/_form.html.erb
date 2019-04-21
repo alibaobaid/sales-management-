@@ -3,7 +3,7 @@
     <% if marketer.errors.any? %>
       <div  class="alert alert-warning" role="alert" style="text-align: center;" >
         <h3> يرجئ التاكد من التالي </h3>
-        <ul>
+        <ul style="list-style-type: none;">
         <% marketer.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>

@@ -15,6 +15,5 @@
 class Manger < ApplicationRecord
 
     # Validations
-    validates_presence_of :name, message:'لا يكمن ترك خانت الاسم فارغه'
-    validates_presence_of :city, message:'لا يكمن ترك خانت المدينه فارغه'
+    validates :name, :city, presence: true
 end

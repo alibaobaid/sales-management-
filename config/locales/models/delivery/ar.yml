@@ -1,0 +1,20 @@
+ar:
+  activerecord:
+    attributes:
+      delivery:
+        commodity_type: 'نوع البضاعه'
+        commodity_amount: 'الكمية'
+        delivery_time: 'تاريخ التسليم'
+        delegate_id: 'المندوب'
+    errors:
+      models:
+        delivery:
+          attributes:
+            commodity_type:
+              blank: 'لايمكن تركه فارغا'
+            commodity_amount:
+              blank: 'لايمكن تركها فارغه'
+            delivery_time:
+              blank: 'لايمكن تركه فارغا'
+            delegate_id:
+              blank: 'لايمكن تركه فارغا'
