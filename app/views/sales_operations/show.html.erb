@@ -1,0 +1,26 @@
+<br>
+<p id="notice" style="text-align: center;" ><%= notice %></p>
+
+<dl class="row" style="text-align: right;">
+  <dt class="col-sm-3">التاريخ</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.date %></dd>
+  <dt class="col-sm-3">المندوب</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.delegate.name %></dd>
+  <dt class="col-sm-3">المسوق</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.marketer.name %></dd>
+  <dt class="col-sm-3">نوع البضاعه</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.commodity_type %></dd>
+  <dt class="col-sm-3">الكمية</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.commodity_amount %></dd>
+  <dt class="col-sm-3">السعر</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.price %></dd>
+  <dt class="col-sm-3">عمولة المندوب</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.delegate_commission %></dd>
+  <dt class="col-sm-3">عمولة المسوق</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.marketer_commission %></dd>
+  <dt class="col-sm-3">عمولة المدير</dt>
+  <dd class="col-sm-9"><%=  @sales_operation.manager_commission %></dd>
+</dl>
+
+<%= link_to 'تعديل', edit_sales_operation_path(@sales_operation) , class: "btn btn-outline-success my-2 my-sm-0"%> |
+<%= link_to 'عودة', sales_operations_path , class: "btn btn-outline-success my-2 my-sm-0" %>

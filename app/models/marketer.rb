@@ -13,6 +13,7 @@
 #
 
 class Marketer < ApplicationRecord
+    has_many :sales_operations
 
     # Validations
     validates :name, :city, presence: true
