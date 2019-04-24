@@ -1,0 +1,55 @@
+<br>
+<p id="notice"  style="text-align: center;" ><%= notice %></p>
+
+<h2 style="text-align: center;">المبيعات</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>التاريخ</th>
+        <th>المندوب</th>
+        <th>المسوق</th>
+        <th>نوع البضاعه</th>
+        <th>الكمية</th>
+        <th>السعر</th>
+        <th>عمولة المندوب</th>
+        <th>عمولة المسوق</th>
+        <th>عمولة المدير</th>
+        <th colspan="3">
+          <%= form_tag(sales_operations_path, :method => "get", class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= search_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button> 
+              </div>
+            </div>
+          <% end %>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: center;">
+      <% @sales_operations.each do |sales_operation| %>
+        <tr>
+          <td><%= sales_operation.date %></td>
+          <td><%= sales_operation.delegate.name %></td>
+          <td><%= sales_operation.marketer.name %></td>
+          <td><%= sales_operation.commodity_type %></td>
+          <td><%= sales_operation.commodity_amount %></td>
+          <td><%= sales_operation.price %></td>
+          <td><%= sales_operation.delegate_commission %></td>
+          <td><%= sales_operation.marketer_commission %></td>
+          <td><%= sales_operation.manager_commission %></td>
+          <td><%= link_to 'عرض', sales_operation, class: "stretched-link"%></td>
+          <td><%= link_to 'تعديل', edit_sales_operation_path(sales_operation), class: "stretched-link" %></td>
+          <td><%= link_to 'حذف', sales_operation, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة عملية بيع', new_sales_operation_path, class: "btn btn-outline-success my-2 my-sm-0"%>

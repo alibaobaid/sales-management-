@@ -30,8 +30,8 @@
           <li class="<%= params[:controller] == 'deliveries'? "nav-item active" : "nav-item" %>">
             <a class="nav-link" href="/deliveries#index"> تسليم البضائع</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">المبيعات</a>
+          <li class="<%= params[:controller] == 'sales_operations'? "nav-item active" : "nav-item" %>">
+            <a class="nav-link" href="/sales_operations#index">المبيعات</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">الحوالات</a>

@@ -1,0 +1,32 @@
+ar:
+  activerecord:
+    attributes:
+      sales_operation:
+        commodity_amount: 'الكمية'
+        commodity_type: 'نوع البضاعه'
+        date: 'التاريخ'
+        delegate_commission: 'عمولة المندوب'
+        marketer_commission: 'عمولة المسوق'
+        price: 'السعر'
+        marketer_id: 'المسوق'
+        delegate_id: 'المندوب'
+    errors:
+      models:
+        sales_operation:
+          attributes:
+            commodity_amount:
+              blank: 'لا يمكن تركها فارغا'
+            commodity_type:
+              blank: 'لا يمكن تركه فارغا'
+            date:
+              blank: 'لا يمكن تركه فارغا'
+            delegate_commission:
+              blank: 'لا يمكن تركها فارغا'
+            marketer_commission:
+              blank: 'لا يمكن تركها فارغا'
+            price:
+              blank: 'لا يمكن تركه فارغا'
+            marketer_id:
+              blank: 'لا يمكن تركه فارغا'
+            delegate_id:
+              blank: 'لا يمكن تركه فارغا'

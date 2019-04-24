@@ -18,6 +18,7 @@ class Delegate < ApplicationRecord
 
     # Associations
     has_many   :deliveries, dependent: :destroy, inverse_of: :delegate
+    has_many :sales_operations
 
     # Validations
     validates :name, :city, presence: true
