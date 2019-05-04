@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_161946) do
+ActiveRecord::Schema.define(version: 2019_04_27_115349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,24 @@ ActiveRecord::Schema.define(version: 2019_04_24_161946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "operations", force: :cascade do |t|
+    t.datetime "date_of_sale"
+    t.bigint "delegates_id"
+    t.string "product_type"
+    t.integer "amount"
+    t.integer "the_value"
+    t.integer "delegate_value"
+    t.bigint "marketers_id"
+    t.integer "marketer_value"
+    t.bigint "mangers_id"
+    t.integer "manger_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delegates_id"], name: "index_operations_on_delegates_id"
+    t.index ["mangers_id"], name: "index_operations_on_mangers_id"
+    t.index ["marketers_id"], name: "index_operations_on_marketers_id"
+  end
+
   create_table "sales_operations", force: :cascade do |t|
     t.date "date", null: false
     t.string "commodity_type", null: false
@@ -81,6 +99,9 @@ ActiveRecord::Schema.define(version: 2019_04_24_161946) do
   end
 
   add_foreign_key "deliveries", "delegates"
+  add_foreign_key "operations", "delegates", column: "delegates_id"
+  add_foreign_key "operations", "mangers", column: "mangers_id"
+  add_foreign_key "operations", "marketers", column: "marketers_id"
   add_foreign_key "sales_operations", "delegates"
   add_foreign_key "sales_operations", "marketers"
 end
