@@ -40,7 +40,7 @@ class SalesOperationsController < ApplicationController
 
     respond_to do |format|
       if @sales_operation.save
-        format.html { redirect_to @sales_operation, notice: 'Sales operation was successfully created.' }
+        format.html { redirect_to sales_operations_url, notice: 'تمت عملية الاضافة بنجاح' }
         format.json { render :show, status: :created, location: @sales_operation }
       else
         format.html { render :new }
@@ -54,7 +54,7 @@ class SalesOperationsController < ApplicationController
   def update
     respond_to do |format|
       if @sales_operation.update(sales_operation_params)
-        format.html { redirect_to @sales_operation, notice: 'Sales operation was successfully updated.' }
+        format.html { redirect_to @sales_operation, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @sales_operation }
       else
         format.html { render :edit }
@@ -68,7 +68,7 @@ class SalesOperationsController < ApplicationController
   def destroy
     @sales_operation.destroy
     respond_to do |format|
-      format.html { redirect_to sales_operations_url, notice: 'Sales operation was successfully destroyed.' }
+      format.html { redirect_to sales_operations_url, notice: 'تمت عملية الحذف بنجاح' }
       format.json { head :no_content }
     end
   end
@@ -81,6 +81,6 @@ class SalesOperationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sales_operation_params
-      params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :delegate_commission, :marketer_commission)
+      params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :manger_id, :delegate_commission, :marketer_commission)
     end
 end

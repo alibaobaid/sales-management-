@@ -92,9 +92,11 @@ ActiveRecord::Schema.define(version: 2019_04_27_115349) do
     t.float "marketer_commission", null: false
     t.bigint "delegate_id", null: false
     t.bigint "marketer_id", null: false
+    t.bigint "manger_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["delegate_id"], name: "index_sales_operations_on_delegate_id"
+    t.index ["manger_id"], name: "index_sales_operations_on_manger_id"
     t.index ["marketer_id"], name: "index_sales_operations_on_marketer_id"
   end
 
@@ -103,5 +105,6 @@ ActiveRecord::Schema.define(version: 2019_04_27_115349) do
   add_foreign_key "operations", "mangers", column: "mangers_id"
   add_foreign_key "operations", "marketers", column: "marketers_id"
   add_foreign_key "sales_operations", "delegates"
+  add_foreign_key "sales_operations", "mangers"
   add_foreign_key "sales_operations", "marketers"
 end

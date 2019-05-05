@@ -9,7 +9,7 @@ class CreateSalesOperations < ActiveRecord::Migration[5.2]
       t.float :marketer_commission, null: false
       t.references :delegate, foreign_key: true, index: true, null: false
       t.references :marketer, foreign_key: true, index: true, null: false
-      
+      t.references :manger,foreign_key: true, index: true, null: false
 
       t.timestamps
     end
