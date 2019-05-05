@@ -28,7 +28,7 @@ class MarketersController < ApplicationController
 
     respond_to do |format|
       if @marketer.save
-        format.html { redirect_to @marketer, notice: 'تمت عملية الاضافة بنجاح.' }
+        format.html { redirect_to @marketer, notice: 'تمت عملية الاضافة بنجاح' }
         format.json { render :show, status: :created, location: @marketer }
       else
         format.html { render :new }
