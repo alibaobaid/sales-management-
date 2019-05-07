@@ -65,7 +65,7 @@ class SalesOperation < ApplicationRecord
   end
 
   def update_delegate_value
-    delegate.update(for_him: delegate.for_him.to_i + delegate_commission )
+    delegate.update(for_him: delegate.for_him.to_i + delegate_commission - price)
   end
 
   def update_marketrt_value

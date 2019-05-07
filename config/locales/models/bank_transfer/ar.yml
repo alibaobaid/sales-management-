@@ -1,0 +1,20 @@
+ar:
+  activerecord:
+    attributes:
+      bank_transfer:
+        date_of_transfer: 'تاريخ الحواله'
+        transfer_type: 'نوع الحواله'
+        section_type: 'صنف المحول'
+        price: 'السعر'
+    errors:
+      models:
+        bank_transfer:
+          attributes:
+            date_of_transfer:
+              blank: 'لا يمكن تركها فارغا'
+            transfer_type:
+              blank: 'لا يمكن تركه فارغا'
+            section_type:
+              blank: 'لا يمكن تركه فارغا'
+            price:
+              blank: 'لا يمكن تركه فارغا'

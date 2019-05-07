@@ -28,7 +28,7 @@ class MangersController < ApplicationController
 
     respond_to do |format|
       if @manger.save
-        format.html { redirect_to @manger, notice: 'تمت عملية الاضافة بنجاح' }
+        format.html { redirect_to mangers_url, notice: 'تمت عملية الاضافة بنجاح' }
         format.json { render :show, status: :created, location: @manger }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MangersController < ApplicationController
   def update
     respond_to do |format|
       if @manger.update(manger_params)
-        format.html { redirect_to @manger, notice: 'تمت عملية التعديل بنجاح' }
+        format.html { redirect_to mangers_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @manger }
       else
         format.html { render :edit }

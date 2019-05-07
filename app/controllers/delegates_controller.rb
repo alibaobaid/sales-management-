@@ -33,7 +33,7 @@ class DelegatesController < ApplicationController
 
     respond_to do |format|
       if @delegate.save
-        format.html { redirect_to @delegate, notice: 'تمت عملية الاضافة بنجاح' }
+        format.html { redirect_to delegates_url, notice: 'تمت عملية الاضافة بنجاح' }
         format.json { render :show, status: :created, location: @delegate }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class DelegatesController < ApplicationController
   def update
     respond_to do |format|
       if @delegate.update(delegate_params)
-        format.html { redirect_to @delegate, notice: 'تمت عملية التعديل بنجاح' }
+        format.html { redirect_to delegates_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @delegate }
       else
         format.html { render :edit }
