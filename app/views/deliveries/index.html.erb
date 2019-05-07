@@ -9,7 +9,7 @@
         <th>الكمية</th>
         <th>المندوب </th>
         <th>تاريخ التسليم</th>
-        <th colspan="3">
+        <th colspan="2">
           <%= form_tag(deliveries_path, :method => "get", class: 'navbar-form navbar-left') do %>
             <div class="input-group">
               <%= search_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
@@ -29,7 +29,6 @@
           <td><%= delivery.commodity_amount %></td>
           <td><%= delivery.delegate.name %></td>
           <td><%= delivery.delivery_time.to_date %></td>
-          <td><%= link_to 'عرض', delivery , class: "stretched-link" %></td>
           <td><%= link_to 'تعديل', edit_delivery_path(delivery),class: "stretched-link"  %></td>
           <td><%= link_to 'حذف', delivery, method: :delete, data: { confirm: 'هل انت متاكد من الحذف؟' },class: "stretched-link"  %></td>
         </tr>

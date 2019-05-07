@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_27_115349) do
+ActiveRecord::Schema.define(version: 2019_05_05_235456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(version: 2019_04_27_115349) do
     t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bank_transfers", force: :cascade do |t|
+    t.datetime "date_of_transfer"
+    t.string "transfer_type"
+    t.string "section_type"
+    t.bigint "delegate_id"
+    t.bigint "marketer_id"
+    t.bigint "manger_id"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delegate_id"], name: "index_bank_transfers_on_delegate_id"
+    t.index ["manger_id"], name: "index_bank_transfers_on_manger_id"
+    t.index ["marketer_id"], name: "index_bank_transfers_on_marketer_id"
   end
 
   create_table "delegates", force: :cascade do |t|
@@ -100,6 +115,9 @@ ActiveRecord::Schema.define(version: 2019_04_27_115349) do
     t.index ["marketer_id"], name: "index_sales_operations_on_marketer_id"
   end
 
+  add_foreign_key "bank_transfers", "delegates"
+  add_foreign_key "bank_transfers", "mangers"
+  add_foreign_key "bank_transfers", "marketers"
   add_foreign_key "deliveries", "delegates"
   add_foreign_key "operations", "delegates", column: "delegates_id"
   add_foreign_key "operations", "mangers", column: "mangers_id"

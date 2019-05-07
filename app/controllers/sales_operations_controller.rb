@@ -54,7 +54,7 @@ class SalesOperationsController < ApplicationController
   def update
     respond_to do |format|
       if @sales_operation.update(sales_operation_params)
-        format.html { redirect_to @sales_operation, notice: 'تمت عملية التعديل بنجاح' }
+        format.html { redirect_to sales_operations_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @sales_operation }
       else
         format.html { render :edit }

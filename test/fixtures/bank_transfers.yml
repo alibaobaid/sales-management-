@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_of_transfer: 2019-05-06 02:54:56
+  delegates: one
+  transfer_type: MyString
+  section_type: MyString
+  marketers: one
+  mangers: one
+  price: 1
+
+two:
+  date_of_transfer: 2019-05-06 02:54:56
+  delegates: two
+  transfer_type: MyString
+  section_type: MyString
+  marketers: two
+  mangers: two
+  price: 1

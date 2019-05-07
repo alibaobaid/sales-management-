@@ -43,7 +43,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.save
-        format.html { redirect_to @delivery, notice: 'تمت عملية الاضافة بنجاح' }
+        format.html { redirect_to deliveries_url, notice: 'تمت عملية الاضافة بنجاح' }
         format.json { render :show, status: :created, location: @delivery }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class DeliveriesController < ApplicationController
   def update
     respond_to do |format|
       if @delivery.update(delivery_params)
-        format.html { redirect_to @delivery, notice: 'تمت عملية التعديل بنجاح' }
+        format.html { redirect_to deliveries_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @delivery }
       else
         format.html { render :edit }
