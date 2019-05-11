@@ -1,0 +1,33 @@
+<div  class="form-group">
+  <%= form_with(model: manger_discount, local: true) do |form| %>
+      <% if manger_discount.errors.any? %>
+        <div class="alert alert-warning" role="alert" style="text-align: center;">
+          <h3> يرجئ التاكد من التالي </h3>
+          <ul style="list-style-type: none;">
+            <% manger_discount.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+    <div class="form-group">
+      <%= form.collection_select(:manger_id, Manger.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المدير"})  %>
+    </div>
+
+    <div class="form-group">
+      <%= form.text_field :Desc, class: "form-control", placeholder: 'الوصف' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.number_field :value, class: "form-control", placeholder: 'المبلغ' %>
+    </div>
+    <div class="form-group ">
+      <%= form.date_field :date_of_discount, class: "form-control", placeholder: "تاريخ الصرف"%>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "موافق",class:"btn btn-outline-success my-2 my-sm-0" %>
+    </div>
+  <% end %>
+</div>

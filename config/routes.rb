@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :manger_discounts
   resources :bank_transfers
   resources :sales_operations
   resources :mangers

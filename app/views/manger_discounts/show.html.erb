@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Manger:</strong>
+  <%= @manger_discount.manger %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @manger_discount.Desc %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @manger_discount.value %>
+</p>
+
+<%= link_to 'Edit', edit_manger_discount_path(@manger_discount) %> |
+<%= link_to 'Back', manger_discounts_path %>
