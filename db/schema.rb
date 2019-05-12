@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_05_235456) do
+ActiveRecord::Schema.define(version: 2019_05_11_085640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 2019_05_05_235456) do
     t.index ["delegate_id"], name: "index_deliveries_on_delegate_id"
   end
 
+  create_table "manger_discounts", force: :cascade do |t|
+    t.bigint "manger_id"
+    t.string "Desc"
+    t.integer "value"
+    t.date "date_of_discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manger_id"], name: "index_manger_discounts_on_manger_id"
+  end
+
   create_table "mangers", force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -78,24 +88,6 @@ ActiveRecord::Schema.define(version: 2019_05_05_235456) do
     t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "operations", force: :cascade do |t|
-    t.datetime "date_of_sale"
-    t.bigint "delegates_id"
-    t.string "product_type"
-    t.integer "amount"
-    t.integer "the_value"
-    t.integer "delegate_value"
-    t.bigint "marketers_id"
-    t.integer "marketer_value"
-    t.bigint "mangers_id"
-    t.integer "manger_value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["delegates_id"], name: "index_operations_on_delegates_id"
-    t.index ["mangers_id"], name: "index_operations_on_mangers_id"
-    t.index ["marketers_id"], name: "index_operations_on_marketers_id"
   end
 
   create_table "sales_operations", force: :cascade do |t|
@@ -119,9 +111,7 @@ ActiveRecord::Schema.define(version: 2019_05_05_235456) do
   add_foreign_key "bank_transfers", "mangers"
   add_foreign_key "bank_transfers", "marketers"
   add_foreign_key "deliveries", "delegates"
-  add_foreign_key "operations", "delegates", column: "delegates_id"
-  add_foreign_key "operations", "mangers", column: "mangers_id"
-  add_foreign_key "operations", "marketers", column: "marketers_id"
+  add_foreign_key "manger_discounts", "mangers"
   add_foreign_key "sales_operations", "delegates"
   add_foreign_key "sales_operations", "mangers"
   add_foreign_key "sales_operations", "marketers"

@@ -53,7 +53,7 @@ class SalesOperation < ApplicationRecord
 
 
   def manager_commission
-    price - delegate_commission - marketer_commission
+    price - delegate_commission 
   end
 
   def update_amount_of_delegate

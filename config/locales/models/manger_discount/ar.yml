@@ -1,0 +1,15 @@
+ar:
+  activerecord:
+    attributes:
+      manger_discount:
+        date_of_discount: 'تاريخ الصرف'
+        manger_id: 'المدير'
+        value: 'المبلغ'
+    errors:
+      models:
+        manger_discount:
+          attributes:
+            date_of_discount:
+              blank: 'لا يمكن تركها فارغا'
+            value:
+              blank: 'لا يمكن تركه فارغا'
