@@ -14,6 +14,7 @@
 
 class Manger < ApplicationRecord
 
-    # Validations
-    validates :name, :city, presence: true
+  # Validations
+  validates :name, :city, presence: true
+  
 end

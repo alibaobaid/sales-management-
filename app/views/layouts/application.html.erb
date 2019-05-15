@@ -39,12 +39,30 @@
           <li class="<%= params[:controller] == 'manger_discounts'? "nav-item active" : "nav-item"%>">
             <a class="nav-link" href="/manger_discounts#index">صرفيات المدير</a>
           </li>
+          <li class="<%= params[:controller] == 'users'? "nav-item active" : "nav-item"%>">
+            <a class="nav-link" href="/users#index">المستخدمين</a>
+          </li>
+          
+          <% if @current_user.present? %>
+            <li class="nav-item ">
+              <div >
+                <%= link_to 'تسجيل الخروج', session_logout_path , class: "navbar-nav nav-link" %>
+              </div>
+            </li>
+          <% end %>
         </ul>
+        
       </div>
     </nav>
+    <% if flash[:notice].present? %>
+      <div class="alert alert-warning" role="alert" style="text-align: center;">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
     <div class="container">
+      
       <%= yield %>
-      <% if controller.action_name == 'index' &&  controller.controller_name != 'home'%>
+      <% if controller.action_name == 'index' && ['home', 'session'].exclude?(controller.controller_name)%>
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
             <li class="page-item">

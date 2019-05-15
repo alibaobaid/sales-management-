@@ -1,0 +1,30 @@
+<br>
+
+<h2 style="text-align: center;">الممستخدمين</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>الاسم</th>
+        <th>نوع الصلاحيه</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: center;">
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= user.role_type %></td>
+          <td><%= link_to 'تعديل', edit_user_path(user), class: "stretched-link" %></td>
+          <td><%= link_to 'حذف', user, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة مستخدم', new_user_path, class: "btn btn-outline-success my-2 my-sm-0"%>

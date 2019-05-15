@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_11_085640) do
+ActiveRecord::Schema.define(version: 2019_05_13_163509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_tokens", force: :cascade do |t|
+    t.string "value"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
 
   create_table "assistants", force: :cascade do |t|
     t.string "name"
@@ -107,6 +115,19 @@ ActiveRecord::Schema.define(version: 2019_05_11_085640) do
     t.index ["marketer_id"], name: "index_sales_operations_on_marketer_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "password_digest", null: false
+    t.string "role_type", default: "مدير", null: false
+    t.boolean "is_default", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["password_digest"], name: "index_users_on_password_digest"
+    t.index ["role_type"], name: "index_users_on_role_type"
+    t.index ["username"], name: "index_users_on_username"
+  end
+
+  add_foreign_key "access_tokens", "users"
   add_foreign_key "bank_transfers", "delegates"
   add_foreign_key "bank_transfers", "mangers"
   add_foreign_key "bank_transfers", "marketers"

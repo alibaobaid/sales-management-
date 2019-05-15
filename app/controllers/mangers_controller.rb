@@ -69,6 +69,6 @@ class MangersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def manger_params
-      params.require(:manger).permit(:name, :city, :phone_NO, :for_him, :to_him)
+      params.require(:manger).permit(:name, :password, :role_type, :city, :phone_NO, :for_him, :to_him)
     end
 end
