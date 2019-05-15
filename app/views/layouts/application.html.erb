@@ -39,10 +39,12 @@
           <li class="<%= params[:controller] == 'manger_discounts'? "nav-item active" : "nav-item"%>">
             <a class="nav-link" href="/manger_discounts#index">صرفيات المدير</a>
           </li>
+          <li class="<%= params[:controller] == 'product_discounts'? "nav-item active" : "nav-item"%>">
+            <a class="nav-link" href="/product_discounts#index">البضائع المصروفه</a>
+          </li>
           <li class="<%= params[:controller] == 'users'? "nav-item active" : "nav-item"%>">
             <a class="nav-link" href="/users#index">المستخدمين</a>
           </li>
-          
           <% if @current_user.present? %>
             <li class="nav-item ">
               <div >
@@ -50,6 +52,7 @@
               </div>
             </li>
           <% end %>
+          
         </ul>
         
       </div>

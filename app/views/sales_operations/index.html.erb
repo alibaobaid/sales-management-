@@ -4,7 +4,7 @@
 
 <div class="table-responsive" >
   <table class="table">
-    <thead class="thead-light">
+    <thead class="thead-light" style="text-align: right;">
       <tr>
         <th>المندوب</th>
         <th>نوع البضاعه</th>
@@ -28,7 +28,7 @@
       </tr>
     </thead>
 
-    <tbody style="text-align: center;">
+    <tbody style="text-align: right;">
       <% @sales_operations.each do |sales_operation| %>
         <tr>
           <td><%= sales_operation.delegate.name %></td>

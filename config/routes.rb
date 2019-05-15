@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :product_discounts
   resources :manger_discounts
   get 'session/login'
   post 'session/attempt_login'

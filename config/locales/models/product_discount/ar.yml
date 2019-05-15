@@ -1,0 +1,19 @@
+ar:
+  activerecord:
+    attributes:
+      product_discount:
+        discount_date: 'تاريخ الصرف'
+        delegate_id: 'المندوب'
+        amount: 'الكمية'
+        product_type: 'نوع البضاعه '
+
+    errors:
+      models:
+        product_discount:
+          attributes:
+            discount_date:
+              blank: 'لا يمكن تركه فارغا'
+            amount:
+              blank: 'لا يمكن تركها فارغا'
+            product_type:
+              blank: 'لا يمكن تركه فارغا'
