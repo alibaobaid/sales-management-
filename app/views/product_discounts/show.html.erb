@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product type:</strong>
+  <%= @product_discount.product_type %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @product_discount.reason %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @product_discount.amount %>
+</p>
+
+<p>
+  <strong>Discount date:</strong>
+  <%= @product_discount.discount_date %>
+</p>
+
+<p>
+  <strong>Delegate:</strong>
+  <%= @product_discount.delegate %>
+</p>
+
+<%= link_to 'Edit', edit_product_discount_path(@product_discount) %> |
+<%= link_to 'Back', product_discounts_path %>

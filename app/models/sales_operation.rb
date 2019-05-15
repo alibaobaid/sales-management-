@@ -2,18 +2,21 @@
 #
 # Table name: sales_operations
 #
-#  id                  :bigint(8)        not null, primary key
-#  commodity_amount    :integer          not null
-#  commodity_type      :string           not null
-#  date                :date             not null
-#  delegate_commission :float            not null
-#  marketer_commission :float            not null
-#  price               :float            not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  delegate_id         :bigint(8)        not null
-#  manger_id           :bigint(8)        not null
-#  marketer_id         :bigint(8)        not null
+#  id                     :bigint(8)        not null, primary key
+#  commodity_amount       :integer          not null
+#  commodity_type         :string           not null
+#  date                   :date             not null
+#  delegate_commission    :integer          not null
+#  from_delegate_transfer :integer
+#  marketer_commission    :integer          not null
+#  price                  :integer          not null
+#  to_manger_transfer     :integer
+#  to_marketer_transfer   :integer
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  delegate_id            :bigint(8)        not null
+#  manger_id              :bigint(8)        not null
+#  marketer_id            :bigint(8)        not null
 #
 # Indexes
 #
@@ -50,6 +53,10 @@ class SalesOperation < ApplicationRecord
   after_create :update_delegate_value
   after_create :update_marketrt_value
   after_create :update_manager_value
+  after_create :create_bank_transfer_for_delegate
+  after_create :create_bank_transfer_for_marketer
+  after_create :create_bank_transfer_for_manger
+
 
 
   def manager_commission
@@ -74,5 +81,21 @@ class SalesOperation < ApplicationRecord
 
   def update_manager_value
     manger.update(for_him: manger.for_him.to_i + manager_commission )
+  end
+
+  # this methods is for create bank transfer if the the price is entred within sale operation
+  def create_bank_transfer_for_delegate
+    return if from_delegate_transfer.nil?
+    BankTransfer.create({date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id})
+  end
+
+  def create_bank_transfer_for_marketer
+    return if to_marketer_transfer.nil?
+    BankTransfer.create({date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id})
+  end
+
+  def create_bank_transfer_for_manger
+    return if to_manger_transfer.nil?
+    BankTransfer.create({date_of_transfer: date, price: to_manger_transfer, transfer_type:"استلام", section_type:"مدير", manger_id: manger_id})
   end
 end

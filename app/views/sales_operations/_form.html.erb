@@ -38,13 +38,24 @@
     <div class="form-group">
       <%= form.number_field :delegate_commission, class: "form-control", placeholder: 'عمولة المندوب' %>
     </div>
-    
+
+    <div class="form-group">
+      <%= form.number_field :from_delegate_transfer, class: "form-control", placeholder: 'حواله من المندوب' %>
+    </div>
+
     <div class="form-group">
       <%= form.collection_select(:marketer_id, Marketer.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
     </div>
 
     <div class="form-group">
       <%= form.number_field :marketer_commission, class: "form-control", placeholder: 'عمولة المسوق' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.number_field :to_marketer_transfer, class: "form-control", placeholder: 'حواله للمسوق' %>
+    </div>
+    <div class="form-group">
+      <%= form.number_field :to_manger_transfer, class: "form-control", placeholder: 'حواله للمدير' %>
     </div>
 
     <div class="form-group">

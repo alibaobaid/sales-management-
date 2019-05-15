@@ -81,6 +81,6 @@ class SalesOperationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sales_operation_params
-      params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :manger_id, :delegate_commission, :marketer_commission)
+      params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :manger_id, :delegate_commission, :marketer_commission, :from_delegate_transfer, :to_marketer_transfer, :to_manger_transfer)
     end
 end

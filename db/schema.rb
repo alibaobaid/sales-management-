@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_163509) do
+ActiveRecord::Schema.define(version: 2019_05_15_133544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,13 +98,27 @@ ActiveRecord::Schema.define(version: 2019_05_13_163509) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_discounts", force: :cascade do |t|
+    t.string "product_type"
+    t.string "reason"
+    t.integer "amount"
+    t.date "discount_date"
+    t.bigint "delegate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delegate_id"], name: "index_product_discounts_on_delegate_id"
+  end
+
   create_table "sales_operations", force: :cascade do |t|
     t.date "date", null: false
     t.string "commodity_type", null: false
     t.integer "commodity_amount", null: false
-    t.float "price", null: false
-    t.float "delegate_commission", null: false
-    t.float "marketer_commission", null: false
+    t.integer "price", null: false
+    t.integer "delegate_commission", null: false
+    t.integer "marketer_commission", null: false
+    t.integer "from_delegate_transfer"
+    t.integer "to_marketer_transfer"
+    t.integer "to_manger_transfer"
     t.bigint "delegate_id", null: false
     t.bigint "marketer_id", null: false
     t.bigint "manger_id", null: false
@@ -133,6 +147,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_163509) do
   add_foreign_key "bank_transfers", "marketers"
   add_foreign_key "deliveries", "delegates"
   add_foreign_key "manger_discounts", "mangers"
+  add_foreign_key "product_discounts", "delegates"
   add_foreign_key "sales_operations", "delegates"
   add_foreign_key "sales_operations", "mangers"
   add_foreign_key "sales_operations", "marketers"
