@@ -1,20 +1,16 @@
 ar:
   activerecord:
     attributes:
-      manger:
-        name: 'الاسم'
+      user:
+        username: 'الاسم'
         password: 'كلمة المرور'
-        password_confirmation: 'تاكيد كلة المرور'
-        city: 'المدينة'
         role_type: 'نوع الصلاحية'
     errors:
       models:
-        manger:
+        user:
           attributes:
-            name:
+            username:
               blank: 'لايمكن تركه فارغا'
-            city:
-              blank: 'لا يمكن ترها فارغه'
             password:
               blank: 'لا يمكن ترها فارغه'
             role_type:
