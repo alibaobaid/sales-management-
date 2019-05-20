@@ -4,8 +4,8 @@ class CreateAssistants < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :city
       t.string :phone_NO
+      t.integer :his_amount
       t.integer :for_him
-      t.integer :to_him
 
       t.timestamps
     end

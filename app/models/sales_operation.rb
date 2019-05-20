@@ -56,6 +56,8 @@ class SalesOperation < ApplicationRecord
   after_create :create_bank_transfer_for_delegate
   after_create :create_bank_transfer_for_marketer
   after_create :create_bank_transfer_for_manger
+  after_create :update_assistants
+
 
 
 
@@ -97,5 +99,11 @@ class SalesOperation < ApplicationRecord
   def create_bank_transfer_for_manger
     return if to_manger_transfer.nil?
     BankTransfer.create({date_of_transfer: date, price: to_manger_transfer, transfer_type:"استلام", section_type:"مدير", manger_id: manger_id})
+  end
+
+  def update_assistants
+    Assistant.all.each do |assistant|
+      assistant.update(for_him: assistant.for_him.to_i + assistant.his_amount.to_i)
+    end
   end
 end

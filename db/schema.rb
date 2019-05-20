@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.string "name"
     t.string "city"
     t.string "phone_NO"
+    t.integer "his_amount"
     t.integer "for_him"
-    t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.integer "amount_of_box"
     t.integer "amount_of_gallon"
     t.integer "for_him"
-    t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,7 +92,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.string "city"
     t.string "phone_NO"
     t.integer "for_him"
-    t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

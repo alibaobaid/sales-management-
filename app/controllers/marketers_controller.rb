@@ -69,6 +69,6 @@ class MarketersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def marketer_params
-      params.require(:marketer).permit(:name, :city, :phone_NO, :for_him, :to_him)
+      params.require(:marketer).permit(:name, :city, :phone_NO, :for_him)
     end
 end

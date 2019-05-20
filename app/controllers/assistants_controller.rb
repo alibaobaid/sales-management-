@@ -69,6 +69,6 @@ class AssistantsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def assistant_params
-    params.require(:assistant).permit(:name, :city, :phone_NO, :for_him, :to_him)
+    params.require(:assistant).permit(:name, :city, :phone_NO, :his_amount, :for_him)
   end
 end
