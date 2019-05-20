@@ -9,6 +9,7 @@
         <th>الاسم</th>
         <th>المدينه</th>
         <th>رقم الجوال</th>
+        <th>نصيبه</th>
         <th>المبلغ المستحق</th>
         <th colspan="2"></th>
       </tr>
@@ -20,6 +21,7 @@
           <td><%= assistant.name %></td>
           <td><%= assistant.city %></td>
           <td><%= assistant.phone_NO %></td>
+          <td><%= assistant.his_amount %></td>
           <td><%= assistant.for_him %></td>
           <td><%= link_to 'تعديل', edit_assistant_path(assistant), class: "stretched-link" %></td>
           <td><%= link_to 'حذف', assistant, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
@@ -31,4 +33,4 @@
 
 <br>
 
-<%= link_to 'إضافة مسوق', new_assistant_path, class: "btn btn-outline-success my-2 my-sm-0"%>
+<%= link_to 'إضافة', new_assistant_path, class: "btn btn-outline-success my-2 my-sm-0"%>

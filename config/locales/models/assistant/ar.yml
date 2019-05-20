@@ -4,6 +4,7 @@ ar:
       assistant:
         name: 'الاسم'
         city: 'المدينة'
+        his_amount: 'نصيبه'
     errors:
       models:
         assistant:
@@ -11,4 +12,6 @@ ar:
             name:
               blank: 'لايمكن تركه فارغا'
             city:
-              blank: 'لا يمكن ترها فارغه'
+              blank: 'لا يمكن تركها فارغه'
+            his_amount:
+              blank: 'لا يمكن تركها فارغه'

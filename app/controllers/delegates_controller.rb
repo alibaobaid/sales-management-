@@ -74,6 +74,6 @@ class DelegatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delegate_params
-      params.require(:delegate).permit(:name, :city, :phone_NO, :amount_of_box, :amount_of_gallon, :for_him, :to_him)
+      params.require(:delegate).permit(:name, :city, :phone_NO, :amount_of_box, :amount_of_gallon, :for_him)
     end
 end

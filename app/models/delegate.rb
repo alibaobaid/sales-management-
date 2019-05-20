@@ -9,7 +9,6 @@
 #  for_him          :integer
 #  name             :string
 #  phone_NO         :string
-#  to_him           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

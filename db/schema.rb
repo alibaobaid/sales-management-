@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.string "name"
     t.string "city"
     t.string "phone_NO"
+    t.integer "his_amount"
     t.integer "for_him"
-    t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,11 +38,13 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.string "transfer_type"
     t.string "section_type"
     t.bigint "delegate_id"
+    t.bigint "assistant_id"
     t.bigint "marketer_id"
     t.bigint "manger_id"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assistant_id"], name: "index_bank_transfers_on_assistant_id"
     t.index ["delegate_id"], name: "index_bank_transfers_on_delegate_id"
     t.index ["manger_id"], name: "index_bank_transfers_on_manger_id"
     t.index ["marketer_id"], name: "index_bank_transfers_on_marketer_id"
@@ -55,7 +57,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.integer "amount_of_box"
     t.integer "amount_of_gallon"
     t.integer "for_him"
-    t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
     t.string "city"
     t.string "phone_NO"
     t.integer "for_him"
-    t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 2019_05_15_133544) do
   end
 
   add_foreign_key "access_tokens", "users"
+  add_foreign_key "bank_transfers", "assistants"
   add_foreign_key "bank_transfers", "delegates"
   add_foreign_key "bank_transfers", "mangers"
   add_foreign_key "bank_transfers", "marketers"

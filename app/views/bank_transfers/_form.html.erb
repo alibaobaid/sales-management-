@@ -22,7 +22,7 @@
     </div>
 
     <div class="form-group">
-      <%= form.select(:section_type, options_for_select(["مدير","مندوب","مسوق"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "نوع الموضف", id:"type", onchange: "myfunction()"})  %>
+      <%= form.select(:section_type, options_for_select(["مدير","مندوب","مسوق","مساعد"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "نوع الموضف", id:"type", onchange: "myfunction()"})  %>
     </div>
 
     <div class="form-group" id ="manger" style="display: none" >
@@ -35,6 +35,9 @@
 
     <div class="form-group" id="marketer" style="display: none">
       <%= form.collection_select(:marketer_id, Marketer.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
+    </div>
+    <div class="form-group" id="assistant" style="display: none">
+      <%= form.collection_select(:assistant_id, Assistant.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المساعد"})  %>
     </div>
 
     <div class="form-group">
@@ -53,22 +56,32 @@
     var manger = document.getElementById("manger");
     var delegate = document.getElementById("delegate");
     var marketer = document.getElementById("marketer");
+    var assistant = document.getElementById("assistant");
     switch(type.value) {
       case "مدير":
         manger.style.display="block"
         delegate.style.display="none"
         marketer.style.display="none"
+        assistant.style.display="none"
         break;
       case "مندوب":
         manger.style.display="none"
         delegate.style.display="block"
         marketer.style.display="none"
+        assistant.style.display="none"
         break;
       case "مسوق":
         manger.style.display="none"
         delegate.style.display="none"
         marketer.style.display="block"
-        break; }
+        assistant.style.display="none"
+      case "مساعد":
+        manger.style.display="none"
+        delegate.style.display="none"
+        marketer.style.display="none"
+        assistant.style.display="block"
+        break;
+       }
 
   }
 

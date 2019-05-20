@@ -73,8 +73,10 @@ class BankTransfersController < ApplicationController
          params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :manger_id, :price)
       elsif params[:bank_transfer][:section_type] == "مندوب"
          params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :delegate_id, :price)
+      elsif params[:bank_transfer][:section_type] == "مسوق"
+         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :marketer_id, :price)
       else 
-        params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :marketer_id, :price)
+         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :assistant_id, :price)
       end
     end
 end

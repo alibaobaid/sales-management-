@@ -7,7 +7,6 @@ class CreateDelegates < ActiveRecord::Migration[5.2]
       t.integer :amount_of_box
       t.integer :amount_of_gallon
       t.integer :for_him
-      t.integer :to_him
 
       t.timestamps
     end

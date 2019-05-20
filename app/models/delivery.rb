@@ -31,9 +31,9 @@ class Delivery < ApplicationRecord
   # instance method
   def set_amount_to_delegate
     if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box + commodity_amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount )
     else 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon + commodity_amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
     end
   end
 

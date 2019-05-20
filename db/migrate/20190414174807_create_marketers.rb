@@ -5,7 +5,6 @@ class CreateMarketers < ActiveRecord::Migration[5.2]
       t.string :city
       t.string :phone_NO
       t.integer :for_him
-      t.integer :to_him
 
       t.timestamps
     end
