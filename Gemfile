@@ -55,6 +55,12 @@ end
 # super easily from ActiveRecord relations, plain Ruby objects, or tabular data
 gem 'spreadsheet_architect'
 
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'
+
+gem 'axlsx_styler', '~> 0.2.0'
+
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'

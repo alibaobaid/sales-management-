@@ -1,0 +1,71 @@
+<br>
+<div class="alert alert-info" role="alert" style="text-align: center;">
+  سوف يتم عرض مبيعات تاريخ اليوم اذا لم يتم تحديد التاريخ
+</div>
+<div>
+    
+          <%= form_tag(reports_sales_report_path, :method => "get", class: 'navbar-form navbar-left') do %>
+            <div class="input-group">
+              <%= date_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button> 
+              </div>
+            </div>
+          <% end %>
+</div>
+
+<br>
+<br>
+
+<h4 style="text-align: center;"><%= @sales_operations.blank? ? "لا توجد عمليات بيع للتاريخ المختار" : "تقرير عمليات البيع لتاريخ #{@sales_operations.first.date.to_s}" %></h4>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>المندوب</th>
+        <th>المنطقة</th>
+        <th>رقم الجوال</th>
+        <th>نصيب البنك</th>
+        <th>حواله من المندوب</th>
+        <th>حواله للمسوق</th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% @sales_operations.each do |sales_operation| %>
+        <tr>
+          <td><%= sales_operation.delegate.name %></td>
+           <td><%= sales_operation.delegate.city %></td>
+          <td><%= sales_operation.delegate.phone_NO %></td>
+          <td><%= sales_operation.bank_commission %></td>
+          <td><%= sales_operation.from_delegate_transfer %></td>
+          <td><%= sales_operation.to_marketer_transfer %></td> 
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot style="text-align: right;">
+        <tr>
+          <td colspan="2" >الرصيد الافتراضي</td>
+           <td>الرصيد المستلم</td>
+          <td>عدد الجوالين</td>
+          <td>عدد العلب</td>
+          <td>عدد عمليات البيع</td>
+        </tr>
+        <tr>
+          <td colspan="2" ><%= @sales_operations.map(&:bank_commission).sum  %></td>
+           <td><%= @sales_operations.pluck(:from_delegate_transfer).compact.sum - @sales_operations.pluck(:to_marketer_transfer).compact.sum %></td>
+          <td><%= @sales_operations.gallon_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum  %></td>
+          <td><%= @sales_operations.box_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum %></td>
+          <td><%= @sales_operations.count %></td>
+        </tr>
+    </tfoot>
+  </table>
+</div>
+<%
+=begin%>
+ <%= link_to "استخراج", "/reports/sales_report.xlsx?search=#{params[:search]}"  %> 
+<%
+=end%>
+
+<%= link_to 'استخراج',"/reports/sales_report.xlsx?search=#{params[:search]}",class: "btn btn-outline-success my-2 my-sm-0" %>

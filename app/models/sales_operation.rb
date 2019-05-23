@@ -32,10 +32,17 @@
 #
 
 class SalesOperation < ApplicationRecord
+
   # Associations
   belongs_to :delegate
   belongs_to :marketer
   belongs_to :manger
+  scope :gallon, -> { where(commodity_type: "جالون") }
+  scope :box, -> { where(commodity_type: "علب") }
+  scope :gallon_and_on_date, -> (date) { where(date: date).gallon }
+  scope :box_and_on_date, -> (date) { where(date: date).box }
+
+  # Ex:- scope :active, -> {where(:active => true)}
   # Validations
   validates :commodity_amount, 
             :commodity_type,
@@ -63,6 +70,9 @@ class SalesOperation < ApplicationRecord
 
   def manager_commission
     price - delegate_commission 
+  end
+  def bank_commission
+    price - delegate_commission - marketer_commission
   end
 
   def update_amount_of_delegate
@@ -106,4 +116,23 @@ class SalesOperation < ApplicationRecord
       assistant.update(for_him: assistant.for_him.to_i + assistant.his_amount.to_i)
     end
   end
+  # def spreadsheet_columns
+  #   # sales_operations = SalesOperation.where(date: date)
+  #   # footer_array =[["الرصيد الافتراضي", sales_operations.map(&:bank_commission).sum],
+  #   #                ["الرصيد المستلم", sales_operations.pluck(:from_delegate_transfer).compact.sum - sales_operations.pluck(:to_marketer_transfer).compact.sum],
+  #   #                ["عدد الجوالين", sales_operations.gallon.pluck(:commodity_amount).sum],
+  #   #                ["عدد العلب", sales_operations.box.pluck(:commodity_amount).sum],
+  #   #                ["عدد عمليات البيع", sales_operations.count],
+  #   #                ["",""] ].reverse
+  #   [
+  #     ['المندوب', delegate.name ],
+  #     ['المنطقة', delegate.city ],
+  #     ['رقم الجوال', delegate.phone_NO ],
+  #     ['نصيب البنك', :bank_commission],
+  #     ['حواله من المندوب', :from_delegate_transfer],
+  #     ['حواله للمسوق', :to_marketer_transfer]
+  #   ]
+
+  # end
+
 end
