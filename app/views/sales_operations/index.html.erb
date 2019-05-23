@@ -51,3 +51,8 @@
 <br>
 
 <%= link_to 'إضافة عملية بيع', new_sales_operation_path, class: "btn btn-outline-success my-2 my-sm-0"%>
+
+<%= form_tag import_sales_operations_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import", class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>

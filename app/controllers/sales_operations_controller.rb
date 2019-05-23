@@ -73,6 +73,17 @@ class SalesOperationsController < ApplicationController
     end
   end
 
+  def import
+    result = SalesOperation.import(params[:file])
+
+    message = ['تم رفع الملف']
+    if result[:failed].any?
+      message += result[:failed]
+    end
+
+    redirect_to sales_operations_path, notice: message
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sales_operation

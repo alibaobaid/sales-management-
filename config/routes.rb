@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   post 'session/attempt_login'
   get 'session/logout'
   resources :bank_transfers
-  resources :sales_operations
+  resources :sales_operations do
+    collection do
+      post :import
+    end
+  end
   resources :mangers
   resources :assistants
   resources :marketers

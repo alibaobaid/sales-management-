@@ -106,4 +106,21 @@ class SalesOperation < ApplicationRecord
       assistant.update(for_him: assistant.for_him.to_i + assistant.his_amount.to_i)
     end
   end
+
+  def self.import(file)
+    spreadsheet = open_spreadsheet(file)
+    debugger
+    header = spreadsheet
+  end
+
+  def self.open_spreadsheet(file)
+    debugger
+    case File.extname(file.original_filename).downcase
+      # when ".csv" then  Roo::Csv.new(file.path, nil, :ignore)
+      when ".xls" then  Roo::Excel.new(file.path, {file_warning: :ignore})
+      when ".xlsx" then  Roo::Excelx.new(file.path, {file_warning: :ignore})
+      else
+        raise UnknownFileFormat
+    end
+  end
 end
