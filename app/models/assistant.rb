@@ -15,5 +15,6 @@
 class Assistant < ApplicationRecord
 
     # Validations
-    validates :name, :city, :his_amount, presence: true
+    validates :name, presence: true, uniqueness: true
+    validates :city, presence: true
 end

@@ -1,0 +1,15 @@
+<br>
+
+<h2 style="text-align: center;">الاخطأ الموجوده في الملف</h2>
+<% if @error.present? %>
+  <div class="alert alert-warning" role="alert" style="text-align: center;">
+    <table>
+      <% @error.each do |error| %>
+        <tr><td style="text-align: right;"><%= error %></td></tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+<center>
+  <%= link_to 'المبيعات',sales_operations_path , class:"page-link", style: "width: 150px;" %>
+</center>

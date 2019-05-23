@@ -20,6 +20,7 @@ class Delegate < ApplicationRecord
     has_many :sales_operations
 
     # Validations
-    validates :name, :city, presence: true
+    validates :name, presence: true, uniqueness: true
+    validates :city, presence: true
 
 end

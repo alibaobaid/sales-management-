@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   attr_accessor :current_user
 
+  rescue_from ActiveRecord::RecordNotFound, with: :return_error
+  rescue_from UnknownFileFormat, with: :error_file
+  rescue_from Zip::Error do
+    redirect_to(send("#{controller_name}_path"), notice: 'الملف محمي')
+  end
+
   private
 
   def login_require
@@ -31,5 +37,13 @@ class ApplicationController < ActionController::Base
       flash[:notice] = 'لا تملك صلاحية التعديل على البيانات'
       redirect_to(send("#{controller_name}_path"))
     end
+  end
+
+  def return_error
+    redirect_to(send("#{controller_name}_path"), notice: 'غير موجود')
+  end
+
+  def error_file
+    redirect_to(send("#{controller_name}_path"), notice: 'ملف خاطئ')
   end
 end

@@ -25,7 +25,7 @@ class User < ApplicationRecord
   has_many :access_tokens
 
   # Validations
-  validates :username, presence: true
+  validates :username, presence: true, uniqueness: true
   validates :role_type, inclusion: { in: ['مدير', 'مستخدم'] }
 
   # Callback

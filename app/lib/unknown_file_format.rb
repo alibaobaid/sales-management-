@@ -1,0 +1,2 @@
+class UnknownFileFormat < StandardError
+end

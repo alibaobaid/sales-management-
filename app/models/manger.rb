@@ -16,5 +16,15 @@ class Manger < ApplicationRecord
 
   # Validations
   validates :name, :city, presence: true
-  
+
+  # Callback
+  before_create :default_one_account
+
+
+  private
+
+  def default_one_account
+    errors.add(:base, 'لايمكن اضافة حساب اخر') if Manger.any?
+  end
+
 end
