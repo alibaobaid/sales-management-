@@ -10,5 +10,6 @@ ar:
           attributes:
             name:
               blank: 'لايمكن تركه فارغا'
+              taken: 'ماخوذ مسبقا'
             city:
               blank: 'لا يمكن ترها فارغه'

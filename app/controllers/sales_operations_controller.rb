@@ -73,6 +73,19 @@ class SalesOperationsController < ApplicationController
     end
   end
 
+  def import
+    if params[:file].present?
+      result = SalesOperation.import(params[:file])
+      @error = result[:failed].map do |e|
+        "#{e[:name]} : #{e[:error]}"
+      end
+      flash[:notice] = 'تم رفع الملف بنجاح'
+    end
+    if @error.blank?
+      redirect_to(sales_operations_path)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sales_operation

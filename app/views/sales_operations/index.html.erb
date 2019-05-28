@@ -1,3 +1,37 @@
+<style>
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+</style>
+<br>
+<center>
+  <div >
+    <%= form_tag import_sales_operations_path, multipart: true do %>
+      <span class="btn btn-large btn-warning btn-file">
+         اختر الملف
+        <%= file_field_tag :file %>
+      </span>
+      <%= submit_tag "إرفع", class: "btn btn-warning" %>
+    <% end %>
+  <div>
+</center>
 <br>
 
 <h2 style="text-align: center;">المبيعات</h2>
@@ -6,6 +40,7 @@
   <table class="table">
     <thead class="thead-light" style="text-align: right;">
       <tr>
+        <th>رقم العملية</th>
         <th>المندوب</th>
         <th>نوع البضاعه</th>
         <th>الكمية</th>
@@ -20,7 +55,7 @@
             <div class="input-group">
               <%= search_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
               <div class="input-group-btn">
-                <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button> 
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
               </div>
             </div>
           <% end %>
@@ -31,13 +66,14 @@
     <tbody style="text-align: right;">
       <% @sales_operations.each do |sales_operation| %>
         <tr>
+          <td><%= sales_operation.operation_number %></td>
           <td><%= sales_operation.delegate.name %></td>
            <td><%= sales_operation.commodity_type %></td>
           <td><%= sales_operation.commodity_amount %></td>
           <td><%= sales_operation.price %></td>
           <td><%= sales_operation.date.to_date %></td>
-          <td><%= sales_operation.delegate_commission %></td> 
-          <td><%= sales_operation.marketer.name %></td> 
+          <td><%= sales_operation.delegate_commission %></td>
+          <td><%= sales_operation.marketer.name %></td>
           <td><%= sales_operation.marketer_commission %></td>
           <td><%= sales_operation.manager_commission %></td>
           <td><%= link_to 'تعديل', edit_sales_operation_path(sales_operation), class: "stretched-link"%></td>
@@ -52,3 +88,7 @@
 
 <%= link_to 'إضافة عملية بيع', new_sales_operation_path, class: "btn btn-outline-success my-2 my-sm-0"%>
 <%= link_to 'عرض التقرير اليومي', reports_sales_report_path, class: "btn btn-outline-success my-2 my-sm-0"%>
+
+<br>
+<br>
+

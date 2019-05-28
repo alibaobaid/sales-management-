@@ -193,6 +193,14 @@ GEM
       builder (>= 3.0)
       dry-inflector (~> 0.1)
       rubyzip (>= 1.0)
+    roo (2.8.2)
+      nokogiri (~> 1)
+      rubyzip (>= 1.2.1, < 2.0.0)
+    roo-xls (1.2.0)
+      nokogiri
+      roo (>= 2.0.0, < 3)
+      spreadsheet (> 0.9.0)
+    ruby-ole (1.2.12.2)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
     sass (3.7.4)
@@ -209,6 +217,8 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    spreadsheet (1.2.4)
+      ruby-ole (>= 1.0)
     spreadsheet_architect (3.2.1)
       axlsx (>= 2, < 4)
       axlsx_styler (>= 0.1.7, < 2)
@@ -270,6 +280,8 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.3)
   rubyzip (>= 1.2.1)
+  roo
+  roo-xls
   sass-rails (~> 5.0)
   selenium-webdriver
   spreadsheet_architect

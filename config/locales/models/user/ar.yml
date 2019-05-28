@@ -11,6 +11,7 @@ ar:
           attributes:
             username:
               blank: 'لايمكن تركه فارغا'
+              taken: 'ماخوذ مسبقا'
             password:
               blank: 'لا يمكن ترها فارغه'
             role_type:
