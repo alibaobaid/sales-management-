@@ -62,7 +62,6 @@ class BankTransfer < ApplicationRecord
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i - price)
       elsif section_type == "مدير"
-        manger.update(for_him: manger.for_him.to_i - price)
         manger.update(to_him: manger.to_him.to_i + price)
       elsif section_type == "مسوق"
         marketer.update(for_him: marketer.for_him.to_i - price)

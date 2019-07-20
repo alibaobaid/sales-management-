@@ -5,6 +5,7 @@
 #  id                     :bigint(8)        not null, primary key
 #  commodity_amount       :integer          not null
 #  commodity_type         :string           not null
+#  customr_no             :string
 #  date                   :date             not null
 #  delegate_commission    :integer          not null
 #  from_delegate_transfer :integer
@@ -73,7 +74,7 @@ class SalesOperation < ApplicationRecord
 
 
   def manager_commission
-    price - delegate_commission
+    price - delegate_commission - marketer_commission
   end
 
   def bank_commission
@@ -97,7 +98,7 @@ class SalesOperation < ApplicationRecord
   end
 
   def update_manager_value
-    manger.update(for_him: manger.for_him.to_i + manager_commission )
+    manger.update(for_him: manger.for_him.to_i + manager_commission  )
   end
 
   # this methods is for create bank transfer if the the price is entred within sale operation

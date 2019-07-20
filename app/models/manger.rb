@@ -15,7 +15,7 @@
 class Manger < ApplicationRecord
 
   # Validations
-  validates :name, :city, presence: true
+  validates :name,  presence: true
 
   # Callback
   before_create :default_one_account
