@@ -33,5 +33,6 @@ class MangerDiscount < ApplicationRecord
 
   def update_manger_account
     manger.update(to_him: manger.to_him.to_i - value)
+    manger.update(for_him: manger.for_him.to_i - value)
   end
 end
