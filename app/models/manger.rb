@@ -24,7 +24,9 @@ class Manger < ApplicationRecord
   private
 
   def default_one_account
-    errors.add(:base, 'لايمكن اضافة حساب اخر') if Manger.any?
+    return if Manger.any?
+    errors.add(:base, 'لايمكن اضافة حساب اخر') 
+    throw(:abort)
   end
 
 end
