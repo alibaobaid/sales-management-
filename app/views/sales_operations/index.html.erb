@@ -40,7 +40,6 @@
   <table class="table">
     <thead class="thead-light" style="text-align: right;">
       <tr>
-        <th>رقم العملية</th>
         <th>المندوب</th>
         <th>نوع البضاعه</th>
         <th>الكمية</th>
@@ -51,6 +50,7 @@
         <th>عمولة المسوق</th>
         <th>عمولة المدير</th>
         <th>رقم العميل</th>
+        <th>منطقة العميل</th>
         <th colspan="2">
           <%= form_tag(sales_operations_path, :method => "get", class: 'navbar-form navbar-left') do %>
             <div class="input-group">
@@ -67,7 +67,6 @@
     <tbody style="text-align: right;">
       <% @sales_operations.each do |sales_operation| %>
         <tr>
-          <td><%= sales_operation.operation_number %></td>
           <td><%= sales_operation.delegate.name %></td>
            <td><%= sales_operation.commodity_type %></td>
           <td><%= sales_operation.commodity_amount %></td>
@@ -78,6 +77,7 @@
           <td><%= sales_operation.marketer_commission %></td>
           <td><%= sales_operation.manager_commission %></td>
           <td><%= sales_operation.customr_no %></td> 
+          <td><%= sales_operation.customr_city %></td> 
           <td><%= link_to 'تعديل', edit_sales_operation_path(sales_operation), class: "stretched-link"%></td>
           <td><%= link_to 'حذف', sales_operation, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
