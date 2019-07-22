@@ -18,15 +18,13 @@ class Manger < ApplicationRecord
   validates :name,  presence: true
 
   # Callback
-  before_create :default_one_account
+  before_save :default_one_account
 
 
   private
 
   def default_one_account
-    return if Manger.any?
-    errors.add(:base, 'لايمكن اضافة حساب اخر') 
-    throw(:abort)
+    errors.add(:base, 'لايمكن اضافة حساب اخر') and throw(:abort) if Manger.any?
   end
 
 end
