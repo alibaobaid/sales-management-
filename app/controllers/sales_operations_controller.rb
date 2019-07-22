@@ -1,4 +1,5 @@
 class SalesOperationsController < ApplicationController
+  before_action :set_manger, only: [:create]
   before_action :set_sales_operation, only: [:show, :edit, :update, :destroy]
 
   # GET /sales_operations
@@ -92,8 +93,13 @@ class SalesOperationsController < ApplicationController
       @sales_operation = SalesOperation.find(params[:id])
     end
 
+    # use to set manger id to sales opration
+    def set_manger
+      params[:sales_operation][:manger_id] = Manger.first.id
+    end 
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def sales_operation_params
-      params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :manger_id, :delegate_commission, :marketer_commission, :from_delegate_transfer, :to_marketer_transfer, :to_manger_transfer, :customr_no)
+      params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :manger_id, :delegate_commission, :marketer_commission, :from_delegate_transfer, :to_marketer_transfer, :to_manger_transfer, :customr_no, :customr_city)
     end
 end
