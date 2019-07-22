@@ -5,6 +5,7 @@
 #  id                     :bigint(8)        not null, primary key
 #  commodity_amount       :integer          not null
 #  commodity_type         :string           not null
+#  customr_city           :string
 #  customr_no             :string
 #  date                   :date             not null
 #  delegate_commission    :integer          not null
@@ -58,6 +59,7 @@ class SalesOperation < ApplicationRecord
             :delegate_id,
             :marketer_id,
             :manger_id,
+            :customr_city,
             presence: true
 
   # Callbacks

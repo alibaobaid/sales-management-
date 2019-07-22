@@ -12,6 +12,7 @@ ar:
         marketer: 'المسوق'
         delegate_id: 'المندوب'
         delegate: 'المندوب'
+        customr_city: 'المنطقه'
     errors:
       models:
         sales_operation:
@@ -36,3 +37,5 @@ ar:
               required: 'لا يمكن تركه فارغا'
             marketer:
               required: 'لا يمكن تركه فارغا'
+            customr_city:
+              required: 'لا يمكن تركها فارغا'
