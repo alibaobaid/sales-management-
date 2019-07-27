@@ -12,35 +12,38 @@
         </div>
       <% end %>
 
-  
     <div class="form-group ">
+      <%= form.label "حدد تاريخ الحواله", style: "text-align: right; float: right" %>
       <%= form.date_field :date_of_transfer, class: "form-control", placeholder: "تاريخ الحواله"%>
     </div>
 
     <div class="form-group">
+      <%= form.label "حدد نوع الحواله", style: "text-align: right; float: right"%>
       <%= form.select(:transfer_type, options_for_select(["ارسال","استلام"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "اختر نوع الحواله"})  %>
     </div>
 
     <div class="form-group">
-      <%= form.select(:section_type, options_for_select(["مدير","مندوب","مسوق","مساعد"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "نوع الموضف", id:"type", onchange: "myfunction()"})  %>
+      <%= form.label "حدد نوع الموظف", style: "text-align: right; float: right"%>
+      <%= form.select(:section_type, options_for_select(["مندوب","مسوق","مساعد"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "نوع الموضف", id:"type", onchange: "myfunction()"})  %>
     </div>
 
-    <div class="form-group" id ="manger" style="display: none" >
-      <%= form.collection_select(:manger_id, Manger.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المدير"})  %>
-    </div>
-
-    <div class="form-group" id ="delegate" style="display: none">
+    <div class="form-group", id ="delegate", style="display: none">
+      <%= form.label "حدد المندوب", style: "text-align: right; float: right"%>
       <%= form.collection_select(:delegate_id, Delegate.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
     </div>
 
-    <div class="form-group" id="marketer" style="display: none">
+    <div class="form-group", id="marketer", style="display: none">
+      <%= form.label "حدد المسوق", style: "text-align: right; float: right"%>
       <%= form.collection_select(:marketer_id, Marketer.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
     </div>
-    <div class="form-group" id="assistant" style="display: none">
+
+    <div class="form-group", id="assistant", style="display: none">
+      <%= form.label "حدد المساعد", style: "text-align: right; float: right"%>
       <%= form.collection_select(:assistant_id, Assistant.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المساعد"})  %>
     </div>
 
     <div class="form-group">
+      <%= form.label "حدد المبلغ ",style: "text-align: right; float: right"%>
       <%= form.number_field :price, class: "form-control", placeholder: 'المبلغ المحول' %>
     </div>
 
@@ -52,32 +55,22 @@
 <script type="text/javascript">
 
   function myfunction() {
-    var type= document.getElementById("type")
-    var manger = document.getElementById("manger");
-    var delegate = document.getElementById("delegate");
-    var marketer = document.getElementById("marketer");
-    var assistant = document.getElementById("assistant");
+    var type = document.getElementById("type")
+    var delegate = document.getElementById("delegate")
+    var marketer = document.getElementById("marketer")
+    var assistant = document.getElementById("assistant")
     switch(type.value) {
-      case "مدير":
-        manger.style.display="block"
-        delegate.style.display="none"
-        marketer.style.display="none"
-        assistant.style.display="none"
-        break;
       case "مندوب":
-        manger.style.display="none"
         delegate.style.display="block"
         marketer.style.display="none"
         assistant.style.display="none"
         break;
       case "مسوق":
-        manger.style.display="none"
         delegate.style.display="none"
         marketer.style.display="block"
         assistant.style.display="none"
         break;
       case "مساعد":
-        manger.style.display="none"
         delegate.style.display="none"
         marketer.style.display="none"
         assistant.style.display="block"

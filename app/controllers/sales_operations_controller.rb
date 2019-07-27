@@ -14,10 +14,10 @@ class SalesOperationsController < ApplicationController
           marketers.name LIKE :search
           ",
           search: "%#{params[:search]}%"
-        ).order(created_at: :desc)
+        )
       else
-        SalesOperation.order(created_at: :desc)
-      end.page(params[:page])
+        SalesOperation
+      end.order(created_at: :desc).page(params[:page])
   end
 
   # GET /sales_operations/1

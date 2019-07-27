@@ -4,7 +4,7 @@ class BankTransfersController < ApplicationController
   # GET /bank_transfers
   # GET /bank_transfers.json
   def index
-    @bank_transfers = BankTransfer.page(params[:page])
+    @bank_transfers = BankTransfer.order(created_at: :desc).page(params[:page])
   end
 
   # GET /bank_transfers/1
@@ -69,9 +69,7 @@ class BankTransfersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bank_transfer_params
-      if params[:bank_transfer][:section_type] == "مدير"
-         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :manger_id, :price)
-      elsif params[:bank_transfer][:section_type] == "مندوب"
+      if params[:bank_transfer][:section_type] == "مندوب"
          params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :delegate_id, :price)
       elsif params[:bank_transfer][:section_type] == "مسوق"
          params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :marketer_id, :price)

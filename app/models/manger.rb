@@ -18,7 +18,7 @@ class Manger < ApplicationRecord
   validates :name,  presence: true
 
   # Callback
-  before_save :default_one_account
+  before_create :default_one_account
 
 
   private
