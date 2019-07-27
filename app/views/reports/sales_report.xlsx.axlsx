@@ -5,22 +5,21 @@ wb.add_worksheet(name: "Items") do |sheet|
 title = wb.styles.add_style( b: true,:bg_color => "95AFBA", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"},:alignment=>{:horizontal => :center})
 body = wb.styles.add_style( b: true,:bg_color => "ffffff", :fg_color=>"#FF000000", :sz=>12,  :border=> {:style => :thin, :color => "FFFF0000"},:alignment=>{:horizontal => :center})
   # title 
-  sheet.add_row ["", "", "تقرير عمليات البيع", "بتاريخ", @sales_operations.first&.date.to_s , ""], style: title
+  sheet.add_row ["تقرير عمليات البيع", "بتاريخ", @sales_operations.first&.date.to_s , ""], style: title
   sheet.add_row
   # Create the header row
-  sheet.add_row ["المندوب", "المنطقة", "رقم الجوال", "نصيب البنك", "حواله من المندوب" , "حواله للمسوق"], style: title
+  sheet.add_row ["التاريخ", "السعر", "المنطقة", "رقم العميل"], style: title
   # Create entries for each item
   @sales_operations.each do |sales_operation|
-    sheet.add_row [sales_operation.delegate.name, sales_operation.delegate.city ,sales_operation.delegate.phone_NO,
-                   sales_operation.bank_commission,sales_operation.from_delegate_transfer,sales_operation.to_marketer_transfer],style: body
+    sheet.add_row [sales_operation.date.to_date, sales_operation.price, sales_operation.customr_city,
+                   sales_operation.customr_no],style: body
   end
   sheet.add_row
-  sheet.add_row ["الرصيد الافتراضي", "الرصيد المستلم", "عدد الجوالين", "عدد العلب" , "عدد عمليات البيع" , ""], style: title
+  sheet.add_row ["الرصيد الافتراضي","عدد الجوالين", "عدد العلب" , "عدد عمليات البيع"], style: title
 
-  sheet.add_row [@sales_operations.map(&:bank_commission).sum,
-                @sales_operations.pluck(:from_delegate_transfer).compact.sum - @sales_operations.pluck(:to_marketer_transfer).compact.sum, 
+  sheet.add_row [@sales_operations.map(&:manager_commission).sum, 
                 @sales_operations.gallon_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum,
                 @sales_operations.box_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum ,
-                @sales_operations.count , ""],style: body
+                @sales_operations.count],style: body
  
 end

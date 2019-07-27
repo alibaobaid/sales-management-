@@ -69,17 +69,12 @@ class SalesOperation < ApplicationRecord
   after_create :update_manager_value
   after_create :create_bank_transfer_for_delegate
   after_create :create_bank_transfer_for_marketer
-  after_create :create_bank_transfer_for_manger
   after_create :update_assistants
 
 
 
 
   def manager_commission
-    price - delegate_commission - marketer_commission
-  end
-
-  def bank_commission
     price - delegate_commission - marketer_commission
   end
 
@@ -112,11 +107,6 @@ class SalesOperation < ApplicationRecord
   def create_bank_transfer_for_marketer
     return if to_marketer_transfer.nil?
     BankTransfer.create({date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id})
-  end
-
-  def create_bank_transfer_for_manger
-    return if to_manger_transfer.nil?
-    BankTransfer.create({date_of_transfer: date, price: to_manger_transfer, transfer_type:"استلام", section_type:"مدير", manger_id: manger_id})
   end
 
   def update_assistants
