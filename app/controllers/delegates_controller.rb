@@ -4,7 +4,18 @@ class DelegatesController < ApplicationController
   # GET /delegates
   # GET /delegates.json
   def index
-    @delegates = Delegate.page(params[:page])
+    @delegates = \
+      if params[:search].present?
+        Delegate.where(
+          "
+          name LIKE :search OR
+          city LIKE :search
+          ",
+          search: "%#{params[:search]}%"
+        )
+      else
+        Delegate
+      end.order(name: :asc).page(params[:page]) 
     
     respond_to do |format|
       format.html

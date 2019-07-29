@@ -10,7 +10,16 @@
         <th>صنف المحول</th>
         <th>الاسم</th>
         <th>المبلغ</th>
-        <th colspan="2"></th>
+        <th colspan="2">
+          <%= form_tag(bank_transfers_path, :method => "get", class: 'navbar-form navbar-left') do %>
+                <div class="input-group">
+                  <%= search_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
+                  </div>
+                </div>
+          <% end %>
+        </th>
       </tr>
     </thead>
 
