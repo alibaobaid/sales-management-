@@ -4,7 +4,18 @@ class MarketersController < ApplicationController
   # GET /marketers
   # GET /marketers.json
   def index
-    @marketers = Marketer.page(params[:page])
+    @marketers = \
+      if params[:search].present?
+        Marketer.where(
+          "
+          name LIKE :search OR
+          city LIKE :search
+          ",
+          search: "%#{params[:search]}%"
+        )
+      else
+        Marketer
+      end.order(name: :asc).page(params[:page])
   end
 
   # GET /marketers/1

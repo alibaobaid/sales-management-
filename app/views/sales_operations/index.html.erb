@@ -78,8 +78,7 @@
           <td><%= sales_operation.manager_commission %></td>
           <td><%= sales_operation.customr_no %></td> 
           <td><%= sales_operation.customr_city %></td> 
-          <td><%= link_to 'تعديل', edit_sales_operation_path(sales_operation), class: "stretched-link"%></td>
-          <td><%= link_to 'حذف', sales_operation, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+          <td colspan="2" style="text-align: center;" ><%= link_to 'حذف', sales_operation, method: :delete, class: "btn btn-secondary", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>

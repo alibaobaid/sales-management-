@@ -4,7 +4,18 @@ class BankTransfersController < ApplicationController
   # GET /bank_transfers
   # GET /bank_transfers.json
   def index
-    @bank_transfers = BankTransfer.order(created_at: :desc).page(params[:page])
+    @bank_transfers = \
+      if params[:search].present?
+        BankTransfer.where(
+          "
+          bank_transfers.transfer_type LIKE :search OR
+          bank_transfers.section_type LIKE :search
+          ",
+          search: "%#{params[:search]}%"
+        )
+      else
+        BankTransfer
+      end.order(created_at: :desc).page(params[:page])
   end
 
   # GET /bank_transfers/1
