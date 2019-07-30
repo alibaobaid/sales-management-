@@ -45,35 +45,30 @@ class BankTransfer < ApplicationRecord
 
   # Callbacks
   after_create :update__price_of_employee, if: :not_manger?
+  after_destroy :reverse_operation
 
   def update__price_of_employee
     default_manger = Manger.first
     if transfer_type == "ارسال" 
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i + price)
-        BankTransfer.create({ date_of_transfer: self.date_of_transfer, price: self.price, transfer_type:"استلام", section_type:"مدير", manger_id: default_manger.id })
         default_manger.update(to_him: default_manger.to_him.to_i + price)
       elsif section_type == "مسوق"
         marketer.update(for_him: marketer.for_him.to_i + price)
-        BankTransfer.create({ date_of_transfer: self.date_of_transfer, price: self.price, transfer_type:"استلام", section_type:"مدير", manger_id: default_manger.id })
         default_manger.update(to_him: default_manger.to_him.to_i + price)
       elsif section_type == "مساعد"
         assistant.update(for_him: assistant.for_him.to_i + price)
-        BankTransfer.create({ date_of_transfer: self.date_of_transfer, price: self.price, transfer_type:"استلام", section_type:"مدير", manger_id: default_manger.id })
         default_manger.update(to_him: default_manger.to_him.to_i + price)
       end
     elsif transfer_type == "استلام"
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i - price)
-        BankTransfer.create({ date_of_transfer: self.date_of_transfer, price: self.price, transfer_type:"ارسال", section_type:"مدير", manger_id: default_manger.id })
         default_manger.update(to_him: default_manger.to_him.to_i - price)
       elsif section_type == "مسوق"
         marketer.update(for_him: marketer.for_him.to_i - price)
-        BankTransfer.create({ date_of_transfer: self.date_of_transfer, price: self.price, transfer_type:"ارسال", section_type:"مدير", manger_id: default_manger.id })
         default_manger.update(to_him: default_manger.to_him.to_i - price)
       elsif section_type == "مساعد"
         assistant.update(for_him: assistant.for_him.to_i - price)
-        BankTransfer.create({ date_of_transfer: self.date_of_transfer, price: self.price, transfer_type:"ارسال", section_type:"مدير", manger_id: default_manger.id })
         default_manger.update(to_him: default_manger.to_him.to_i - price)
       end
     end
@@ -81,5 +76,32 @@ class BankTransfer < ApplicationRecord
 
   def not_manger?
     self.section_type != "مدير"
+  end
+
+  def reverse_operation
+    default_manger = Manger.first
+    if transfer_type == "استلام" 
+      if section_type == "مندوب"
+        delegate.update(for_him: delegate.for_him.to_i + price)
+        default_manger.update(to_him: default_manger.to_him.to_i + price)
+      elsif section_type == "مسوق"
+        marketer.update(for_him: marketer.for_him.to_i + price)
+        default_manger.update(to_him: default_manger.to_him.to_i + price)
+      elsif section_type == "مساعد"
+        assistant.update(for_him: assistant.for_him.to_i + price)
+        default_manger.update(to_him: default_manger.to_him.to_i + price)
+      end
+    elsif transfer_type == "ارسال"
+      if section_type == "مندوب"
+        delegate.update(for_him: delegate.for_him.to_i - price)
+        default_manger.update(to_him: default_manger.to_him.to_i - price)
+      elsif section_type == "مسوق"
+        marketer.update(for_him: marketer.for_him.to_i - price)
+        default_manger.update(to_him: default_manger.to_him.to_i - price)
+      elsif section_type == "مساعد"
+        assistant.update(for_him: assistant.for_him.to_i - price)
+        default_manger.update(to_him: default_manger.to_him.to_i - price)
+      end
+    end
   end
 end
