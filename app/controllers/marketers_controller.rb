@@ -16,6 +16,11 @@ class MarketersController < ApplicationController
       else
         Marketer
       end.order(name: :asc).page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.xlsx
+    end
   end
 
   # GET /marketers/1
