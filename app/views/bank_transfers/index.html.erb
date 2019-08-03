@@ -31,7 +31,8 @@
           <td><%= bank_transfer.section_type %></td>
           <td><%= bank_transfer.manger&.name || bank_transfer.delegate&.name || bank_transfer.marketer&.name || bank_transfer.assistant&.name %></td>
           <td><%= bank_transfer.price %></td>
-          <td colspan="2" style="text-align: center;"><%= link_to 'حذف', bank_transfer, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' }%></td>
+          <td style="text-align: center;"><%= link_to 'تعديل', edit_bank_transfer_path(bank_transfer),class: "btn btn-light" %></td>
+          <td style="text-align: center;"><%= link_to 'حذف', bank_transfer, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' }%></td>
         </tr>
       <% end %>
     </tbody>

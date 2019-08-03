@@ -29,8 +29,8 @@
           <td><%= delivery.commodity_amount %></td>
           <td><%= delivery.delegate.name %></td>
           <td><%= delivery.delivery_time.to_date %></td>
-          <td><%= link_to 'تعديل', edit_delivery_path(delivery),class: "stretched-link"  %></td>
-          <td><%= link_to 'حذف', delivery, method: :delete, data: { confirm: 'هل انت متاكد من الحذف؟' },class: "stretched-link"  %></td>
+          <td><%= link_to 'تعديل', edit_delivery_path(delivery),class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', delivery, method: :delete, data: { confirm: 'هل انت متاكد من الحذف؟' },class: "btn btn-light"  %></td>
         </tr>
       <% end %>
     </tbody>

@@ -22,8 +22,8 @@
         <td><%= product_discount.amount %></td>
         <td><%= product_discount.discount_date %></td>
         <td><%= product_discount.reason %></td>
-        <td><%= link_to 'التعديل', edit_product_discount_path(product_discount), class: "stretched-link"%></td>
-        <td><%= link_to 'حذف', product_discount, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد ؟' } %></td>
+        <td><%= link_to 'التعديل', edit_product_discount_path(product_discount), class: "btn btn-light"%></td>
+        <td><%= link_to 'حذف', product_discount, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد ؟' } %></td>
       </tr>
     <% end %>
   </tbody>

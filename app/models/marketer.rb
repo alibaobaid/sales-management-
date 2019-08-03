@@ -12,9 +12,11 @@
 #
 
 class Marketer < ApplicationRecord
-    has_many :sales_operations
-
-    # Validations
-    validates :name, presence: true, uniqueness: true
-    validates :city, presence: true
+    
+  # Associations
+  has_many :sales_operations, dependent: :destroy
+  has_many :bank_transfers, dependent: :destroy
+  # Validations
+  validates :name, presence: true, uniqueness: true
+  validates :city, presence: true
 end

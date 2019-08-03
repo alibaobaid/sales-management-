@@ -29,8 +29,8 @@
           <td><%= manger.phone_NO %></td>
           <td><%= manger.for_him %></td>
           <td><%= manger.to_him %></td>
-          <td><%= link_to 'تعديل', edit_manger_path(manger), class: "stretched-link" %></td>
-          <td><%= link_to 'حذف', manger, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+          <td><%= link_to 'تعديل', edit_manger_path(manger), class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', manger, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>

@@ -5,7 +5,7 @@ wb.add_worksheet(name: "المسوقين") do |sheet|
   sheet.add_row ["الاسم","المدينه","رقم الجوال","المبلغ المستحق"]
   
   # each user is a row on your spreadsheet
-  @marketers.each do |marketer|
+  Marketer.all.each do |marketer|
     sheet.add_row [ marketer.name, marketer.city, marketer.phone_NO, marketer.for_him]
   end
 end

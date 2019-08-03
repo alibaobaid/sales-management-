@@ -42,12 +42,14 @@ class BankTransfer < ApplicationRecord
             :section_type,
             :price,
             presence: true
+  validate :not_updatable_fields, on: :update
 
   # Callbacks
-  after_create :update__price_of_employee, if: :not_manger?
+  after_create :update_price_of_employee
+  after_update :update_price_of_employee_changes, if: :saved_change_to_price?
   after_destroy :reverse_operation
 
-  def update__price_of_employee
+  def update_price_of_employee
     default_manger = Manger.first
     if transfer_type == "ارسال" 
       if section_type == "مندوب"
@@ -74,10 +76,6 @@ class BankTransfer < ApplicationRecord
     end
   end
 
-  def not_manger?
-    self.section_type != "مدير"
-  end
-
   def reverse_operation
     default_manger = Manger.first
     if transfer_type == "استلام" 
@@ -99,6 +97,53 @@ class BankTransfer < ApplicationRecord
         marketer.update(for_him: marketer.for_him.to_i - price)
         default_manger.update(to_him: default_manger.to_him.to_i - price)
       elsif section_type == "مساعد"
+        assistant.update(for_him: assistant.for_him.to_i - price)
+        default_manger.update(to_him: default_manger.to_him.to_i - price)
+      end
+    end
+  end
+
+  def not_updatable_fields
+      errors.add(:base,'لا يمكن حفظ البيانات التي قمت بتعديله') and throw(:abort) if not_allowed_changes?
+  end
+
+  def not_allowed_changes?
+    delegate_id_changed? || marketer_id_changed? || section_type_changed? || transfer_type_changed? 
+  end
+
+  def update_price_of_employee_changes
+    default_manger = Manger.first
+    if transfer_type == "ارسال" 
+      if section_type == "مندوب"
+        delegate.update(for_him: delegate.for_him.to_i - price_before_last_save)
+        default_manger.update(to_him: default_manger.to_him.to_i - price_before_last_save)
+        delegate.update(for_him: delegate.for_him.to_i + price)
+        default_manger.update(to_him: default_manger.to_him.to_i + price)
+      elsif section_type == "مسوق"
+        marketer.update(for_him: marketer.for_him.to_i - price_before_last_save)
+        default_manger.update(to_him: default_manger.to_him.to_i - price_before_last_save)
+        marketer.update(for_him: marketer.for_him.to_i + price)
+        default_manger.update(to_him: default_manger.to_him.to_i + price)
+      elsif section_type == "مساعد"
+        assistant.update(for_him: assistant.for_him.to_i - price_before_last_save)
+        default_manger.update(to_him: default_manger.to_him.to_i - price_before_last_save)
+        assistant.update(for_him: assistant.for_him.to_i + price)
+        default_manger.update(to_him: default_manger.to_him.to_i + price)
+      end
+    elsif transfer_type == "استلام"
+      if section_type == "مندوب"
+        delegate.update(for_him: delegate.for_him.to_i + price_before_last_save)
+        default_manger.update(to_him: default_manger.to_him.to_i + price_before_last_save)
+        delegate.update(for_him: delegate.for_him.to_i - price)
+        default_manger.update(to_him: default_manger.to_him.to_i - price)
+      elsif section_type == "مسوق"
+        marketer.update(for_him: marketer.for_him.to_i + price_before_last_save)
+        default_manger.update(to_him: default_manger.to_him.to_i + price_before_last_save)
+        marketer.update(for_him: marketer.for_him.to_i - price)
+        default_manger.update(to_him: default_manger.to_him.to_i - price)
+      elsif section_type == "مساعد"
+        assistant.update(for_him: assistant.for_him.to_i + price_before_last_save)
+        default_manger.update(to_him: default_manger.to_him.to_i + price_before_last_save)
         assistant.update(for_him: assistant.for_him.to_i - price)
         default_manger.update(to_him: default_manger.to_him.to_i - price)
       end

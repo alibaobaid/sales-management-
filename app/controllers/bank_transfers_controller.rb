@@ -52,7 +52,7 @@ class BankTransfersController < ApplicationController
   # PATCH/PUT /bank_transfers/1.json
   def update
     respond_to do |format|
-      if @bank_transfer.update(bank_transfer_params)
+      if @bank_transfer.update(bank_transfer_update_params)
         format.html { redirect_to bank_transfers_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @bank_transfer }
       else
@@ -88,4 +88,8 @@ class BankTransfersController < ApplicationController
          params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :assistant_id, :price)
       end
     end
+
+    def bank_transfer_update_params
+      params.require(:bank_transfer).permit(:date_of_transfer, :price)      
+    end 
 end

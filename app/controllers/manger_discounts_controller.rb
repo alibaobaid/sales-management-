@@ -1,4 +1,5 @@
 class MangerDiscountsController < ApplicationController
+  before_action :set_manger, only: [:create]
   before_action :set_manger_discount, only: [:show, :edit, :update, :destroy]
 
   # GET /manger_discounts
@@ -67,8 +68,12 @@ class MangerDiscountsController < ApplicationController
       @manger_discount = MangerDiscount.find(params[:id])
     end
 
+    def set_manger
+      params[:manger_discount][:manger_id] = Manger.first.id
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def manger_discount_params
       params.require(:manger_discount).permit(:manger_id, :Desc, :value, :date_of_discount)
-    end
+    end    
 end

@@ -41,7 +41,7 @@ class ProductDiscountsController < ApplicationController
   # PATCH/PUT /product_discounts/1.json
   def update
     respond_to do |format|
-      if @product_discount.update(product_discount_params)
+      if @product_discount.update(product_discount_update_params)
         format.html { redirect_to product_discounts_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @product_discount }
       else
@@ -70,5 +70,9 @@ class ProductDiscountsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_discount_params
       params.require(:product_discount).permit(:product_type, :reason, :amount, :discount_date, :delegate_id)
+    end
+
+    def product_discount_update_params
+      params.require(:product_discount).permit( :reason, :amount, :discount_date)
     end
 end

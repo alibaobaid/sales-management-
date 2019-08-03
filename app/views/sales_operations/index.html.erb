@@ -78,6 +78,7 @@
           <td><%= sales_operation.manager_commission %></td>
           <td><%= sales_operation.customr_no %></td> 
           <td><%= sales_operation.customr_city %></td> 
+          <td><%= link_to 'التعديل', edit_sales_operation_path(sales_operation), class: "btn btn-light"%></td>
           <td colspan="2" style="text-align: center;" ><%= link_to 'حذف', sales_operation, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>

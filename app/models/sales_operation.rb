@@ -59,8 +59,8 @@ class SalesOperation < ApplicationRecord
             :delegate_id,
             :marketer_id,
             :manger_id,
-            :customr_city,
             presence: true
+  validate :not_updatable, on: :update
 
   # Callbacks
   after_create :update_amount_of_delegate
@@ -70,12 +70,20 @@ class SalesOperation < ApplicationRecord
   after_create :create_bank_transfer_for_delegate
   after_create :create_bank_transfer_for_marketer
   after_create :update_assistants
+  after_destroy :reverse_chnages
+  after_update :update_amount_of_delegate_changes, if: [:saved_change_to_commodity_amount?]
+  after_update :update_delegate_value_changes, if: [:saved_change_to_delegate_commission? || :saved_change_to_price?]
+  after_update :update_marketrt_value_changes, if: [:saved_change_to_marketer_commission?]
+  after_update :update_manager_value_changes, if: [:saved_change_to_marketer_commission? || :saved_change_to_delegate_commission? || :saved_change_to_price?]
+
+
+
 
 
 
 
   def manager_commission
-    price - delegate_commission - marketer_commission
+    price - (delegate_commission + marketer_commission)
   end
 
   def update_amount_of_delegate
@@ -115,4 +123,56 @@ class SalesOperation < ApplicationRecord
     end
   end
 
+  def reverse_chnages
+    if commodity_type == 'علب'
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount )
+    else
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
+    end
+
+    delegate.update(for_him: delegate.for_him.to_i - (delegate_commission - price))
+    marketer.update(for_him: marketer.for_him.to_i - marketer_commission )
+    manger.update(for_him: manger.for_him.to_i - manager_commission  )
+
+    Assistant.all.each do |assistant|
+      assistant.update(for_him: assistant.for_him.to_i - assistant.his_amount.to_i)
+    end
+  end
+
+  def not_updatable
+    errors.add(:base,'لا يمكن حفظ البيانات التي قمت بتعديله') and throw(:abort) if not_allowed_changes?
+  end
+
+  def not_allowed_changes?
+    delegate_id_changed? || marketer_id_changed? || to_manger_transfer_changed? || to_marketer_transfer_changed? || from_delegate_transfer_changed? || commodity_type_changed?
+  end
+
+  def update_amount_of_delegate_changes
+    if commodity_type == 'علب'
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount_before_last_save )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount )
+    else
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount_before_last_save )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount )
+    end
+  end
+
+  def update_delegate_value_changes
+    delegate.update(for_him: delegate.for_him.to_i - (delegate_commission_before_last_save - price_before_last_save))
+    delegate.update(for_him: delegate.for_him.to_i + (delegate_commission - price))
+  end
+
+  def update_marketrt_value_changes
+    marketer.update(for_him: marketer.for_him.to_i - marketer_commission_before_last_save )
+    marketer.update(for_him: marketer.for_him.to_i + marketer_commission )
+  end
+
+  def update_manager_value_changes
+    manger.update(for_him: manger.for_him.to_i - manager_commission_before_last_save)
+    manger.update(for_him: manger.for_him.to_i + manager_commission)
+  end
+
+  def manager_commission_before_last_save
+    price_before_last_save - (delegate_commission_before_last_save + marketer_commission_before_last_save)
+  end
 end
