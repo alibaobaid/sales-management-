@@ -14,7 +14,9 @@
 
 class Assistant < ApplicationRecord
 
-    # Validations
-    validates :name, presence: true, uniqueness: true
-    validates :city, presence: true
+  # Associations
+  has_many :bank_transfers, dependent: :destroy   
+  # Validations
+  validates :name, presence: true, uniqueness: true
+  validates :city, presence: true
 end

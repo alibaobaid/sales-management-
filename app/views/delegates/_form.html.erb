@@ -12,26 +12,32 @@
     <% end %>
 
     <div class="form-group">
+      <%= form.label 'الاسم', style: "text-align: right; float: right" %>
       <%= form.text_field :name, class: "form-control" , placeholder: "الاسم"  %>
     </div>
 
     <div class="form-group">
+      <%= form.label 'المدينه', style: "text-align: right; float: right" %>
       <%= form.text_field :city, class: "form-control" , placeholder: "المدينه" %>
     </div>
 
     <div class="form-group">
+      <%= form.label 'رقم الجوال', style: "text-align: right; float: right" %>
       <%= form.text_field :phone_NO, class: "form-control" , placeholder:"رقم الجوال" %>
     </div>
 
     <div class="form-group">
+      <%= form.label 'عدد العلب', style: "text-align: right; float: right" %>
       <%= form.number_field :amount_of_box, class: "form-control", placeholder: "عدد العلب" %>
     </div>
 
     <div class="form-group">
+      <%= form.label 'عدد الجوالين', style: "text-align: right; float: right" %>
       <%= form.number_field :amount_of_gallon, class: "form-control", placeholder:"عدد الجوالين" %>
     </div>
 
     <div class="form-group">
+      <%= form.label 'المبلغ المستحق', style: "text-align: right; float: right" %>
       <%= form.number_field :for_him, class: "form-control", placeholder:"المبلغ المستحق" %>
     </div>
 

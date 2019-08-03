@@ -33,8 +33,8 @@
           <td><%= marketer.city %></td>
           <td><%= marketer.phone_NO %></td>
           <td><%= marketer.for_him %></td>
-          <td><%= link_to 'تعديل', edit_marketer_path(marketer), class: "stretched-link" %></td>
-          <td><%= link_to 'حذف', marketer, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+          <td><%= link_to 'تعديل', edit_marketer_path(marketer), class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', marketer, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>

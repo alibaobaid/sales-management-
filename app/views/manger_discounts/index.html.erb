@@ -6,8 +6,7 @@
   <table class="table">
     <thead class="thead-light" style="text-align: right;">
       <tr>
-        <th>اسم المدير</th>
-        <th>الوصف</th>
+        <th>سبب صرف المبلغ</th>
         <th>المبلغ</th>
         <th>تاريخ الصرف</th>
         <th colspan="2"></th>
@@ -17,12 +16,11 @@
     <tbody style="text-align: right;">
       <% @manger_discounts.each do |manger_discount| %>
         <tr>
-          <td><%= manger_discount.manger.name %></td>
           <td><%= manger_discount.Desc %></td>
           <td><%= manger_discount.value %></td>
           <td><%= manger_discount.date_of_discount %></td>
-          <td><%= link_to 'تعديل', edit_manger_discount_path(manger_discount), class: "stretched-link" %></td>
-          <td><%= link_to 'حذف', manger_discount, method: :delete, class: "stretched-link", data: { confirm:'هل انت متاكد؟' } %></td>
+          <td><%= link_to 'تعديل', edit_manger_discount_path(manger_discount), class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', manger_discount, method: :delete, class:"btn btn-light", data: { confirm:'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>

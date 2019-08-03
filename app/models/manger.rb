@@ -14,11 +14,17 @@
 
 class Manger < ApplicationRecord
 
+  # Associations
+  has_many :deliveries, dependent: :destroy, inverse_of: :manger
+  has_many :sales_operations, dependent: :destroy, inverse_of: :manger
+  has_many :manger_discounts, dependent: :destroy, inverse_of: :manger
+
   # Validations
   validates :name,  presence: true
 
   # Callback
   before_create :default_one_account
+  before_destroy :not_deletable
 
 
   private
@@ -27,4 +33,8 @@ class Manger < ApplicationRecord
     errors.add(:base, 'لايمكن اضافة حساب اخر') and throw(:abort) if Manger.any?
   end
 
+  def not_deletable
+    errors.add(:base, 'لايمكنك حذف المدير الافتراضي') 
+    throw(:abort) 
+  end
 end

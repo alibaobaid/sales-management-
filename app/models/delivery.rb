@@ -25,9 +25,13 @@ class Delivery < ApplicationRecord
 
   # Validations
   validates :commodity_type, :commodity_amount, :delivery_time, :delegate_id, presence: true
+  validate :not_updatable_fields, on: :update
 
   # Callbacks
   after_create :set_amount_to_delegate
+  after_update :update_delegate_account_changes, if: :saved_change_to_commodity_amount?
+  after_destroy :reveres_changes
+  
   # instance method
   def set_amount_to_delegate
     if commodity_type == 'علب'
@@ -35,6 +39,32 @@ class Delivery < ApplicationRecord
     else 
       delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
     end
+  end
+
+  def update_delegate_account_changes
+    if commodity_type == 'علب'
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount_before_last_save )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount )
+    else
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount_before_last_save ) 
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
+    end
+  end
+
+  def reveres_changes
+    if commodity_type == 'علب'
+      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount )
+    else 
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount )
+    end
+  end
+
+  def not_updatable_fields
+    errors.add(:base,'لا يمكن حفظ البيانات التي قمت بتعديله') and throw(:abort) if not_allowed_changes?
+  end
+  
+  def not_allowed_changes?
+    delegate_id_changed? || commodity_type_changed?
   end
 
   def spreadsheet_columns

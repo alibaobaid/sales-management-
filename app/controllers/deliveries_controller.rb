@@ -56,7 +56,7 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1.json
   def update
     respond_to do |format|
-      if @delivery.update(delivery_params)
+      if @delivery.update(delivery_update_params)
         format.html { redirect_to deliveries_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @delivery }
       else
@@ -85,5 +85,9 @@ class DeliveriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
       params.require(:delivery).permit(:commodity_type, :commodity_amount, :delivery_time, :delegate_id)
+    end
+
+    def delivery_update_params
+      params.require(:delivery).permit( :commodity_amount, :delivery_time)
     end
 end

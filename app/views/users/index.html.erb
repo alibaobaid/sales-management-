@@ -17,8 +17,8 @@
         <tr>
           <td><%= user.username %></td>
           <td><%= user.role_type %></td>
-          <td><%= link_to 'تعديل', edit_user_path(user), class: "stretched-link" %></td>
-          <td><%= link_to 'حذف', user, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+          <td><%= link_to 'تعديل', edit_user_path(user), class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', user, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>

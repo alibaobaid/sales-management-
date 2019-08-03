@@ -37,8 +37,8 @@
           <td><%= delegate.amount_of_box %></td>
           <td><%= delegate.amount_of_gallon %></td>
           <td><%= delegate.for_him %></td>
-          <td><%= link_to 'تعديل', edit_delegate_path(delegate) , class: "stretched-link" %></td>
-          <td><%= link_to 'حذف', delegate, method: :delete, data: { confirm: 'هل انت مناكد من عملية الحذف؟' }, class: "stretched-link" %></td>
+          <td><%= link_to 'تعديل', edit_delegate_path(delegate) , class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', delegate, method: :delete, data: { confirm: 'هل انت مناكد من عملية الحذف؟' }, class: "btn btn-light" %></td>
         </tr>
       <% end %>
     </tbody>

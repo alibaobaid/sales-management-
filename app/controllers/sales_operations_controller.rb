@@ -54,7 +54,7 @@ class SalesOperationsController < ApplicationController
   # PATCH/PUT /sales_operations/1.json
   def update
     respond_to do |format|
-      if @sales_operation.update(sales_operation_params)
+      if @sales_operation.update(sales_operation_update_params)
         format.html { redirect_to sales_operations_url, notice: 'تمت عملية التعديل بنجاح' }
         format.json { render :show, status: :ok, location: @sales_operation }
       else
@@ -101,5 +101,9 @@ class SalesOperationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sales_operation_params
       params.require(:sales_operation).permit(:date, :delegate_id, :commodity_type, :commodity_amount, :price, :marketer_id, :manger_id, :delegate_commission, :marketer_commission, :from_delegate_transfer, :to_marketer_transfer, :to_manger_transfer, :customr_no, :customr_city)
+    end
+
+    def sales_operation_update_params
+      params.require(:sales_operation).permit(:date, :commodity_amount, :price,  :delegate_commission, :marketer_commission, :customr_no, :customr_city)
     end
 end

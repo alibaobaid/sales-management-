@@ -30,9 +30,23 @@ class MangerDiscount < ApplicationRecord
 
   # Callbacks
   after_create :update_manger_account
+  after_update :update_manger_account_changes, if: :saved_change_to_value?
+  after_destroy :reverse_changes
 
   def update_manger_account
     manger.update(to_him: manger.to_him.to_i - value)
     manger.update(for_him: manger.for_him.to_i - value)
   end
+
+  def update_manger_account_changes
+    manger.update(to_him: manger.to_him.to_i + value_before_last_save)
+    manger.update(for_him: manger.for_him.to_i + value_before_last_save)
+    manger.update(to_him: manger.to_him.to_i - value)
+    manger.update(for_him: manger.for_him.to_i - value)
+  end
+
+  def reverse_changes
+    manger.update(to_him: manger.to_him.to_i + value)
+    manger.update(for_him: manger.for_him.to_i + value)
+  end  
 end

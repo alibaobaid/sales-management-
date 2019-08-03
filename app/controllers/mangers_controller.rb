@@ -54,10 +54,14 @@ class MangersController < ApplicationController
   # DELETE /mangers/1
   # DELETE /mangers/1.json
   def destroy
-    @manger.destroy
     respond_to do |format|
-      format.html { redirect_to mangers_url, notice: 'تمت عملية الحذف بنجاح' }
-      format.json { head :no_content }
+      if @manger.destroy
+        format.html { redirect_to mangers_url, notice: 'تمت عملية الحذف بنجاح' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to mangers_url, notice: @manger.errors.full_messages.first }
+        format.json { render json: @manger.errors, status: :unprocessable_entity }
+      end
     end
   end
 

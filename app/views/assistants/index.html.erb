@@ -26,8 +26,8 @@
           <td><%= assistant.phone_NO %></td>
           <td><%= assistant.his_amount %></td>
           <td><%= assistant.for_him %></td>
-          <td><%= link_to 'تعديل', edit_assistant_path(assistant), class: "stretched-link" %></td>
-          <td><%= link_to 'حذف', assistant, method: :delete, class: "stretched-link", data: { confirm: 'هل انت متاكد؟' } %></td>
+          <td><%= link_to 'تعديل', edit_assistant_path(assistant), class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', assistant, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>
