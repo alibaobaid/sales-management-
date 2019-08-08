@@ -16,6 +16,15 @@ class BankTransfersController < ApplicationController
       else
         BankTransfer
       end.order(created_at: :desc).page(params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.xlsx
+      format.pdf do
+        render pdf: 'bank_transfers',
+               layout: 'pdf'
+      end
+    end
   end
 
   # GET /bank_transfers/1

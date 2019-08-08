@@ -1,0 +1,43 @@
+
+<h2 style="text-align: center;">قائمة المندوبين</h2>
+<div class="table-responsive" >
+  <table class="table" >
+    <thead class="thead-light" style="text-align: right;"  >
+      <tr  >
+        <th colspan="2">الاسم</th>
+        <th>المدينه</th>
+        <th>رقم الجوال</th>
+        <th>عدد العلب</th>
+        <th>عدد الجوالين</th>
+        <th>المبلغ المستحق</th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;" >
+      <% Delegate.all.each do |delegate| %>
+        <tr  >
+          <td colspan="2"><%= delegate.name %></td>
+          <td><%= delegate.city %></td>
+          <td><%= delegate.phone_NO %></td>
+          <td><%= delegate.amount_of_box %></td>
+          <td><%= delegate.amount_of_gallon %></td>
+          <td><%= delegate.for_him %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot  style="text-align: center;">
+        <tr>
+          <td colspan="2">اجمالي المندوبين</td>
+          <td colspan="2">اجمالي العلب</td>
+          <td colspan="2">اجمالي الجوالين</td>
+          <td colspan="2">اجمالي المبالغ المستحقه</td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= Delegate.count %></td>
+          <td colspan="2"><%= Delegate.all.pluck(:amount_of_box).sum %></td>
+          <td colspan="2"><%= Delegate.all.pluck(:amount_of_gallon).sum %></td>
+          <td colspan="2"><%= Delegate.all.pluck(:for_him).sum %></td>
+        </tr>
+    </tfoot>
+  </table>
+</div>

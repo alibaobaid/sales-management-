@@ -38,6 +38,16 @@
         </tr>
       <% end %>
     </tbody>
+    <tfoot  style="text-align: center;">
+        <tr>
+          <td colspan="3">اجمالي المسوقين</td>
+          <td colspan="3">اجمالي المبالغ المستحقه</td>
+        </tr>
+        <tr>
+          <td colspan="3"><%= @marketers.count %></td>
+          <td colspan="3"><%= @marketers.map(&:for_him).sum  %></td>
+        </tr>
+    </tfoot>
   </table>
 </div>
 
@@ -45,3 +55,4 @@
 
 <%= link_to 'إضافة مسوق', new_marketer_path, class: "btn btn-outline-success my-2 my-sm-0"%>
 <%= link_to "استخراج ملف اكسل", marketers_path(format: "xlsx"),class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to "استخراج ملف pdf", marketers_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>

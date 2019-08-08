@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_034958) do
+ActiveRecord::Schema.define(version: 2019_08_08_042027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,9 @@ ActiveRecord::Schema.define(version: 2019_07_22_034958) do
     t.string "name"
     t.string "city"
     t.string "phone_NO"
-    t.integer "amount_of_box"
-    t.integer "amount_of_gallon"
-    t.integer "for_him"
+    t.integer "amount_of_box", default: 0
+    t.integer "amount_of_gallon", default: 0
+    t.integer "for_him", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_034958) do
     t.string "name"
     t.string "city"
     t.string "phone_NO"
-    t.integer "for_him"
+    t.integer "for_him", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

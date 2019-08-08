@@ -4,7 +4,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  city       :string
-#  for_him    :integer
+#  for_him    :integer          default(0)
 #  name       :string
 #  phone_NO   :string
 #  created_at :datetime         not null
@@ -19,4 +19,8 @@ class Marketer < ApplicationRecord
   # Validations
   validates :name, presence: true, uniqueness: true
   validates :city, presence: true
+
+	def self.for_him_total
+		Marketer.all.pluck(:for_him).sum
+	end
 end

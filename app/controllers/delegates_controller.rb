@@ -20,6 +20,10 @@ class DelegatesController < ApplicationController
     respond_to do |format|
       format.html
       format.xlsx
+      format.pdf do
+        render pdf: 'Delegates',
+               layout: 'pdf'
+      end
     end
   end
 

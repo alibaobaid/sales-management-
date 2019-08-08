@@ -4,12 +4,10 @@
     <title>SalesManagement</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
    <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
   </head>
-
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
       <a class="navbar-brand" href="/"> مؤسسة بلا حدود</a>
@@ -56,7 +54,6 @@
               </li>
             <% end %>
           </ul>
-         
       </div>
     </nav>
     <% if flash[:notice].present? %>
@@ -64,8 +61,7 @@
         <%= flash[:notice] %>
       </div>
     <% end %>
-    <div class="container">
-      
+    <div class="container">  
       <%= yield %>
       <% if controller.action_name == 'index' && ['home', 'session'].exclude?(controller.controller_name)%>
         <nav aria-label="Page navigation example">

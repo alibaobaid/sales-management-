@@ -18,6 +18,15 @@ class SalesOperationsController < ApplicationController
       else
         SalesOperation
       end.order(created_at: :desc).page(params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.xlsx
+      format.pdf do
+        render pdf: 'sales_operations',
+               layout: 'pdf'
+      end
+    end
   end
 
   # GET /sales_operations/1
