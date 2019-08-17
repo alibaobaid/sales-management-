@@ -10,8 +10,9 @@ class SessionController < ApplicationController
   end
 
   def attempt_login
-    if params[:name] && params[:password]
-      user = User.find_by(username: params[:name])
+    if params[:name] && params[:password] && params[:country]
+      country = Country.find_by(name: params[:country])
+      user = country.users.find_by(username: params[:name])
       if user && user.authenticate(params[:password])
         update_expire_token(user.generate_token)
         flash[:notice] = 'لقد تم تسجيل دخولك'

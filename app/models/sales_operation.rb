@@ -17,12 +17,14 @@
 #  to_marketer_transfer   :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  country_id             :bigint(8)
 #  delegate_id            :bigint(8)        not null
 #  manger_id              :bigint(8)        not null
 #  marketer_id            :bigint(8)        not null
 #
 # Indexes
 #
+#  index_sales_operations_on_country_id        (country_id)
 #  index_sales_operations_on_delegate_id       (delegate_id)
 #  index_sales_operations_on_manger_id         (manger_id)
 #  index_sales_operations_on_marketer_id       (marketer_id)
@@ -30,6 +32,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (country_id => countries.id)
 #  fk_rails_...  (delegate_id => delegates.id)
 #  fk_rails_...  (manger_id => mangers.id)
 #  fk_rails_...  (marketer_id => marketers.id)
@@ -43,6 +46,8 @@ class SalesOperation < ApplicationRecord
   belongs_to :delegate
   belongs_to :marketer
   belongs_to :manger
+  belongs_to :country
+  
   scope :gallon, -> { where(commodity_type: "جالون") }
   scope :box, -> { where(commodity_type: "علب") }
   scope :gallon_and_on_date, -> (date) { where(date: date).gallon }
@@ -109,16 +114,16 @@ class SalesOperation < ApplicationRecord
   # this methods is for create bank transfer if the the price is entred within sale operation
   def create_bank_transfer_for_delegate
     return if from_delegate_transfer.nil?
-    BankTransfer.create({date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id})
+    BankTransfer.create({date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id, country_id: self.country_id})
   end
 
   def create_bank_transfer_for_marketer
     return if to_marketer_transfer.nil?
-    BankTransfer.create({date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id})
+    BankTransfer.create({date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id, country_id: self.country_id})
   end
 
   def update_assistants
-    Assistant.all.each do |assistant|
+    Assistant.where(country_id: self.country_id).each do |assistant|
       assistant.update(for_him: assistant.for_him.to_i + assistant.his_amount.to_i)
     end
   end
@@ -134,7 +139,7 @@ class SalesOperation < ApplicationRecord
     marketer.update(for_him: marketer.for_him.to_i - marketer_commission )
     manger.update(for_him: manger.for_him.to_i - manager_commission  )
 
-    Assistant.all.each do |assistant|
+    Assistant.where(country_id: self.country_id).each do |assistant|
       assistant.update(for_him: assistant.for_him.to_i - assistant.his_amount.to_i)
     end
   end

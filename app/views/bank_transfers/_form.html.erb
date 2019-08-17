@@ -29,17 +29,17 @@
 
     <div class="form-group", id ="delegate", style="display: block">
       <%= form.label "حدد المندوب", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:delegate_id, Delegate.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
+      <%= form.collection_select(:delegate_id, Delegate.where(country_id: bank_transfer.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
     </div>
 
     <div class="form-group", id="marketer", style="display: none">
       <%= form.label "حدد المسوق", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:marketer_id, Marketer.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
+      <%= form.collection_select(:marketer_id, Marketer.where(country_id: bank_transfer.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
     </div>
 
     <div class="form-group", id="assistant", style="display: none">
       <%= form.label "حدد المساعد", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:assistant_id, Assistant.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المساعد"})  %>
+      <%= form.collection_select(:assistant_id, Assistant.where(country_id: bank_transfer.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المساعد"})  %>
     </div>
 
     <div class="form-group">

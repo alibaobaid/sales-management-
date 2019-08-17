@@ -4,7 +4,7 @@ class ProductDiscountsController < ApplicationController
   # GET /product_discounts
   # GET /product_discounts.json
   def index
-    @product_discounts = ProductDiscount.page(params[:page])
+    @product_discounts = @current_country.product_discounts.page(params[:page])
   end
 
   # GET /product_discounts/1
@@ -14,7 +14,7 @@ class ProductDiscountsController < ApplicationController
 
   # GET /product_discounts/new
   def new
-    @product_discount = ProductDiscount.new
+    @product_discount = @current_country.product_discounts.new
   end
 
   # GET /product_discounts/1/edit
@@ -24,7 +24,7 @@ class ProductDiscountsController < ApplicationController
   # POST /product_discounts
   # POST /product_discounts.json
   def create
-    @product_discount = ProductDiscount.new(product_discount_params)
+    @product_discount = @current_country.product_discounts.new(product_discount_params)
 
     respond_to do |format|
       if @product_discount.save

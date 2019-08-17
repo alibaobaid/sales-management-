@@ -6,7 +6,7 @@ class MarketersController < ApplicationController
   def index
     @marketers = \
       if params[:search].present?
-        Marketer.where(
+        @current_country.marketers.where(
           "
           name LIKE :search OR
           city LIKE :search
@@ -14,7 +14,7 @@ class MarketersController < ApplicationController
           search: "%#{params[:search]}%"
         )
       else
-        Marketer
+        @current_country.marketers
       end.order(name: :asc).page(params[:page])
 
     respond_to do |format|
@@ -34,7 +34,7 @@ class MarketersController < ApplicationController
 
   # GET /marketers/new
   def new
-    @marketer = Marketer.new
+    @marketer = @current_country.marketers.new
   end
 
   # GET /marketers/1/edit
@@ -44,7 +44,7 @@ class MarketersController < ApplicationController
   # POST /marketers
   # POST /marketers.json
   def create
-    @marketer = Marketer.new(marketer_params)
+    @marketer = @current_country.marketers.new(marketer_params)
 
     respond_to do |format|
       if @marketer.save

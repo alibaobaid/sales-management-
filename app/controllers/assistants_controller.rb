@@ -4,7 +4,7 @@ class AssistantsController < ApplicationController
   # GET /assistants
   # GET /assistants.json
   def index
-    @assistants = Assistant.page(params[:page])
+    @assistants = @current_country.assistants.page(params[:page])
   end
 
   # GET /assistants/1
@@ -14,7 +14,7 @@ class AssistantsController < ApplicationController
 
   # GET /assistants/new
   def new
-    @assistant = Assistant.new
+    @assistant = @current_country.assistants.new
   end
 
   # GET /assistants/1/edit
@@ -24,7 +24,7 @@ class AssistantsController < ApplicationController
   # POST /assistants
   # POST /assistants.json
   def create
-    @assistant = Assistant.new(assistant_params)
+    @assistant = @current_country.assistants.new(assistant_params)
 
     respond_to do |format|
       if @assistant.save

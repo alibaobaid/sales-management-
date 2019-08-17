@@ -9,12 +9,18 @@
 #  username        :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  country_id      :bigint(8)
 #
 # Indexes
 #
+#  index_users_on_country_id       (country_id)
 #  index_users_on_password_digest  (password_digest)
 #  index_users_on_role_type        (role_type)
 #  index_users_on_username         (username)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (country_id => countries.id)
 #
 
 class User < ApplicationRecord
@@ -23,9 +29,10 @@ class User < ApplicationRecord
 
   # assosiations
   has_many :access_tokens
+  belongs_to :country
 
   # Validations
-  validates :username, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: { scope: [:country_id] }
   validates :role_type, inclusion: { in: ['مدير', 'مستخدم'] }
 
   # Callback

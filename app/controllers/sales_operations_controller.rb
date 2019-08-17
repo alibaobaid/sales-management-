@@ -7,7 +7,7 @@ class SalesOperationsController < ApplicationController
   def index
     @sales_operations = \
       if params[:search].present?
-        SalesOperation.joins(:delegate, :marketer).where(
+        @current_country.sales_operations.joins(:delegate, :marketer).where(
           "
           sales_operations.commodity_type LIKE :search OR
           delegates.name LIKE :search OR
@@ -16,7 +16,7 @@ class SalesOperationsController < ApplicationController
           search: "%#{params[:search]}%"
         )
       else
-        SalesOperation
+        @current_country.sales_operations
       end.order(created_at: :desc).page(params[:page])
     
     respond_to do |format|
@@ -36,7 +36,7 @@ class SalesOperationsController < ApplicationController
 
   # GET /sales_operations/new
   def new
-    @sales_operation = SalesOperation.new
+    @sales_operation = @current_country.sales_operations.new
   end
 
   # GET /sales_operations/1/edit
@@ -46,7 +46,7 @@ class SalesOperationsController < ApplicationController
   # POST /sales_operations
   # POST /sales_operations.json
   def create
-    @sales_operation = SalesOperation.new(sales_operation_params)
+    @sales_operation = @current_country.sales_operations.new(sales_operation_params)
 
     respond_to do |format|
       if @sales_operation.save
@@ -104,7 +104,7 @@ class SalesOperationsController < ApplicationController
 
     # use to set manger id to sales opration
     def set_manger
-      params[:sales_operation][:manger_id] = Manger.first.id
+      params[:sales_operation][:manger_id] = @current_country.mangers.first.id
     end 
 
     # Never trust parameters from the scary internet, only allow the white list through.

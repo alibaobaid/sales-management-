@@ -5,7 +5,7 @@ class DeliveriesController < ApplicationController
   # GET /deliveries.json
   def index
     @deliveries = if params[:search].present?
-      Delivery.joins(:delegate).where(
+      @current_country.deliveries.joins(:delegate).where(
         "
           lower(delegates.name) LIKE :search OR
           lower(deliveries.commodity_type) LIKE :search
@@ -13,7 +13,7 @@ class DeliveriesController < ApplicationController
         search: "%#{params[:search].downcase}%"
       )
     else
-      Delivery.all
+      @current_country.deliveries.all
     end.page(params[:page])
     
     respond_to do |format|
@@ -33,7 +33,7 @@ class DeliveriesController < ApplicationController
 
   # GET /deliveries/new
   def new
-    @delivery = Delivery.new
+    @delivery = @current_country.deliveries.new
   end
 
   # GET /deliveries/1/edit
@@ -43,7 +43,7 @@ class DeliveriesController < ApplicationController
   # POST /deliveries
   # POST /deliveries.json
   def create
-    @delivery = Delivery.new(delivery_params)
+    @delivery = @current_country.deliveries.new(delivery_params)
 
     respond_to do |format|
       if @delivery.save

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = if current_user.role_type == 'مدير'
-        User.all
+      @current_country.users.all
       else
         User.where(id: current_user.id)
       end.page(params[:page])
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @user = @current_country.users.new
   end
 
   # GET /users/1/edit
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = @current_country.users.new(user_params)
 
     respond_to do |format|
       if @user.save
