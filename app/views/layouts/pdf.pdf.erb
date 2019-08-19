@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+     <link 
+  rel="stylesheet"
+  href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css"
+  integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz"
+  crossorigin="anonymous">
+  </head>
+    <div class="container">
+    <br>
+    <br>
+    <center>      
+      <%= yield %>
+    </center>
+    </div>
+  </body>
+</html>

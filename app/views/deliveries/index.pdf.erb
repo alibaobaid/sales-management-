@@ -1,0 +1,25 @@
+
+<h2 style="text-align: center;">عمليات التسليم </h2>
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>نوع البضاعه </th>
+        <th>الكمية</th>
+        <th>المندوب </th>
+        <th>تاريخ التسليم</th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% Delivery.all.each do |delivery| %>
+        <tr>
+          <td><%= delivery.commodity_type %></td>
+          <td><%= delivery.commodity_amount %></td>
+          <td><%= delivery.delegate.name %></td>
+          <td><%= delivery.delivery_time.to_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

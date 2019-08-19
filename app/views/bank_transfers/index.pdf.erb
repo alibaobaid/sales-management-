@@ -1,0 +1,27 @@
+<br>
+
+<h2 style="text-align: center;">التحويلات</h2>
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: center;">
+      <tr>
+        <th>تاريخ الحواله</th>
+        <th>نوع الحواله</th>
+        <th>صنف المحول</th>
+        <th>الاسم</th>
+        <th>المبلغ</th>
+    </thead>
+
+    <tbody style="text-align: center;">
+      <% BankTransfer.all.each do |bank_transfer| %>
+        <tr>
+          <td><%= bank_transfer.date_of_transfer.to_date %></td>
+          <td><%= bank_transfer.transfer_type %></td>
+          <td><%= bank_transfer.section_type %></td>
+          <td><%= bank_transfer.manger&.name || bank_transfer.delegate&.name || bank_transfer.marketer&.name || bank_transfer.assistant&.name %></td>
+          <td><%= bank_transfer.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

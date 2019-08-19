@@ -1,0 +1,36 @@
+
+<h2 style="text-align: center;">المسوقين</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>الاسم</th>
+        <th>المدينه</th>
+        <th>رقم الجوال</th>
+        <th>المبلغ المستحق</th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% Marketer.all.each do |marketer| %>
+        <tr>
+          <td><%= marketer.name %></td>
+          <td><%= marketer.city %></td>
+          <td><%= marketer.phone_NO %></td>
+          <td><%= marketer.for_him %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot  style="text-align: center;">
+        <tr>
+          <td colspan="2">اجمالي المسوقين</td>
+          <td colspan="2">اجمالي المبالغ المستحقه</td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= @marketers.count %></td>
+          <td colspan="2"><%= @marketers.map(&:for_him).sum  %></td>
+        </tr>
+    </tfoot>
+  </table>
+</div>

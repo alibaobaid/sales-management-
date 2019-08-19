@@ -41,3 +41,4 @@
 
 <%= link_to 'إضافة عملية تسليم', new_delivery_path ,class: "btn btn-outline-success my-2 my-sm-0" %>
 <%= link_to "استخراج ملف اكسل", "./deliveries.xlsx?search=#{params[:search]}" ,class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to "استخراج ملف pdf", deliveries_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>

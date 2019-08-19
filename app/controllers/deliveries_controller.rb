@@ -19,6 +19,10 @@ class DeliveriesController < ApplicationController
     respond_to do |format|
       format.html
       format.xlsx {render xlsx: @deliveries.to_xlsx }
+      format.pdf do
+        render pdf: 'deliveries',
+               layout: 'pdf'
+      end
     end
   end
 

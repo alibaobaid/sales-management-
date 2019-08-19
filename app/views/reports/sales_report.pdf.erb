@@ -1,21 +1,8 @@
-<br>
-<div class="alert alert-info" role="alert" style="text-align: center;">
-  سوف يتم عرض مبيعات تاريخ اليوم اذا لم يتم تحديد التاريخ
-</div>
-<div>
-      <%= form_tag(reports_sales_report_path, :method => "get", class: 'navbar-form navbar-left') do %>
-        <div class="input-group">
-          <%= date_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button> 
-          </div>
-        </div>
-      <% end %>
-</div>
-<br>
-<br>
-<h4 style="text-align: center;"><%= @sales_operations.blank? ? "لا توجد عمليات بيع للتاريخ المختار" : "تقرير عمليات البيع لتاريخ #{@sales_operations.first.date.to_s}" %></h4>
-<div class="table-responsive" >
+
+<h2 style="text-align: center;">
+  تقرير عمليات البيع بتاريخ <%= @sales_operations.first&.date.to_s %>
+</h2>
+<div class="table" >
   <table class="table">
     <thead class="thead-light" style="text-align: center;">
       <tr>
@@ -25,7 +12,6 @@
         <th colspan="2">رقم العميل</th>
       </tr>
     </thead>
-
     <tbody style="text-align: right;">
       <% @sales_operations.each do |sales_operation| %>
         <tr>
@@ -52,5 +38,3 @@
     </tfoot>
   </table>
 </div>
-<%= link_to ' استخراج اكسل',"/reports/sales_report.xlsx?search=#{params[:search]}",class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= link_to 'استخراج pdf',"/reports/sales_report.pdf?search=#{params[:search]}",class: "btn btn-outline-success my-2 my-sm-0" %>

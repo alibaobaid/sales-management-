@@ -20,6 +20,10 @@ class MarketersController < ApplicationController
     respond_to do |format|
       format.html
       format.xlsx
+      format.pdf do
+        render pdf: 'marketers',
+               layout: 'pdf'
+      end
     end
   end
 
