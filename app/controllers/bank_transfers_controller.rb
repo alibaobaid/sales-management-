@@ -6,7 +6,7 @@ class BankTransfersController < ApplicationController
   def index
     @bank_transfers = \
       if params[:search].present?
-        BankTransfer.where(
+        @current_country.bank_transfers.where(
           "
           bank_transfers.transfer_type LIKE :search OR
           bank_transfers.section_type LIKE :search
@@ -14,7 +14,7 @@ class BankTransfersController < ApplicationController
           search: "%#{params[:search]}%"
         )
       else
-        BankTransfer
+        @current_country.bank_transfers
       end.order(created_at: :desc).page(params[:page])
     
     respond_to do |format|
@@ -34,7 +34,7 @@ class BankTransfersController < ApplicationController
 
   # GET /bank_transfers/new
   def new
-    @bank_transfer = BankTransfer.new
+    @bank_transfer = @current_country.bank_transfers.new
   end
 
   # GET /bank_transfers/1/edit
@@ -44,7 +44,7 @@ class BankTransfersController < ApplicationController
   # POST /bank_transfers
   # POST /bank_transfers.json
   def create
-    @bank_transfer = BankTransfer.new(bank_transfer_params)
+    @bank_transfer = @current_country.bank_transfers.new(bank_transfer_params)
 
     respond_to do |format|
       if @bank_transfer.save

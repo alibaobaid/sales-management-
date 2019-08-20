@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_042027) do
+ActiveRecord::Schema.define(version: 2019_08_15_075416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "for_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_assistants_on_country_id"
   end
 
   create_table "bank_transfers", force: :cascade do |t|
@@ -44,10 +46,16 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
     t.index ["assistant_id"], name: "index_bank_transfers_on_assistant_id"
+    t.index ["country_id"], name: "index_bank_transfers_on_country_id"
     t.index ["delegate_id"], name: "index_bank_transfers_on_delegate_id"
     t.index ["manger_id"], name: "index_bank_transfers_on_manger_id"
     t.index ["marketer_id"], name: "index_bank_transfers_on_marketer_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "delegates", force: :cascade do |t|
@@ -59,6 +67,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "for_him", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_delegates_on_country_id"
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -66,6 +76,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "commodity_amount"
     t.datetime "delivery_time"
     t.bigint "delegate_id"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_deliveries_on_country_id"
     t.index ["delegate_id"], name: "index_deliveries_on_delegate_id"
   end
 
@@ -76,6 +88,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.date "date_of_discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_manger_discounts_on_country_id"
     t.index ["manger_id"], name: "index_manger_discounts_on_manger_id"
   end
 
@@ -87,6 +101,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_mangers_on_country_id"
   end
 
   create_table "marketers", force: :cascade do |t|
@@ -96,6 +112,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "for_him", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_marketers_on_country_id"
   end
 
   create_table "product_discounts", force: :cascade do |t|
@@ -106,6 +124,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.bigint "delegate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_product_discounts_on_country_id"
     t.index ["delegate_id"], name: "index_product_discounts_on_delegate_id"
   end
 
@@ -127,6 +147,8 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.integer "operation_number"
     t.string "customr_no"
     t.string "customr_city"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_sales_operations_on_country_id"
     t.index ["delegate_id"], name: "index_sales_operations_on_delegate_id"
     t.index ["manger_id"], name: "index_sales_operations_on_manger_id"
     t.index ["marketer_id"], name: "index_sales_operations_on_marketer_id"
@@ -140,20 +162,32 @@ ActiveRecord::Schema.define(version: 2019_08_08_042027) do
     t.boolean "is_default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["password_digest"], name: "index_users_on_password_digest"
     t.index ["role_type"], name: "index_users_on_role_type"
     t.index ["username"], name: "index_users_on_username"
   end
 
   add_foreign_key "access_tokens", "users"
+  add_foreign_key "assistants", "countries"
   add_foreign_key "bank_transfers", "assistants"
+  add_foreign_key "bank_transfers", "countries"
   add_foreign_key "bank_transfers", "delegates"
   add_foreign_key "bank_transfers", "mangers"
   add_foreign_key "bank_transfers", "marketers"
+  add_foreign_key "delegates", "countries"
+  add_foreign_key "deliveries", "countries"
   add_foreign_key "deliveries", "delegates"
+  add_foreign_key "manger_discounts", "countries"
   add_foreign_key "manger_discounts", "mangers"
+  add_foreign_key "mangers", "countries"
+  add_foreign_key "marketers", "countries"
+  add_foreign_key "product_discounts", "countries"
   add_foreign_key "product_discounts", "delegates"
+  add_foreign_key "sales_operations", "countries"
   add_foreign_key "sales_operations", "delegates"
   add_foreign_key "sales_operations", "mangers"
   add_foreign_key "sales_operations", "marketers"
+  add_foreign_key "users", "countries"
 end

@@ -14,7 +14,7 @@
     </thead>
 
     <tbody style="text-align: right;" >
-      <% Delegate.all.each do |delegate| %>
+      <% Delegate.where(country_id: @current_country.id).each do |delegate| %>
         <tr  >
           <td colspan="2"><%= delegate.name %></td>
           <td><%= delegate.city %></td>
@@ -33,10 +33,10 @@
           <td colspan="2">اجمالي المبالغ المستحقه</td>
         </tr>
         <tr>
-          <td colspan="2"><%= Delegate.count %></td>
-          <td colspan="2"><%= Delegate.all.pluck(:amount_of_box).sum %></td>
-          <td colspan="2"><%= Delegate.all.pluck(:amount_of_gallon).sum %></td>
-          <td colspan="2"><%= Delegate.all.pluck(:for_him).sum %></td>
+          <td colspan="2"><%= Delegate.where(country_id: @current_country.id).count %></td>
+          <td colspan="2"><%= Delegate.where(country_id: @current_country.id).pluck(:amount_of_box).sum %></td>
+          <td colspan="2"><%= Delegate.where(country_id: @current_country.id).pluck(:amount_of_gallon).sum %></td>
+          <td colspan="2"><%= Delegate.where(country_id: @current_country.id).pluck(:for_him).sum %></td>
         </tr>
     </tfoot>
   </table>

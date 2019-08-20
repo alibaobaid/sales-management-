@@ -5,7 +5,7 @@ class MangerDiscountsController < ApplicationController
   # GET /manger_discounts
   # GET /manger_discounts.json
   def index
-    @manger_discounts = MangerDiscount.page(params[:page])
+    @manger_discounts = @current_country.manger_discounts.page(params[:page])
   end
 
   # GET /manger_discounts/1
@@ -15,7 +15,7 @@ class MangerDiscountsController < ApplicationController
 
   # GET /manger_discounts/new
   def new
-    @manger_discount = MangerDiscount.new
+    @manger_discount = @current_country.manger_discounts.new
   end
 
   # GET /manger_discounts/1/edit
@@ -25,7 +25,7 @@ class MangerDiscountsController < ApplicationController
   # POST /manger_discounts
   # POST /manger_discounts.json
   def create
-    @manger_discount = MangerDiscount.new(manger_discount_params)
+    @manger_discount = @current_country.manger_discounts.new(manger_discount_params)
 
     respond_to do |format|
       if @manger_discount.save
@@ -69,7 +69,7 @@ class MangerDiscountsController < ApplicationController
     end
 
     def set_manger
-      params[:manger_discount][:manger_id] = Manger.first.id
+      params[:manger_discount][:manger_id] = @current_country.mangers.first.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

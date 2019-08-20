@@ -9,14 +9,17 @@
 #  reason        :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  country_id    :bigint(8)
 #  delegate_id   :bigint(8)
 #
 # Indexes
 #
+#  index_product_discounts_on_country_id   (country_id)
 #  index_product_discounts_on_delegate_id  (delegate_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (country_id => countries.id)
 #  fk_rails_...  (delegate_id => delegates.id)
 #
 
@@ -24,6 +27,7 @@ class ProductDiscount < ApplicationRecord
   
   # Associations
   belongs_to :delegate
+  belongs_to :country
   # Validations
   validates :amount,
             :discount_date,

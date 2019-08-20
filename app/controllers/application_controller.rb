@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :login_require, except: %i[login attempt_login]
   before_action :authrized, except: %i[login attempt_login logout]
 
-  attr_accessor :current_user
+  attr_accessor :current_user, :current_country
 
   rescue_from ActiveRecord::RecordNotFound, with: :return_error
   rescue_from UnknownFileFormat, with: :error_file
@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     end
 
     @current_user = token.user
+    @current_country = @current_user.country
     update_expire_token(cookies[:access_token])
   end
 

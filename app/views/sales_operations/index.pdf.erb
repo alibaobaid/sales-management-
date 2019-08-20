@@ -21,7 +21,7 @@
     </thead>
 
     <tbody style="text-align: right;">
-      <% SalesOperation.all.each do |sales_operation| %>
+      <% SalesOperation.where(country_id: @current_country.id).each do |sales_operation| %>
         <tr>
           <td><%= sales_operation.delegate.name %></td>
            <td><%= sales_operation.commodity_type %></td>

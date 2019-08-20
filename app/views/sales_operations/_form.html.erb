@@ -17,7 +17,7 @@
 
     <div class="form-group">
       <%= form.label 'إختر اسم المندوب', style: "text-align: right; float: right" %>
-      <%= form.collection_select(:delegate_id, Delegate.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
+      <%= form.collection_select(:delegate_id, Delegate.where(country_id: sales_operation.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
     </div>
 
     <div class="form-group">
@@ -52,7 +52,7 @@
 
     <div class="form-group">
       <%= form.label 'اختر اسم المسوق', style: "text-align: right; float: right" %>
-      <%= form.collection_select(:marketer_id, Marketer.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
+      <%= form.collection_select(:marketer_id, Marketer.where(country_id: sales_operation.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
     </div>
 
     <div class="form-group">

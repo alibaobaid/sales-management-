@@ -8,20 +8,24 @@
 #  value            :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  country_id       :bigint(8)
 #  manger_id        :bigint(8)
 #
 # Indexes
 #
-#  index_manger_discounts_on_manger_id  (manger_id)
+#  index_manger_discounts_on_country_id  (country_id)
+#  index_manger_discounts_on_manger_id   (manger_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (country_id => countries.id)
 #  fk_rails_...  (manger_id => mangers.id)
 #
 
 class MangerDiscount < ApplicationRecord
   # Associations
   belongs_to :manger
+  belongs_to :country
 
   # Validations
   validates :value,

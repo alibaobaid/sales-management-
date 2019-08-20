@@ -4,7 +4,7 @@ class MangersController < ApplicationController
   # GET /mangers
   # GET /mangers.json
   def index
-    @mangers = Manger.page(params[:page])
+    @mangers = @current_country.mangers.page(params[:page])
   end
 
   # GET /mangers/1
@@ -14,7 +14,7 @@ class MangersController < ApplicationController
 
   # GET /mangers/new
   def new
-    @manger = Manger.new
+    @manger = @current_country.mangers.new
   end
 
   # GET /mangers/1/edit
@@ -24,7 +24,7 @@ class MangersController < ApplicationController
   # POST /mangers
   # POST /mangers.json
   def create
-    @manger = Manger.new(manger_params)
+    @manger = @current_country.mangers.new(manger_params)
 
     respond_to do |format|
       if @manger.save
@@ -68,7 +68,7 @@ class MangersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_manger
-      @manger = Manger.find(params[:id])
+      @manger = current_country.mangers.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

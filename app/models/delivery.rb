@@ -6,14 +6,17 @@
 #  commodity_amount :integer
 #  commodity_type   :string
 #  delivery_time    :datetime
+#  country_id       :bigint(8)
 #  delegate_id      :bigint(8)
 #
 # Indexes
 #
+#  index_deliveries_on_country_id   (country_id)
 #  index_deliveries_on_delegate_id  (delegate_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (country_id => countries.id)
 #  fk_rails_...  (delegate_id => delegates.id)
 #
 
@@ -22,6 +25,7 @@ class Delivery < ApplicationRecord
   
   # Associations
   belongs_to :delegate, inverse_of: :deliveries
+  belongs_to :country
 
   # Validations
   validates :commodity_type, :commodity_amount, :delivery_time, :delegate_id, presence: true

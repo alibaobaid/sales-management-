@@ -6,7 +6,7 @@ class DelegatesController < ApplicationController
   def index
     @delegates = \
       if params[:search].present?
-        Delegate.where(
+        @current_country.delegates.where(
           "
           name LIKE :search OR
           city LIKE :search
@@ -14,7 +14,7 @@ class DelegatesController < ApplicationController
           search: "%#{params[:search]}%"
         )
       else
-        Delegate
+        @current_country.delegates
       end.order(name: :asc).page(params[:page]) 
     
     respond_to do |format|
@@ -34,7 +34,7 @@ class DelegatesController < ApplicationController
 
   # GET /delegates/new
   def new
-    @delegate = Delegate.new
+    @delegate = @current_country.delegates.new
   end
 
   # GET /delegates/1/edit
@@ -44,7 +44,7 @@ class DelegatesController < ApplicationController
   # POST /delegates
   # POST /delegates.json
   def create
-    @delegate = Delegate.new(delegate_params)
+    @delegate = @current_country.delegates.new(delegate_params)
 
     respond_to do |format|
       if @delegate.save

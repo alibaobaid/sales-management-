@@ -10,6 +10,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  assistant_id     :bigint(8)
+#  country_id       :bigint(8)
 #  delegate_id      :bigint(8)
 #  manger_id        :bigint(8)
 #  marketer_id      :bigint(8)
@@ -17,6 +18,7 @@
 # Indexes
 #
 #  index_bank_transfers_on_assistant_id  (assistant_id)
+#  index_bank_transfers_on_country_id    (country_id)
 #  index_bank_transfers_on_delegate_id   (delegate_id)
 #  index_bank_transfers_on_manger_id     (manger_id)
 #  index_bank_transfers_on_marketer_id   (marketer_id)
@@ -24,6 +26,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (assistant_id => assistants.id)
+#  fk_rails_...  (country_id => countries.id)
 #  fk_rails_...  (delegate_id => delegates.id)
 #  fk_rails_...  (manger_id => mangers.id)
 #  fk_rails_...  (marketer_id => marketers.id)
@@ -35,6 +38,7 @@ class BankTransfer < ApplicationRecord
   belongs_to :marketer , optional: true
   belongs_to :assistant , optional: true
   belongs_to :manger, optional: true
+  belongs_to :country
 
   # Validations
   validates :date_of_transfer,
@@ -50,7 +54,7 @@ class BankTransfer < ApplicationRecord
   after_destroy :reverse_operation
 
   def update_price_of_employee
-    default_manger = Manger.first
+    default_manger = Manger.where(country_id: self.country_id).first
     if transfer_type == "ارسال" 
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i + price)
@@ -77,7 +81,7 @@ class BankTransfer < ApplicationRecord
   end
 
   def reverse_operation
-    default_manger = Manger.first
+    default_manger = Manger.where(country_id: self.country_id).first
     if transfer_type == "استلام" 
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i + price)
@@ -112,7 +116,7 @@ class BankTransfer < ApplicationRecord
   end
 
   def update_price_of_employee_changes
-    default_manger = Manger.first
+    default_manger = Manger.where(country_id: self.country_id).first
     if transfer_type == "ارسال" 
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i - price_before_last_save)

@@ -13,7 +13,7 @@
     </thead>
 
     <tbody style="text-align: right;">
-      <% Marketer.all.each do |marketer| %>
+      <% Marketer.where(country_id: @current_country.id).each do |marketer| %>
         <tr>
           <td><%= marketer.name %></td>
           <td><%= marketer.city %></td>
@@ -28,8 +28,8 @@
           <td colspan="2">اجمالي المبالغ المستحقه</td>
         </tr>
         <tr>
-          <td colspan="2"><%= @marketers.count %></td>
-          <td colspan="2"><%= @marketers.map(&:for_him).sum  %></td>
+          <td colspan="2"><%= Marketer.where(country_id: @current_country.id).count %></td>
+          <td colspan="2"><%= Marketer.where(country_id: @current_country.id).map(&:for_him).sum  %></td>
         </tr>
     </tfoot>
   </table>

@@ -8,9 +8,9 @@
 //   text-align: center;
 // }
 
-// table, tr, td, th, tbody, thead, tfoot {
-//   page-break-inside: avoid !important;
-// }
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
 
 table{
   direction: rtl;
