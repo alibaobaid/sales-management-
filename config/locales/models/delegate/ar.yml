@@ -4,6 +4,9 @@ ar:
       delegate:
         name: 'الاسم'
         city: 'المدينة'
+        for_him: 'المبلغ المستحق'
+        amount_of_box: 'عدد العلب'
+        amount_of_gallon: 'عدد الجوالين'
     errors:
       models:
         delegate:
@@ -12,4 +15,10 @@ ar:
               blank: 'لايمكن تركه فارغا'
               taken: 'ماخوذ مسبقا'
             city:
-              blank: 'لا يمكن ترها فارغه'
+              blank: 'لا يمكن تركها فارغه'
+            for_him:
+              blank: 'لايمكن تركه فارغا'
+            amount_of_box:
+              blank: 'لايمكن تركه فارغا'
+            amount_of_gallon:
+              blank: 'لايمكن تركه فارغا'

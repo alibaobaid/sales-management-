@@ -31,4 +31,10 @@
 # MangerDiscount.all.map{|record| record.update(country_id: 1) if record.country_id.nil? }
 # ProductDiscount.all.map{|record| record.update(country_id: 1) if record.country_id.nil? }
 # SalesOperation.all.map{|sales_operation| sales_operation.update(country_id: 1) if sales_operation.country_id.nil? }
-Manger.find(5).delete
+# Manger.find(5).delete
+Marketer.all.map{|m| m.update_columns(for_him: 7) if m.for_him.nil? }
+Delegate.all.map do |delegate|
+  delegate.update_columns(for_him:0)if delegate.for_him.nil?
+  delegate.update_columns(amount_of_box: 0) if delegate.amount_of_box.nil?
+  delegate.update_columns(amount_of_gallon: 0)if delegate.amount_of_gallon.nil?
+end

@@ -29,4 +29,5 @@ class Marketer < ApplicationRecord
   # Validations
   validates :name, presence: true, uniqueness: { scope: [:country_id] }
   validates :city, presence: true
+  validates :for_him, presence: true
 end

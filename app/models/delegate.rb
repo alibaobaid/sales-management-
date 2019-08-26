@@ -33,5 +33,8 @@ class Delegate < ApplicationRecord
   # Validations
   validates :name, presence: true, uniqueness: { scope: [:country_id] }
   validates :city, presence: true
+  validates :for_him, presence: true
+  validates :amount_of_box, presence: true
+  validates :amount_of_gallon, presence: true
 
 end
