@@ -4,6 +4,8 @@ ar:
       marketer:
         name: 'الاسم'
         city: 'المدينة'
+        for_him: 'المبلغ المستحق'
+
     errors:
       models:
         marketer:
@@ -13,3 +15,5 @@ ar:
               taken: 'ماخوذ مسبقا'
             city:
               blank: 'لا يمكن ترها فارغه'
+            for_him:
+              blank: 'لايمكن تركه فارغا'
