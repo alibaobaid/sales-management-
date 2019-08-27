@@ -32,9 +32,16 @@
 # ProductDiscount.all.map{|record| record.update(country_id: 1) if record.country_id.nil? }
 # SalesOperation.all.map{|sales_operation| sales_operation.update(country_id: 1) if sales_operation.country_id.nil? }
 # Manger.find(5).delete
-Marketer.all.map{|m| m.update_columns(for_him: 7) if m.for_him.nil? }
-Delegate.all.map do |delegate|
-  delegate.update_columns(for_him:0)if delegate.for_him.nil?
-  delegate.update_columns(amount_of_box: 0) if delegate.amount_of_box.nil?
-  delegate.update_columns(amount_of_gallon: 0)if delegate.amount_of_gallon.nil?
-end
+# Marketer.all.map{|m| m.update_columns(for_him: 7) if m.for_him.nil? }
+# Delegate.all.map do |delegate|
+#   delegate.update_columns(for_him:0)if delegate.for_him.nil?
+#   delegate.update_columns(amount_of_box: 0) if delegate.amount_of_box.nil?
+#   delegate.update_columns(amount_of_gallon: 0)if delegate.amount_of_gallon.nil?
+# end
+
+su_country = Country.find(1)
+su_country.bank_transfers.each{|record| record.delete  }
+su_country.manger_discounts.each{|record| record.delete  }
+su_country.product_discounts.each{|record| record.delete  }
+su_country.sales_operations.each{|sales_operation| sales_operation.delete }
+su_country.deliveries.each{|delivery| delivery.delete }
