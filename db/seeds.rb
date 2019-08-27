@@ -40,8 +40,8 @@
 # end
 
 su_country = Country.find(1)
-su_country.bank_transfers.each{|record| record.delete  }
-su_country.manger_discounts.each{|record| record.delete  }
-su_country.product_discounts.each{|record| record.delete  }
-su_country.sales_operations.each{|sales_operation| sales_operation.delete }
-su_country.deliveries.each{|delivery| delivery.delete }
+su_country.bank_transfers.each{|record| record.destroy  }
+su_country.manger_discounts.each{|record| record.destroy  }
+su_country.product_discounts.each{|record| record.destroy  }
+su_country.sales_operations.each{|sales_operation| sales_operation.destroy }
+su_country.deliveries.each{|delivery| delivery.destroy }
