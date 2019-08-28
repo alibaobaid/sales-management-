@@ -1,7 +1,9 @@
 
 <h2 style="text-align: center;">
-  تقرير عمليات البيع بتاريخ <%= @sales_operations.first&.date.to_s %>
+  تقرير عمليات البيع
 </h2>
+<p style="text-align: center;"><%= params[:delegate_id].try(:[],:id).present? ? " المندوب #{Delegate.find(params[:delegate_id][:id]).name.to_s}" : "" %></p>
+<p style="text-align: center;"><%= params[:marketer_id].try(:[],:id).present? ? " المسوق #{Marketer.find(params[:marketer_id][:id]).name.to_s}" : "" %></p>
 <div class="table" >
   <table class="table">
     <thead class="thead-light" style="text-align: center;">
@@ -9,20 +11,20 @@
         <th>التاريخ</th>
         <th>السعر</th>
         <th>منطقة العميل</th>
-        <th colspan="2">رقم العميل</th>
+        <th>رقم العميل</th>
       </tr>
     </thead>
-    <tbody style="text-align: right;">
+    <tbody style="text-align: center;">
       <% @sales_operations.each do |sales_operation| %>
         <tr>
           <td><%= sales_operation.date.to_date %></td>
           <td><%= sales_operation.price %></td>
           <td><%= sales_operation.customr_city %></td>
-          <td><%= sales_operation.customr_no %></td> 
+          <td><%= sales_operation.customr_no %></td>
         </tr>
       <% end %>
     </tbody>
-    <tfoot  style="text-align: right;">
+    <tfoot  style="text-align: center;">
         <tr>
           <td>المبلغ المستحق</td>
           <td>عدد الجوالين</td>

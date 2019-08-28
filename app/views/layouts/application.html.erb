@@ -64,16 +64,7 @@
     <div class="container">  
       <%= yield %>
       <% if controller.action_name == 'index' && ['home', 'session'].exclude?(controller.controller_name)%>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item">
-              <%= link_to_prev_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة السابقة' , class:"page-link" %>
-            </li>
-            <li class="pagination justify-content-center" >
-               <%= link_to_next_page instance_variable_get("@#{controller.controller_name}"), 'الصفحة التالية', class:"page-link" %>
-            </li>
-          </ul>
-        </nav>
+        <%= paginate instance_variable_get("@#{controller.controller_name}") %>
       <% end %>
     </div>
   </body>
