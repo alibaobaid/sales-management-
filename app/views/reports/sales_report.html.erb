@@ -5,16 +5,21 @@
 <div>
       <%= form_tag(reports_sales_report_path, :method => "get", class: 'navbar-form navbar-left') do %>
         <div class="input-group">
-          <%= date_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
+          <%= date_field_tag :from, params[:from], placeholder: "من تاريخ", class: "form-control" %>
+          <%= date_field_tag :to, params[:to], placeholder: "الى تاريخ", class: "form-control" %>
+          <%= collection_select :delegate_id, :id, @current_country.delegates, :id, :name,{:"data-style" => "selectpicker", multiple: true, include_blank: true}, {class: "form-control", title: "المندوب"} %>
+          <%= collection_select :marketer_id, :id, @current_country.marketers, :id, :name,{:"data-style" => "selectpicker", multiple: true, include_blank: true}, {class: "form-control", title: "المسوق"} %>
           <div class="input-group-btn">
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button> 
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
           </div>
         </div>
       <% end %>
 </div>
 <br>
 <br>
-<h4 style="text-align: center;"><%= @sales_operations.blank? ? "لا توجد عمليات بيع للتاريخ المختار" : "تقرير عمليات البيع لتاريخ #{@sales_operations.first.date.to_s}" %></h4>
+<h4 style="text-align: center;"><%= @sales_operations.blank? ? "لا توجد عمليات بيع " : "تقرير عمليات البيع" %></h4>
+<p style="text-align: center;"><%= params[:delegate_id].try(:[],:id).present? ? " المندوب #{Delegate.find(params[:delegate_id][:id]).name.to_s}" : "" %></p>
+<p style="text-align: center;"><%= params[:marketer_id].try(:[],:id).present? ? " المسوق #{Marketer.find(params[:marketer_id][:id]).name.to_s}" : "" %></p>
 <div class="table-responsive" >
   <table class="table">
     <thead class="thead-light" style="text-align: center;">
@@ -32,7 +37,7 @@
           <td><%= sales_operation.date.to_date %></td>
           <td><%= sales_operation.price %></td>
           <td><%= sales_operation.customr_city %></td>
-          <td><%= sales_operation.customr_no %></td> 
+          <td><%= sales_operation.customr_no %></td>
         </tr>
       <% end %>
     </tbody>
@@ -52,5 +57,5 @@
     </tfoot>
   </table>
 </div>
-<%= link_to ' استخراج اكسل',"/reports/sales_report.xlsx?search=#{params[:search]}",class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= link_to 'استخراج pdf',"/reports/sales_report.pdf?search=#{params[:search]}",class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to ' استخراج اكسل',"/reports/sales_report.xlsx?from=#{params[:from]}&to=#{params[:to]}&delegate_id%5Bid%5D=#{params[:delegate_id].try(:[],:id)}&marketer_id%5Bid%5D=#{params[:marketer_id].try(:[],:id)}",class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to 'استخراج pdf',"/reports/sales_report.pdf?from=#{params[:from]}&to=#{params[:to]}&delegate_id%5Bid%5D=#{params[:delegate_id].try(:[],:id)}&marketer_id%5Bid%5D=#{params[:marketer_id].try(:[],:id)}",class: "btn btn-outline-success my-2 my-sm-0" %>

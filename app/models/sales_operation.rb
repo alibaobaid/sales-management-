@@ -47,11 +47,14 @@ class SalesOperation < ApplicationRecord
   belongs_to :marketer
   belongs_to :manger
   belongs_to :country
-  
+
   scope :gallon, -> { where(commodity_type: "جالون") }
   scope :box, -> { where(commodity_type: "علب") }
   scope :gallon_and_on_date, -> (date) { where(date: date).gallon }
   scope :box_and_on_date, -> (date) { where(date: date).box }
+  scope :between, -> (from, to) { where(date: from..to) }
+  scope :delegate, -> (id) { where(delegate_id: id)}
+  scope :marketer, -> (id) { where(marketer_id: id)}
 
   # Ex:- scope :active, -> {where(:active => true)}
   # Validations

@@ -4,8 +4,8 @@ wb = xlsx_package.workbook
 wb.add_worksheet(name: "Items") do |sheet|
 title = wb.styles.add_style( b: true,:bg_color => "95AFBA", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"},:alignment=>{:horizontal => :center})
 body = wb.styles.add_style( b: true,:bg_color => "ffffff", :fg_color=>"#FF000000", :sz=>12,  :border=> {:style => :thin, :color => "FFFF0000"},:alignment=>{:horizontal => :center})
-  # title 
-  sheet.add_row ["تقرير عمليات البيع", "بتاريخ", @sales_operations.first&.date.to_s , ""], style: title
+  # title
+  sheet.add_row ["تقرير عمليات البيع", "     ", "     " , "     "], style: title
   sheet.add_row
   # Create the header row
   sheet.add_row ["التاريخ", "السعر", "المنطقة", "رقم العميل"], style: title
@@ -17,9 +17,9 @@ body = wb.styles.add_style( b: true,:bg_color => "ffffff", :fg_color=>"#FF000000
   sheet.add_row
   sheet.add_row ["الرصيد الافتراضي","عدد الجوالين", "عدد العلب" , "عدد عمليات البيع"], style: title
 
-  sheet.add_row [@sales_operations.map(&:manager_commission).sum, 
+  sheet.add_row [@sales_operations.map(&:manager_commission).sum,
                 @sales_operations.gallon_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum,
                 @sales_operations.box_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum ,
                 @sales_operations.count],style: body
- 
+
 end
