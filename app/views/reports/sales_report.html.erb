@@ -20,11 +20,11 @@
 <h4 style="text-align: center;"><%= @sales_operations.blank? ? "لا توجد عمليات بيع " : "تقرير عمليات البيع" %></h4>
 <p style="text-align: center;">
   <%= params[:delegate_id].try(:[],:id).present? ? " المندوب #{Delegate.find(params[:delegate_id][:id]).name.to_s}  " : "" %>
-  <%= params[:delegate_id].try(:[],:id).present? ? " اجمالي المبلغ المستق  : #{@sales_operations.map(&:delegate_commission).sum.to_s}" : "" %>
+  <%= params[:delegate_id].try(:[],:id).present? ? " اجمالي المبلغ المستحق  : #{@sales_operations.map(&:delegate_commission).sum.to_s}" : "" %>
 </p>
 <p style="text-align: center;">
   <%= params[:marketer_id].try(:[],:id).present? ? " المسوق #{Marketer.find(params[:marketer_id][:id]).name.to_s}  " : "" %>
-  <%= params[:marketer_id].try(:[],:id).present? ? " اجمالي المبلغ المستق  : #{@sales_operations.map(&:marketer_commission).sum.to_s}" : "" %>
+  <%= params[:marketer_id].try(:[],:id).present? ? " اجمالي المبلغ المستحق  : #{@sales_operations.map(&:marketer_commission).sum.to_s}" : "" %>
 </p>
 <div class="table-responsive" >
   <table class="table">
