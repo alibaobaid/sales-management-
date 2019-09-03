@@ -5,7 +5,7 @@ wb.add_worksheet(name: "المندوبين") do |sheet|
   sheet.add_row ["الاسم","المدينه","رقم الجوال","عدد العلب","عدد الجوالين","المبلغ المستحق"]
   
   # each user is a row on your spreadsheet
-  Delegate.all.each do |delegate|
+  @current_country.delegates.each do |delegate|
     sheet.add_row [ delegate.name, delegate.city, delegate.phone_NO, delegate.amount_of_box, delegate.amount_of_gallon, delegate.for_him]
   end
 end

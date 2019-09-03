@@ -5,6 +5,13 @@ class ProductDiscountsController < ApplicationController
   # GET /product_discounts.json
   def index
     @product_discounts = @current_country.product_discounts.page(params[:page])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Product Discount',
+               layout: 'pdf'
+      end
+    end
   end
 
   # GET /product_discounts/1

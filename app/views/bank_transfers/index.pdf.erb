@@ -13,7 +13,7 @@
     </thead>
 
     <tbody style="text-align: center;">
-      <% BankTransfer.where(country_id: @current_country.id).each do |bank_transfer| %>
+      <% @current_country.bank_transfers.each do |bank_transfer| %>
         <tr>
           <td><%= bank_transfer.date_of_transfer.to_date %></td>
           <td><%= bank_transfer.transfer_type %></td>

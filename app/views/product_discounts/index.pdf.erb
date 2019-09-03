@@ -1,6 +1,8 @@
 <br>
+<br>
 
 <h2 style="text-align: center;">البضائع المصروفه</h2>
+<br>
 <div class="table-responsive" >
   <table class="table">
     <thead class="thead-light" style="text-align: right;">
@@ -10,26 +12,18 @@
         <th>الكمية</th>
         <th>تاريخ الصرف</th>
         <th>السبب</th>
-        <th colspan="2"></th>
       </tr>
     </thead>
 
   <tbody style="text-align: right;" >
-    <% @product_discounts.each do |product_discount| %>
+    <% @current_country.product_discounts.each do |product_discount| %>
       <tr>
         <td><%= product_discount.delegate.name %></td>
         <td><%= product_discount.product_type %></td>
         <td><%= product_discount.amount %></td>
         <td><%= product_discount.discount_date %></td>
         <td><%= product_discount.reason %></td>
-        <td><%= link_to 'التعديل', edit_product_discount_path(product_discount), class: "btn btn-light"%></td>
-        <td><%= link_to 'حذف', product_discount, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد ؟' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'صرف بضاعه', new_product_discount_path , class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= link_to "استخراج ملف pdf", product_discounts_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>

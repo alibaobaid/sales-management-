@@ -1,9 +1,8 @@
 <br>
-<div class="alert alert-info" role="alert" style="text-align: center;">
-  يتم تحديد نصيب كل مساعد حتى يتم اضفته كمبلغ مستحق عند كل عملية بيع 
-</div>
 
 <h2 style="text-align: center;">المساعدين</h2>
+<br>
+
 
 <div class="table-responsive" >
   <table class="table">
@@ -14,7 +13,6 @@
         <th>رقم الجوال</th>
         <th>نصيبه</th>
         <th>المبلغ المستحق</th>
-        <th colspan="2"></th>
       </tr>
     </thead>
 
@@ -26,15 +24,8 @@
           <td><%= assistant.phone_NO %></td>
           <td><%= assistant.his_amount %></td>
           <td><%= assistant.for_him %></td>
-          <td><%= link_to 'تعديل', edit_assistant_path(assistant), class: "btn btn-light" %></td>
-          <td><%= link_to 'حذف', assistant, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<br>
-
-<%= link_to 'إضافة', new_assistant_path, class: "btn btn-outline-success my-2 my-sm-0"%>
-<%= link_to "استخراج ملف pdf", assistants_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>

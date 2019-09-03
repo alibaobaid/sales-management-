@@ -27,7 +27,12 @@
     </div>
 
     <div class="form-group">
-      <%= form.label 'الرصيد الافتراضي', style: "text-align: right; float: right" %>
+      <%= form.label 'اجمالي نصيب المدير ', style: "text-align: right; float: right" %>
+      <%= form.number_field :final_manager_amount, class: "form-control", placeholder:"الرصيد الافتراضي" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label 'رصيد الاداره ', style: "text-align: right; float: right" %>
       <%= form.number_field :for_him, class: "form-control", placeholder:"الرصيد الافتراضي" %>
     </div>
 
