@@ -8,6 +8,8 @@
 <div class="alert alert-info" role="alert" style="text-align: center;">
    الرصيد الفعلي هي المبالغ التي تم استلمها من المندوبين ناقص مصروفات المدير والتحويلات المرسله 
 </div>
+<br>
+<br>
 
 <h2 style="text-align: center;">معلومات المدير</h2>
 
@@ -20,7 +22,6 @@
         <th>اجمالي نصيب المدير</th>
         <th>رصيد الاداره </th>
         <th>الرصيد الفعلي </th>
-        <th colspan="2"></th>
       </tr>
     </thead>
 
@@ -32,16 +33,9 @@
           <td><%= manger.final_manager_amount %></td>
           <td><%= manger.for_him %></td>
           <td><%= manger.to_him %></td>
-          <td><%= link_to 'تعديل', edit_manger_path(manger), class: "btn btn-light" %></td>
-          <td><%= link_to 'حذف', manger, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-
-<br>
-
-<%= link_to 'إضافة مدير', new_manger_path, class: "btn btn-outline-success my-2 my-sm-0"%>
-<%= link_to "استخراج ملف pdf", mangers_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>
 

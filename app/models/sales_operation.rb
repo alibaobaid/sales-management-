@@ -3,13 +3,17 @@
 # Table name: sales_operations
 #
 #  id                     :bigint(8)        not null, primary key
+#  box_amount             :integer          default(0), not null
 #  commodity_amount       :integer          not null
 #  commodity_type         :string           not null
 #  customr_city           :string
 #  customr_no             :string
 #  date                   :date             not null
 #  delegate_commission    :integer          not null
+#  final_manager_amount   :integer          default(0), not null
 #  from_delegate_transfer :integer
+#  gallon_amount          :integer          default(0), not null
+#  manager_commission     :integer          default(0), not null
 #  marketer_commission    :integer          not null
 #  operation_number       :integer
 #  price                  :integer          not null
@@ -48,18 +52,15 @@ class SalesOperation < ApplicationRecord
   belongs_to :manger
   belongs_to :country
 
-  scope :gallon, -> { where(commodity_type: "جالون") }
-  scope :box, -> { where(commodity_type: "علب") }
-  scope :gallon_and_on_date, -> (date) { where(date: date).gallon }
-  scope :box_and_on_date, -> (date) { where(date: date).box }
+  # Scopes
+  scope :on_date, -> (date) { where(date: date) }
   scope :between, -> (from, to) { where(date: from..to) }
-  scope :delegate, -> (id) { where(delegate_id: id)}
-  scope :marketer, -> (id) { where(marketer_id: id)}
+  scope :delegate, -> (id) { where(delegate_id: id) }
+  scope :marketer, -> (id) { where(marketer_id: id) }
 
-  # Ex:- scope :active, -> {where(:active => true)}
   # Validations
-  validates :commodity_amount,
-            :commodity_type,
+  validates :gallon_amount,
+            :box_amount,
             :date,
             :delegate_commission,
             :marketer_commission,
@@ -71,6 +72,7 @@ class SalesOperation < ApplicationRecord
   validate :not_updatable, on: :update
 
   # Callbacks
+  before_validation :set_manger_value
   after_create :update_amount_of_delegate
   after_create :update_delegate_value
   after_create :update_marketrt_value
@@ -83,72 +85,65 @@ class SalesOperation < ApplicationRecord
   after_update :update_delegate_value_changes, if: [:saved_change_to_delegate_commission? || :saved_change_to_price?]
   after_update :update_marketrt_value_changes, if: [:saved_change_to_marketer_commission?]
   after_update :update_manager_value_changes, if: [:saved_change_to_marketer_commission? || :saved_change_to_delegate_commission? || :saved_change_to_price?]
-
-
-
-
-
-
-
-  def manager_commission
-    price - (delegate_commission + marketer_commission)
+  # Should be removed after remove the coloumns
+  before_validation :set_values
+  
+  # Methods
+  def set_manger_value
+    self.manager_commission = price - (delegate_commission + marketer_commission )
+    self.final_manager_amount = manager_commission - assistants_amount
+  end
+  
+  def set_values
+    self.commodity_amount = 0
+    self.commodity_type = 'جالون وعلبه'
   end
 
   def update_amount_of_delegate
-    if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount )
-    else
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount )
-    end
+    delegate.update(amount_of_box: delegate.amount_of_box.to_i - box_amount)
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - gallon_amount)
   end
 
   def update_delegate_value
-    delegate.update(for_him: delegate.for_him.to_i + delegate_commission - price)
+    delegate.update(for_him: delegate.for_him.to_i + (delegate_commission - price))
   end
 
   def update_marketrt_value
-    marketer.update(for_him: marketer.for_him.to_i + marketer_commission )
+    marketer.update(for_him: marketer.for_him.to_i + marketer_commission)
   end
 
   def update_manager_value
-    manger.update(for_him: manger.for_him.to_i + manager_commission  )
+    manger.update(for_him: manger.for_him.to_i + manager_commission)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i + final_manager_amount)
   end
 
   # this methods is for create bank transfer if the the price is entred within sale operation
   def create_bank_transfer_for_delegate
     return if from_delegate_transfer.nil?
-    BankTransfer.create({date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id, country_id: self.country_id})
+    country.bank_transfers.create({ date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id })
   end
 
   def create_bank_transfer_for_marketer
     return if to_marketer_transfer.nil?
-    BankTransfer.create({date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id, country_id: self.country_id})
+    country.bank_transfers.create({ date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id })
   end
 
   def update_assistants
-    Assistant.where(country_id: self.country_id).each do |assistant|
+    country.assistants.each do |assistant|
       assistant.update(for_him: assistant.for_him.to_i + assistant.his_amount.to_i)
     end
   end
 
   def reverse_chnages
-    if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount )
-    else
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
-    end
-
+    delegate.update(amount_of_box: delegate.amount_of_box.to_i + box_amount)
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + gallon_amount)
     delegate.update(for_him: delegate.for_him.to_i - (delegate_commission - price))
-    marketer.update(for_him: marketer.for_him.to_i - marketer_commission )
-    manger.update(for_him: manger.for_him.to_i - manager_commission  )
-
-    Assistant.where(country_id: self.country_id).each do |assistant|
+    marketer.update(for_him: marketer.for_him.to_i - marketer_commission)
+    manger.update(for_him: manger.for_him.to_i - manager_commission)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i - final_manager_amount)
+    country.assistants.each do |assistant|
       assistant.update(for_him: assistant.for_him.to_i - assistant.his_amount.to_i)
     end
-  end
-
-  def not_updatable
-    errors.add(:base,'لا يمكن حفظ البيانات التي قمت بتعديله') and throw(:abort) if not_allowed_changes?
   end
 
   def not_allowed_changes?
@@ -156,13 +151,10 @@ class SalesOperation < ApplicationRecord
   end
 
   def update_amount_of_delegate_changes
-    if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount_before_last_save )
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount )
-    else
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount_before_last_save )
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount )
-    end
+    delegate.update(amount_of_box: delegate.amount_of_box.to_i + box_amount_before_last_save)
+    delegate.update(amount_of_box: delegate.amount_of_box.to_i - box_amount)
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + gallon_amount_before_last_save )
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - gallon_amount )
   end
 
   def update_delegate_value_changes
@@ -178,9 +170,11 @@ class SalesOperation < ApplicationRecord
   def update_manager_value_changes
     manger.update(for_him: manger.for_him.to_i - manager_commission_before_last_save)
     manger.update(for_him: manger.for_him.to_i + manager_commission)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i - final_manager_amount_before_last_save)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i + final_manager_amount)
   end
 
-  def manager_commission_before_last_save
-    price_before_last_save - (delegate_commission_before_last_save + marketer_commission_before_last_save)
+  def assistants_amount
+    @assistants_amount ||= country.assistants.pluck(:his_amount).inject(:+)
   end
 end

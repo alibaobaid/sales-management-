@@ -17,9 +17,9 @@ body = wb.styles.add_style( b: true,:bg_color => "ffffff", :fg_color=>"#FF000000
   sheet.add_row
   sheet.add_row ["الرصيد الافتراضي","عدد الجوالين", "عدد العلب" , "عدد عمليات البيع"], style: title
 
-  sheet.add_row [@sales_operations.map(&:manager_commission).sum,
-                @sales_operations.gallon_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum,
-                @sales_operations.box_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum ,
+  sheet.add_row [@sales_operations.pluck(:manager_commission).sum,
+                @sales_operations.pluck(:gallon_amount).sum ,
+                @sales_operations.pluck(:box_amount).sum ,
                 @sales_operations.count],style: body
 
 end

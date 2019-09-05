@@ -32,9 +32,9 @@
           <td>عدد الطلبات</td>
         </tr>
         <tr>
-          <td><%= @sales_operations.map(&:manager_commission).sum  %></td>
-          <td><%= @sales_operations.gallon_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum  %></td>
-          <td><%= @sales_operations.box_and_on_date(@sales_operations.first&.date).pluck(:commodity_amount).sum %></td>
+          <td><%= @sales_operations.pluck(:manager_commission).sum  %></td>
+          <td><%= @sales_operations.pluck(:gallon_amount).sum  %></td>
+          <td><%= @sales_operations.pluck(:box_amount).sum %></td>
           <td><%= @sales_operations.count %></td>
         </tr>
     </tfoot>

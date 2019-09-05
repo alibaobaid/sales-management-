@@ -5,6 +5,14 @@ class AssistantsController < ApplicationController
   # GET /assistants.json
   def index
     @assistants = @current_country.assistants.page(params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Assistant',
+               layout: 'pdf'
+      end
+    end
   end
 
   # GET /assistants/1

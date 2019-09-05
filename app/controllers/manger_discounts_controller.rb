@@ -6,6 +6,14 @@ class MangerDiscountsController < ApplicationController
   # GET /manger_discounts.json
   def index
     @manger_discounts = @current_country.manger_discounts.page(params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Manger Discount',
+               layout: 'pdf'
+      end
+    end
   end
 
   # GET /manger_discounts/1

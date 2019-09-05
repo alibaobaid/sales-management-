@@ -1,11 +1,11 @@
 module ImportFile
   extend ActiveSupport::Concern
 
-  def import(file)
+  def import(file, current_country)
     result = { failed: [] }
     spreadsheet = open_spreadsheet(file)
     sheet = spreadsheet.sheet(0)
-    required_header = ['م', 'التاريخ', 'المنطقة', 'اسم المندوب', 'اسم المسوق', 'نوع العملية', 'صنف', 'الكمية', 'القيمة', 'عمولة المندوب',
+    required_header = ['م', 'التاريخ', 'المنطقة', 'اسم المندوب', 'اسم المسوق', 'نوع العملية', 'عدد العلب', 'عدد الجوالين', 'القيمة', 'عمولة المندوب',
       'تحويلات من المندوب', 'المطلوب من المندوب', 'عمولة المسوق', 'تحويلات للمسوق', 'حساب المسوق', 'مصروفات يومية', 'تحويلات للمدير',
       'عمولة المدير', 'جوال الزبون']
     header = sheet.row(2).map { |h| h.try(:strip) }
@@ -23,11 +23,10 @@ module ImportFile
       hash[key] = columns_data(sheet, header, key)
     end
 
-    names_delegate = Delegate.pluck(:id, :name).to_h
-    names_marketer = Marketer.pluck(:id, :name).to_h
-    names_assistant = Assistant.pluck(:id, :name).to_h
-    operation_numbers = SalesOperation.pluck(:operation_number)
-    manager_id = Manger.first&.id || Manger.create(name: 'افتراضي', city: 'افتراضي').id
+    names_delegate = current_country.delegates.pluck(:id, :name).to_h
+    names_marketer = current_country.marketers.pluck(:id, :name).to_h
+    names_assistant = current_country.assistants.pluck(:id, :name).to_h
+    manager_id = current_country.mangers.first&.id || current_country.mangers.create(name: 'مدير المنشاءه').id
 
     (3..sheet.last_row).each do |i|
       j = i-3
@@ -44,7 +43,7 @@ module ImportFile
 
       SalesOperation.transaction do
         if delegate_id.nil?
-          delegate = Delegate.create(name: header_data['اسم المندوب'][j], city: header_data['المنطقة'][j])
+          delegate = current_country.delegates.create(name: header_data['اسم المندوب'][j])
           if delegate.invalid?
             result[:failed] << {
               name: "خطأ في العملية رقم #{header_data['م'][j]} {المندوب}",
@@ -56,7 +55,7 @@ module ImportFile
         end
 
         if marketer_id.nil?
-          marketer = Marketer.create(name: header_data['اسم المسوق'][j], city: header_data['المنطقة'][j])
+          marketer = current_country.marketers.create(name: header_data['اسم المسوق'][j])
           if marketer.invalid?
             result[:failed] << {
               name: "خطأ في العملية رقم #{header_data['م'][j]}{المسوق}",
@@ -66,42 +65,23 @@ module ImportFile
             marketer_id = marketer.id
           end
         end
-
-        if operation_numbers.include?(header_data['م'][j])
-          operation = SalesOperation.find_by(operation_number: header_data['م'][j])
-          operation.update(
-            commodity_amount: header_data['الكمية'][j],
-            commodity_type: header_data['صنف'][j],
-            date: header_data['التاريخ'][j],
-            delegate_commission: header_data['عمولة المندوب'][j],
-            from_delegate_transfer: header_data['تحويلات من المندوب'][j],
-            marketer_commission: header_data['عمولة المسوق'][j],
-            operation_number: header_data['م'][j],
-            price: header_data['القيمة'][j],
-            to_manger_transfer: header_data['تحويلات للمدير'][j],
-            to_marketer_transfer: header_data['تحويلات للمسوق'][j],
-            delegate_id: delegate_id,
-            manger_id: manager_id,
-            marketer_id: marketer_id
-          )
-        else
-          operation = SalesOperation.create(
-            commodity_amount: header_data['الكمية'][j],
-            commodity_type: header_data['صنف'][j],
-            date: header_data['التاريخ'][j],
-            delegate_commission: header_data['عمولة المندوب'][j],
-            from_delegate_transfer: header_data['تحويلات من المندوب'][j],
-            marketer_commission: header_data['عمولة المسوق'][j],
-            operation_number: header_data['م'][j],
-            price: header_data['القيمة'][j],
-            to_manger_transfer: header_data['تحويلات للمدير'][j],
-            to_marketer_transfer: header_data['تحويلات للمسوق'][j],
-            delegate_id: delegate_id,
-            manger_id: manager_id,
-            marketer_id: marketer_id
-          )
-        end
-
+        operation = current_country.sales_operations.create(
+          gallon_amount: header_data['عدد الجوالين'][j],
+          box_amount: header_data['عدد العلب'][j],
+          date: header_data['التاريخ'][j],
+          delegate_commission: header_data['عمولة المندوب'][j],
+          from_delegate_transfer: header_data['تحويلات من المندوب'][j],
+          marketer_commission: header_data['عمولة المسوق'][j],
+          operation_number: header_data['م'][j],
+          price: header_data['القيمة'][j],
+          to_manger_transfer: header_data['تحويلات للمدير'][j],
+          to_marketer_transfer: header_data['تحويلات للمسوق'][j],
+          delegate_id: delegate_id,
+          manger_id: manager_id,
+          marketer_id: marketer_id,
+          customr_city: header_data['المنطقة'][j],
+          customr_no: header_data['جوال الزبون'][j]
+        )
         if operation.invalid?
           result[:failed] << {
             name: "خطأ في العملية رقم #{header_data['م'][j]}",

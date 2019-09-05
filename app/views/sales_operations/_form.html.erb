@@ -17,7 +17,7 @@
 
     <div class="form-group">
       <%= form.label 'إختر اسم المندوب', style: "text-align: right; float: right" %>
-      <%= form.collection_select(:delegate_id, Delegate.where(country_id: sales_operation.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
+      <%= form.collection_select(:delegate_id, @current_country.delegates, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
     </div>
 
     <div class="form-group">
@@ -26,13 +26,13 @@
     </div>
 
     <div class="form-group">
-      <%= form.label 'اختر نوع البضاعه', style: "text-align: right; float: right" %>
-      <%= form.select(:commodity_type, options_for_select(["جالون","علب"]), {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "اختر نوع البضاعه"})  %>
+      <%= form.label 'عدد الجوالين', style: "text-align: right; float: right" %>
+      <%= form.number_field :gallon_amount, class: "form-control" , placeholder: 'عدد الجوالين' %>
     </div>
 
     <div class="form-group">
-      <%= form.label 'حدد الكمية المباعه', style: "text-align: right; float: right" %>
-      <%= form.number_field :commodity_amount, class: "form-control" , placeholder: "الكمية" %>
+      <%= form.label 'عدد العلب', style: "text-align: right; float: right" %>
+      <%= form.number_field :box_amount, class: "form-control" , placeholder: 'عدد العلب' %>
     </div>
 
     <div class="form-group">
@@ -52,7 +52,7 @@
 
     <div class="form-group">
       <%= form.label 'اختر اسم المسوق', style: "text-align: right; float: right" %>
-      <%= form.collection_select(:marketer_id, Marketer.where(country_id: sales_operation.country_id), :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
+      <%= form.collection_select(:marketer_id, @current_country.marketers, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
     </div>
 
     <div class="form-group">

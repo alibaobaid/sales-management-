@@ -39,18 +39,18 @@ class MangerDiscount < ApplicationRecord
 
   def update_manger_account
     manger.update(to_him: manger.to_him.to_i - value)
-    manger.update(for_him: manger.for_him.to_i - value)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i - value)
   end
 
   def update_manger_account_changes
     manger.update(to_him: manger.to_him.to_i + value_before_last_save)
-    manger.update(for_him: manger.for_him.to_i + value_before_last_save)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i + value_before_last_save)
     manger.update(to_him: manger.to_him.to_i - value)
-    manger.update(for_him: manger.for_him.to_i - value)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i - value)
   end
 
   def reverse_changes
     manger.update(to_him: manger.to_him.to_i + value)
-    manger.update(for_him: manger.for_him.to_i + value)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_i + value)
   end  
 end

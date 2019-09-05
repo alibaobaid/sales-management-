@@ -5,6 +5,14 @@ class MangersController < ApplicationController
   # GET /mangers.json
   def index
     @mangers = @current_country.mangers.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Manger',
+               layout: 'pdf'
+      end
+    end
   end
 
   # GET /mangers/1
@@ -73,6 +81,6 @@ class MangersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def manger_params
-      params.require(:manger).permit(:name, :password, :role_type, :city, :phone_NO, :for_him, :to_him)
+      params.require(:manger).permit(:name, :password, :role_type, :city, :phone_NO, :for_him, :to_him, :final_manager_amount)
     end
 end
