@@ -72,7 +72,6 @@ module ImportFile
           delegate_commission: header_data['عمولة المندوب'][j],
           from_delegate_transfer: header_data['تحويلات من المندوب'][j],
           marketer_commission: header_data['عمولة المسوق'][j],
-          operation_number: header_data['م'][j],
           price: header_data['القيمة'][j],
           to_manger_transfer: header_data['تحويلات للمدير'][j],
           to_marketer_transfer: header_data['تحويلات للمسوق'][j],

@@ -69,8 +69,6 @@ class SalesOperation < ApplicationRecord
             :marketer_id,
             :manger_id,
             presence: true
-  validate :not_updatable, on: :update
-
   # Callbacks
   before_validation :set_manger_value
   after_create :update_amount_of_delegate

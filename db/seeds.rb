@@ -45,13 +45,13 @@
 # su_country.product_discounts.each{|record| record.destroy  }
 # su_country.sales_operations.each{|sales_operation| sales_operation.destroy }
 # su_country.deliveries.each{|delivery| delivery.destroy }
-SalesOperation.delete_all
-BankTransfer.delete_all
-MangerDiscount.delete_all
-BankTransfer.delete_all
-Delivery.delete_all
-Delegate.all.update_all(amount_of_box: 0, amount_of_gallon: 0, for_him: 0)
-Marketer.all.update_all(for_him: 0)
-Assistant.all.update_all(for_him: 0, his_amount: 0)
-Manger.all.update_all(final_manager_amount: 0, for_him:0, to_him: 0)
+# SalesOperation.delete_all
+# BankTransfer.delete_all
+# MangerDiscount.delete_all
+# BankTransfer.delete_all
+# Delivery.delete_all
+# Delegate.all.update_all(amount_of_box: 0, amount_of_gallon: 0, for_him: 0)
+# Marketer.all.update_all(for_him: 0)
+# Assistant.all.update_all(for_him: 0, his_amount: 0)
+# Manger.all.update_all(final_manager_amount: 0, for_him:0, to_him: 0)
 
