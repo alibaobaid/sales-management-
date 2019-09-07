@@ -33,17 +33,17 @@ module ImportFile
       next unless header_data['نوع العملية'][j] == 'بيع'
 
       delegate_id = \
-        if names_delegate.values.include?(header_data['اسم المندوب'][j])
-          names_delegate.key(header_data['اسم المندوب'][j])
+        if names_delegate.values.include?(convert_to_string(header_data['اسم المندوب'][j]))
+          names_delegate.key(convert_to_string(header_data['اسم المندوب'][j]))
         end
       marketer_id = \
-        if names_marketer.values.include?(header_data['اسم المسوق'][j])
-          names_marketer.key(header_data['اسم المسوق'][j])
+        if names_marketer.values.include?(convert_to_string(header_data['اسم المسوق'][j]))
+          names_marketer.key(convert_to_string(header_data['اسم المسوق'][j]))
         end
 
       SalesOperation.transaction do
         if delegate_id.nil?
-          delegate = current_country.delegates.create(name: header_data['اسم المندوب'][j])
+          delegate = current_country.delegates.create(name: convert_to_string(header_data['اسم المندوب'][j]))
           if delegate.invalid?
             result[:failed] << {
               name: "خطأ في العملية رقم #{header_data['م'][j]} {المندوب}",
@@ -55,7 +55,7 @@ module ImportFile
         end
 
         if marketer_id.nil?
-          marketer = current_country.marketers.create(name: header_data['اسم المسوق'][j])
+          marketer = current_country.marketers.create(name: convert_to_string(header_data['اسم المسوق'][j]))
           if marketer.invalid?
             result[:failed] << {
               name: "خطأ في العملية رقم #{header_data['م'][j]}{المسوق}",
@@ -78,8 +78,8 @@ module ImportFile
           delegate_id: delegate_id,
           manger_id: manager_id,
           marketer_id: marketer_id,
-          customr_city: header_data['المنطقة'][j],
-          customr_no: header_data['جوال الزبون'][j]
+          customr_city: convert_to_string(header_data['المنطقة'][j]),
+          customr_no: convert_to_string(header_data['جوال الزبون'][j])
         )
         if operation.invalid?
           result[:failed] << {
@@ -109,5 +109,10 @@ module ImportFile
       data << sheet.row(i)[index]
     end
     data
+  end
+  
+  def convert_to_string(cell)
+    return cell.strip if cell.kind_of?(String)
+    cell.to_s.strip
   end
 end
