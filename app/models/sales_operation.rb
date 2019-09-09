@@ -4,21 +4,19 @@
 #
 #  id                     :bigint(8)        not null, primary key
 #  box_amount             :integer          default(0), not null
-#  commodity_amount       :integer          not null
-#  commodity_type         :string           not null
 #  customr_city           :string
 #  customr_no             :string
 #  date                   :date             not null
-#  delegate_commission    :integer          not null
-#  final_manager_amount   :integer          default(0), not null
-#  from_delegate_transfer :integer
+#  delegate_commission    :float            not null
+#  final_manager_amount   :float            default(0.0), not null
+#  from_delegate_transfer :float
 #  gallon_amount          :integer          default(0), not null
-#  manager_commission     :integer          default(0), not null
-#  marketer_commission    :integer          not null
+#  manager_commission     :float            default(0.0), not null
+#  marketer_commission    :float            not null
 #  operation_number       :integer
-#  price                  :integer          not null
-#  to_manger_transfer     :integer
-#  to_marketer_transfer   :integer
+#  price                  :float            not null
+#  to_manger_transfer     :float
+#  to_marketer_transfer   :float
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  country_id             :bigint(8)
@@ -83,18 +81,11 @@ class SalesOperation < ApplicationRecord
   after_update :update_delegate_value_changes, if: [:saved_change_to_delegate_commission? || :saved_change_to_price?]
   after_update :update_marketrt_value_changes, if: [:saved_change_to_marketer_commission?]
   after_update :update_manager_value_changes, if: [:saved_change_to_marketer_commission? || :saved_change_to_delegate_commission? || :saved_change_to_price?]
-  # Should be removed after remove the coloumns
-  before_validation :set_values
-  
+
   # Methods
   def set_manger_value
     self.manager_commission = price - (delegate_commission + marketer_commission )
-    self.final_manager_amount = manager_commission - assistants_amount
-  end
-  
-  def set_values
-    self.commodity_amount = 0
-    self.commodity_type = 'جالون وعلبه'
+    self.final_manager_amount =  assistants_amount.nil? ? manager_commission : manager_commission - assistants_amount
   end
 
   def update_amount_of_delegate

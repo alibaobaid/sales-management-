@@ -6,7 +6,7 @@
 #  amount_of_box    :integer          default(0)
 #  amount_of_gallon :integer          default(0)
 #  city             :string
-#  for_him          :integer          default(0)
+#  for_him          :float            default(0.0)
 #  name             :string
 #  phone_NO         :string
 #  created_at       :datetime         not null

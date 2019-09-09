@@ -10,10 +10,6 @@
         </ul>
       </div>
     <% end %>
-<%# 
-    <div class="form-group">
-      <%= form.collection_select(:manger_id, Manger.all, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المدير", readonly: true})  %>
-    <%# </div> %>
 
     <div class="form-group">
       <%= form.label 'إختر اسم المندوب', style: "text-align: right; float: right" %>
@@ -37,17 +33,17 @@
 
     <div class="form-group">
       <%= form.label 'حدد سعر البيع', style: "text-align: right; float: right" %>
-      <%= form.number_field :price, class: "form-control", placeholder: 'السعر' %>
+      <%= form.number_field :price, step: :any, class: "form-control", placeholder: 'السعر' %>
     </div>
 
     <div class="form-group">
       <%= form.label 'حدد عمولة المندوب ', style: "text-align: right; float: right" %>
-      <%= form.number_field :delegate_commission, class: "form-control", placeholder: 'عمولة المندوب' %>
+      <%= form.number_field :delegate_commission, step: :any, class: "form-control", placeholder: 'عمولة المندوب' %>
     </div>
 
     <div class="form-group">
       <%= form.label 'حدد المبلغ المحول من المندوب إن وجد ', style: "text-align: right; float: right" %>
-      <%= form.number_field :from_delegate_transfer, class: "form-control", placeholder: 'حواله من المندوب' %>
+      <%= form.number_field :from_delegate_transfer, step: :any, class: "form-control", placeholder: 'حواله من المندوب' %>
     </div>
 
     <div class="form-group">
@@ -57,12 +53,12 @@
 
     <div class="form-group">
       <%= form.label 'حدد عمولة المسوق', style: "text-align: right; float: right" %>
-      <%= form.number_field :marketer_commission, class: "form-control", placeholder: 'عمولة المسوق' %>
+      <%= form.number_field :marketer_commission, step: :any, class: "form-control", placeholder: 'عمولة المسوق' %>
     </div>
 
     <div class="form-group">
       <%= form.label 'حدد المبلغ المحول للمسوق إن وجد', style: "text-align: right; float: right" %>
-      <%= form.number_field :to_marketer_transfer, class: "form-control", placeholder: 'حواله للمسوق' %>
+      <%= form.number_field :to_marketer_transfer, step: :any, class: "form-control", placeholder: 'حواله للمسوق' %>
     </div>
     <div class="form-group">
       <%= form.label 'حدد رقم جوال العميل', style: "text-align: right; float: right" %>

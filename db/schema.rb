@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_195823) do
+ActiveRecord::Schema.define(version: 2019_09_09_111520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
     t.string "city"
     t.string "phone_NO"
     t.integer "his_amount"
-    t.integer "for_him"
+    t.float "for_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
     t.bigint "assistant_id"
     t.bigint "marketer_id"
     t.bigint "manger_id"
-    t.integer "price"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
     t.string "phone_NO"
     t.integer "amount_of_box", default: 0
     t.integer "amount_of_gallon", default: 0
-    t.integer "for_him", default: 0
+    t.float "for_him", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
   create_table "manger_discounts", force: :cascade do |t|
     t.bigint "manger_id"
     t.string "Desc"
-    t.integer "value"
+    t.float "value"
     t.date "date_of_discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,12 +97,12 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
     t.string "name"
     t.string "city"
     t.string "phone_NO"
-    t.integer "for_him"
-    t.integer "to_him"
+    t.float "for_him"
+    t.float "to_him"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
-    t.integer "final_manager_amount", default: 0, null: false
+    t.float "final_manager_amount", default: 0.0, null: false
     t.index ["country_id"], name: "index_mangers_on_country_id"
   end
 
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
     t.string "name"
     t.string "city"
     t.string "phone_NO"
-    t.integer "for_him", default: 0
+    t.float "for_him", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
@@ -132,14 +132,12 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
 
   create_table "sales_operations", force: :cascade do |t|
     t.date "date", null: false
-    t.string "commodity_type", null: false
-    t.integer "commodity_amount", null: false
-    t.integer "price", null: false
-    t.integer "delegate_commission", null: false
-    t.integer "marketer_commission", null: false
-    t.integer "from_delegate_transfer"
-    t.integer "to_marketer_transfer"
-    t.integer "to_manger_transfer"
+    t.float "price", null: false
+    t.float "delegate_commission", null: false
+    t.float "marketer_commission", null: false
+    t.float "from_delegate_transfer"
+    t.float "to_marketer_transfer"
+    t.float "to_manger_transfer"
     t.bigint "delegate_id", null: false
     t.bigint "marketer_id", null: false
     t.bigint "manger_id", null: false
@@ -149,10 +147,10 @@ ActiveRecord::Schema.define(version: 2019_09_04_195823) do
     t.string "customr_no"
     t.string "customr_city"
     t.bigint "country_id"
-    t.integer "manager_commission", default: 0, null: false
+    t.float "manager_commission", default: 0.0, null: false
     t.integer "gallon_amount", default: 0, null: false
     t.integer "box_amount", default: 0, null: false
-    t.integer "final_manager_amount", default: 0, null: false
+    t.float "final_manager_amount", default: 0.0, null: false
     t.index ["country_id"], name: "index_sales_operations_on_country_id"
     t.index ["delegate_id"], name: "index_sales_operations_on_delegate_id"
     t.index ["manger_id"], name: "index_sales_operations_on_manger_id"
