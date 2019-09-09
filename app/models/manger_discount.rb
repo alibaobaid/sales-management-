@@ -5,7 +5,7 @@
 #  id               :bigint(8)        not null, primary key
 #  Desc             :string
 #  date_of_discount :date
-#  value            :integer
+#  value            :float
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  country_id       :bigint(8)

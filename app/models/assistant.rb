@@ -4,7 +4,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  city       :string
-#  for_him    :integer
+#  for_him    :float
 #  his_amount :integer
 #  name       :string
 #  phone_NO   :string
@@ -29,4 +29,5 @@ class Assistant < ApplicationRecord
   # Validations
   validates :name, presence: true, uniqueness: { scope: [:country_id] }
   validates :city, presence: true
+  validates :his_amount, presence: true
 end

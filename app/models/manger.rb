@@ -4,11 +4,11 @@
 #
 #  id                   :bigint(8)        not null, primary key
 #  city                 :string
-#  final_manager_amount :integer          default(0), not null
-#  for_him              :integer
+#  final_manager_amount :float            default(0.0), not null
+#  for_him              :float
 #  name                 :string
 #  phone_NO             :string
-#  to_him               :integer
+#  to_him               :float
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  country_id           :bigint(8)

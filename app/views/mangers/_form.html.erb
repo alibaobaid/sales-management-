@@ -28,17 +28,17 @@
 
     <div class="form-group">
       <%= form.label 'اجمالي نصيب المدير ', style: "text-align: right; float: right" %>
-      <%= form.number_field :final_manager_amount, class: "form-control", placeholder:"الرصيد الافتراضي" %>
+      <%= form.number_field :final_manager_amount, step: :any, class: "form-control", placeholder:"الرصيد الافتراضي" %>
     </div>
 
     <div class="form-group">
       <%= form.label 'رصيد الاداره ', style: "text-align: right; float: right" %>
-      <%= form.number_field :for_him, class: "form-control", placeholder:"الرصيد الافتراضي" %>
+      <%= form.number_field :for_him, step: :any, class: "form-control", placeholder:"الرصيد الافتراضي" %>
     </div>
 
     <div class="form-group">
       <%= form.label 'الرصيد الفعلي', style: "text-align: right; float: right" %>
-      <%= form.number_field :to_him, class: "form-control", placeholder:"الرصيد الفعلي" %>
+      <%= form.number_field :to_him, step: :any, class: "form-control", placeholder:"الرصيد الفعلي" %>
     </div>
 
     <div class="form-group">

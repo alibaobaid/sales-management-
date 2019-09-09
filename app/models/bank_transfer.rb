@@ -4,7 +4,7 @@
 #
 #  id               :bigint(8)        not null, primary key
 #  date_of_transfer :datetime
-#  price            :integer
+#  price            :float
 #  section_type     :string
 #  transfer_type    :string
 #  created_at       :datetime         not null
@@ -55,7 +55,7 @@ class BankTransfer < ApplicationRecord
 
   def update_price_of_employee
     default_manger = Manger.where(country_id: self.country_id).first
-    if transfer_type == "ارسال" 
+    if transfer_type == "ارسال"
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i + price)
         default_manger.update(to_him: default_manger.to_him.to_i + price)
@@ -82,7 +82,7 @@ class BankTransfer < ApplicationRecord
 
   def reverse_operation
     default_manger = Manger.where(country_id: self.country_id).first
-    if transfer_type == "استلام" 
+    if transfer_type == "استلام"
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i + price)
         default_manger.update(to_him: default_manger.to_him.to_i + price)
@@ -112,12 +112,12 @@ class BankTransfer < ApplicationRecord
   end
 
   def not_allowed_changes?
-    delegate_id_changed? || marketer_id_changed? || section_type_changed? || transfer_type_changed? 
+    delegate_id_changed? || marketer_id_changed? || section_type_changed? || transfer_type_changed?
   end
 
   def update_price_of_employee_changes
     default_manger = Manger.where(country_id: self.country_id).first
-    if transfer_type == "ارسال" 
+    if transfer_type == "ارسال"
       if section_type == "مندوب"
         delegate.update(for_him: delegate.for_him.to_i - price_before_last_save)
         default_manger.update(to_him: default_manger.to_him.to_i - price_before_last_save)
