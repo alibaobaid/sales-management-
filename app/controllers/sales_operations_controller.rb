@@ -9,7 +9,6 @@ class SalesOperationsController < ApplicationController
       if params[:search].present?
         @current_country.sales_operations.joins(:delegate, :marketer).where(
           "
-          sales_operations.commodity_type LIKE :search OR
           delegates.name LIKE :search OR
           marketers.name LIKE :search
           ",

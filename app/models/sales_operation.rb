@@ -77,7 +77,7 @@ class SalesOperation < ApplicationRecord
   after_create :create_bank_transfer_for_marketer
   after_create :update_assistants
   after_destroy :reverse_chnages
-  after_update :update_amount_of_delegate_changes, if: [:saved_change_to_commodity_amount?]
+  after_update :update_amount_of_delegate_changes, if: [:saved_change_to_box_amount? || :saved_change_to_gallon_amount?]
   after_update :update_delegate_value_changes, if: [:saved_change_to_delegate_commission? || :saved_change_to_price?]
   after_update :update_marketrt_value_changes, if: [:saved_change_to_marketer_commission?]
   after_update :update_manager_value_changes, if: [:saved_change_to_marketer_commission? || :saved_change_to_delegate_commission? || :saved_change_to_price?]
