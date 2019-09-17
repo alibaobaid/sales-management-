@@ -113,13 +113,15 @@ class SalesOperationsController < ApplicationController
                     :manger_id, :delegate_commission, :marketer_commission,
                     :from_delegate_transfer, :to_marketer_transfer, 
                     :to_manger_transfer, :customr_no, :customr_city,
-                    :gallon_amount, :box_amount)
+                    :gallon_amount, :box_amount,
+                    :exchange_for_delegator, :exchange_for_marketer)
     end
 
     def sales_operation_update_params
       params.require(:sales_operation).
              permit(:date, :commodity_amount, :price,
                     :delegate_commission, :marketer_commission,
-                    :customr_no, :customr_city, :gallon_amount, :box_amount)
+                    :customr_no, :customr_city, :gallon_amount, :box_amount,
+                    :exchange_for_delegator, :exchange_for_marketer)
     end
 end

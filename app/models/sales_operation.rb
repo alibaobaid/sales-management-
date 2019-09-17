@@ -8,6 +8,8 @@
 #  customr_no             :string
 #  date                   :date             not null
 #  delegate_commission    :float            not null
+#  exchange_for_delegator :integer          default(0)
+#  exchange_for_marketer  :integer          default(0)
 #  final_manager_amount   :float            default(0.0), not null
 #  from_delegate_transfer :float
 #  gallon_amount          :integer          default(0), not null

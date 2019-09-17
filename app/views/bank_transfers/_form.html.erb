@@ -48,6 +48,11 @@
     </div>
 
     <div class="form-group">
+      <%= form.label "ملاحظه",style: "text-align: right; float: right"%>
+      <%= form.text_field :note, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
       <%= form.submit "موافق",class:"btn btn-outline-success my-2 my-sm-0" %>
     </div>
   <% end %>
