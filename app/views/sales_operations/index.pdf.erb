@@ -1,5 +1,7 @@
 
-<h2 style="text-align: center;">المبيعات</h2>
+<h2 style="text-align: center;">
+عمليات البيع ب<%= @current_country.name %> 
+</h2>
 
 <div class="table" >
   <table class="table">
@@ -11,12 +13,13 @@
         <th>السعر</th>
         <th>التاريخ</th>
         <th>عمولة المندوب</th>
+        <th>الصرف المقابل للمندوب</th>
         <th>المسوق</th>
         <th>عمولة المسوق</th>
+        <th>الصرف المقابل للمسوق</th>
         <th>عمولة المدير</th>
         <th>رقم العميل</th>
         <th>منطقة العميل</th>
-        </th>
       </tr>
     </thead>
 
@@ -24,16 +27,18 @@
       <% @current_country.sales_operations.each do |sales_operation| %>
         <tr>
           <td><%= sales_operation.delegate.name %></td>
-           <td><%= sales_operation.box_amount %></td>
+          <td><%= sales_operation.box_amount %></td>
           <td><%= sales_operation.gallon_amount %></td>
           <td><%= sales_operation.price %></td>
           <td><%= sales_operation.date.to_date %></td>
           <td><%= sales_operation.delegate_commission %></td>
+          <td><%= sales_operation.exchange_for_delegator %></td>
           <td><%= sales_operation.marketer.name %></td>
           <td><%= sales_operation.marketer_commission %></td>
+          <td><%= sales_operation.exchange_for_marketer %></td>
           <td><%= sales_operation.manager_commission %></td>
           <td><%= sales_operation.customr_no %></td> 
-          <td><%= sales_operation.customr_city %></td>
+          <td><%= sales_operation.customr_city %></td> 
         </tr>
       <% end %>
     </tbody>

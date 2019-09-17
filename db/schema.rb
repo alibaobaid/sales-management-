@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_111520) do
+ActiveRecord::Schema.define(version: 2019_09_17_200947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_111520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
+    t.string "note"
     t.index ["assistant_id"], name: "index_bank_transfers_on_assistant_id"
     t.index ["country_id"], name: "index_bank_transfers_on_country_id"
     t.index ["delegate_id"], name: "index_bank_transfers_on_delegate_id"
@@ -151,6 +152,8 @@ ActiveRecord::Schema.define(version: 2019_09_09_111520) do
     t.integer "gallon_amount", default: 0, null: false
     t.integer "box_amount", default: 0, null: false
     t.float "final_manager_amount", default: 0.0, null: false
+    t.integer "exchange_for_delegator", default: 0
+    t.integer "exchange_for_marketer", default: 0
     t.index ["country_id"], name: "index_sales_operations_on_country_id"
     t.index ["delegate_id"], name: "index_sales_operations_on_delegate_id"
     t.index ["manger_id"], name: "index_sales_operations_on_manger_id"

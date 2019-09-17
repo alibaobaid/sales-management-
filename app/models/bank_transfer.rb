@@ -4,6 +4,7 @@
 #
 #  id               :bigint(8)        not null, primary key
 #  date_of_transfer :datetime
+#  note             :string
 #  price            :float
 #  section_type     :string
 #  transfer_type    :string
