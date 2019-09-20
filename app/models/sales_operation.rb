@@ -8,8 +8,8 @@
 #  customr_no             :string
 #  date                   :date             not null
 #  delegate_commission    :float            not null
-#  exchange_for_delegator :integer          default(0)
-#  exchange_for_marketer  :integer          default(0)
+#  exchange_for_delegator :float            default(0.0)
+#  exchange_for_marketer  :float            default(0.0)
 #  final_manager_amount   :float            default(0.0), not null
 #  from_delegate_transfer :float
 #  gallon_amount          :integer          default(0), not null
@@ -45,7 +45,7 @@
 class SalesOperation < ApplicationRecord
 
   extend ImportFile
-
+  attr_accessor :bank_id
   # Associations
   belongs_to :delegate
   belongs_to :marketer
@@ -111,12 +111,12 @@ class SalesOperation < ApplicationRecord
   # this methods is for create bank transfer if the the price is entred within sale operation
   def create_bank_transfer_for_delegate
     return if from_delegate_transfer.nil?
-    country.bank_transfers.create({ date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id })
+    country.bank_transfers.create({ date_of_transfer: date, price: from_delegate_transfer, transfer_type:"ارسال", section_type:"مندوب", delegate_id: delegate_id, bank_id: bank_id})
   end
 
   def create_bank_transfer_for_marketer
     return if to_marketer_transfer.nil?
-    country.bank_transfers.create({ date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id })
+    country.bank_transfers.create({ date_of_transfer: date, price: to_marketer_transfer, transfer_type:"استلام", section_type:"مسوق", marketer_id: marketer_id, bank_id: bank_id })
   end
 
   def update_assistants

@@ -24,14 +24,16 @@
         </tr>
       <% end %>
     </tbody>
-    <tfoot  style="text-align: center;">
+        <tfoot  style="text-align: center;">
         <tr>
-          <td colspan="2">اجمالي المسوقين</td>
+          <td colspan="3">اجمالي المسوقين</td>
           <td colspan="2">اجمالي المبالغ المستحقه</td>
+          <td>صافي المبالغ المستحقه</td>
         </tr>
         <tr>
-          <td colspan="2"><%= @current_country.marketers.count %></td>
-          <td colspan="2"><%= @current_country.marketers.map(&:for_him).sum  %></td>
+          <td colspan="3"><%= @marketers.count %></td>
+          <td colspan="2"><%= @marketers.where('for_him > 0').map(&:for_him).sum  %></td>
+          <td ><%= @marketers.map(&:for_him).sum  %></td>
         </tr>
     </tfoot>
   </table>

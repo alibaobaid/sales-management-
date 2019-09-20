@@ -44,11 +44,13 @@
     <tfoot  style="text-align: center;">
         <tr>
           <td colspan="3">اجمالي المسوقين</td>
-          <td colspan="3">اجمالي المبالغ المستحقه</td>
+          <td colspan="2">اجمالي المبالغ المستحقه</td>
+          <td>صافي المبالغ المستحقه</td>
         </tr>
         <tr>
           <td colspan="3"><%= @marketers.count %></td>
-          <td colspan="3"><%= @marketers.map(&:for_him).sum  %></td>
+          <td colspan="2"><%= @marketers.where('for_him > 0').map(&:for_him).sum  %></td>
+          <td ><%= @marketers.map(&:for_him).sum  %></td>
         </tr>
     </tfoot>
   </table>

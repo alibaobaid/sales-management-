@@ -11,6 +11,18 @@ class ApplicationController < ActionController::Base
     redirect_to(send("#{controller_name}_path"), notice: 'الملف محمي')
   end
 
+  def created_message
+    'تم الانشاء بنجاح'
+  end
+
+  def update_message
+    'تم التعديل بنجاح'
+  end
+  
+  def delete_message
+    'تم الحذف بنجاح'
+  end
+
   private
 
   def login_require

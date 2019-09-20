@@ -19,6 +19,8 @@ class Country < ApplicationRecord
   has_many :product_discounts, dependent: :destroy
   has_many :sales_operations, dependent: :destroy
   has_many :users, dependent: :destroy
+  has_many :banks, dependent: :destroy
+
 
   # Validations
   validates :name, presence: true, uniqueness: true

@@ -46,7 +46,6 @@ class SalesOperationsController < ApplicationController
   # POST /sales_operations.json
   def create
     @sales_operation = @current_country.sales_operations.new(sales_operation_params)
-
     respond_to do |format|
       if @sales_operation.save
         format.html { redirect_to sales_operations_url, notice: 'تمت عملية الاضافة بنجاح' }
@@ -114,7 +113,7 @@ class SalesOperationsController < ApplicationController
                     :from_delegate_transfer, :to_marketer_transfer, 
                     :to_manger_transfer, :customr_no, :customr_city,
                     :gallon_amount, :box_amount,
-                    :exchange_for_delegator, :exchange_for_marketer)
+                    :exchange_for_delegator, :exchange_for_marketer, :bank_id)
     end
 
     def sales_operation_update_params
@@ -122,6 +121,6 @@ class SalesOperationsController < ApplicationController
              permit(:date, :commodity_amount, :price,
                     :delegate_commission, :marketer_commission,
                     :customr_no, :customr_city, :gallon_amount, :box_amount,
-                    :exchange_for_delegator, :exchange_for_marketer)
+                    :exchange_for_delegator, :exchange_for_marketer, :bank_id)
     end
 end

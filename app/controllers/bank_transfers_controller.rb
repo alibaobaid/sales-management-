@@ -90,15 +90,15 @@ class BankTransfersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bank_transfer_params
       if params[:bank_transfer][:section_type] == "مندوب"
-         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :delegate_id, :price, :note)
+         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :delegate_id, :price, :note, :bank_id)
       elsif params[:bank_transfer][:section_type] == "مسوق"
-         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :marketer_id, :price, :note)
+         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :marketer_id, :price, :note, :bank_id)
       else 
-         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :assistant_id, :price, :note)
+         params.require(:bank_transfer).permit(:date_of_transfer, :transfer_type, :section_type, :assistant_id, :price, :note, :bank_id)
       end
     end
 
     def bank_transfer_update_params
-      params.require(:bank_transfer).permit(:date_of_transfer, :price, :note)      
+      params.require(:bank_transfer).permit(:date_of_transfer, :price, :note, :bank_id)      
     end 
 end
