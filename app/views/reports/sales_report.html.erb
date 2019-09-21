@@ -2,6 +2,7 @@
 <div class="alert alert-info" role="alert" style="text-align: center;">
   سوف يتم عرض مبيعات تاريخ اليوم اذا لم يتم تحديد التاريخ
 </div>
+
 <div>
       <%= form_tag(reports_sales_report_path, :method => "get", class: 'navbar-form navbar-left') do %>
         <div class="input-group">
@@ -33,7 +34,7 @@
         <th>التاريخ</th>
         <th>السعر</th>
         <th>منطقة العميل</th>
-        <th colspan="2">رقم العميل</th>
+        <th colspan="4">رقم العميل</th>
       </tr>
     </thead>
 
@@ -43,19 +44,38 @@
           <td><%= sales_operation.date.to_date %></td>
           <td><%= sales_operation.price %></td>
           <td><%= sales_operation.customr_city %></td>
-          <td><%= sales_operation.customr_no %></td>
+          <td colspan='4' style="color: <%= SalesOperation.where(country_id: @current_country.id).where.not(id: sales_operation.id).find_by_customr_no(sales_operation.customr_no).present? ? 'red' : 'black' %>">
+            <%= sales_operation.customr_no %>
+          </td>
         </tr>
       <% end %>
     </tbody>
     <tfoot  style="text-align: right;">
         <tr>
-          <td>نصيب المدير</td>
+          <td>المجموع</td>
+          <td>الا جمالي السابق</td>
+          <td>اجمالي الخصومات</td>
+          <td>الاجمالي</td>
           <td>عدد الجوالين</td>
           <td>عدد العلب</td>
           <td>عدد الطلبات</td>
         </tr>
         <tr>
-          <td><%= @sales_operations.pluck(:manager_commission).sum  %></td>
+          <td>
+            <%= @sales_operations.pluck(:manager_commission).sum  %>
+          </td>
+          <td>
+            <%= @sales_operations.first&.manger&.for_him.to_i - @sales_operations.pluck(:manager_commission).sum  %>
+          </td>
+          <td>
+            <%= BankTransfer.where(country_id: @current_country.id).
+                             on_date(Date.today).
+                             receipt_type.
+                             pluck(:price).sum  %>
+          </td>
+          <td>
+            <%= @sales_operations.first&.manger&.for_him.to_i %>
+          </td>
           <td><%= @sales_operations.pluck(:gallon_amount).sum  %></td>
           <td><%= @sales_operations.pluck(:box_amount).sum %></td>
           <td><%= @sales_operations.count %></td>

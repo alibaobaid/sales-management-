@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  resources :banks
   get 'reports/sales_report'
+  get 'reports/transfers_report'
   resources :product_discounts
   resources :manger_discounts
   get 'session/login'

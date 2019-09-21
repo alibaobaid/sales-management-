@@ -1,0 +1,36 @@
+
+<br>
+<br>
+<h2 style="text-align: center;"> 
+    البنوك  ب<%= @current_country.name %>
+</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>الاسم</th>
+        <th>الرصيد</th>
+        <th>الوصف</th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% @banks.each do |bank| %>
+        <tr>
+          <td><%= bank.name %></td>
+          <td><%= bank.balance %></td>
+          <td><%= bank.desc %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot  style="text-align: center;">
+      <tr>
+            <td colspan="2">اجمالي ارصدت البنوك</td>
+            <td><%= @banks.map(&:balance).sum %></td>
+      </tr>
+  </tfoot>
+  </table>
+</div>
+
+<br>

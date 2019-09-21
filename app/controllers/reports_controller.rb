@@ -28,4 +28,33 @@ class ReportsController < ApplicationController
       end
     end
   end
+
+  def transfers_report
+    @bank_transfers = \
+      if params[:from].present? && params[:to].present? && params[:marketer_id].try(:[],:id).present? && params[:delegate_id].try(:[],:id).present?
+        @current_country.bank_transfers.between(params[:from], params[:to]).delegate(params[:delegate_id][:id]).marketer(params[:marketer_id][:id])
+      elsif params[:from].present? && params[:to].present? && params[:delegate_id].try(:[],:id).present?
+        @current_country.bank_transfers.between(params[:from], params[:to]).delegate(params[:delegate_id][:id])
+      elsif params[:from].present? && params[:to].present? && params[:marketer_id].try(:[],:id).present?
+        @current_country.bank_transfers.between(params[:from], params[:to]).marketer(params[:marketer_id][:id])
+      elsif params[:marketer_id].try(:[],:id).present? && params[:delegate_id].try(:[],:id).present?
+        @current_country.bank_transfers.on_date(Date.today).delegate(params[:delegate_id][:id]).marketer(params[:marketer_id][:id])
+      elsif params[:delegate_id].try(:[],:id).present?
+        @current_country.bank_transfers.on_date(Date.today).delegate(params[:delegate_id][:id])
+      elsif params[:marketer_id].try(:[],:id).present?
+        @current_country.bank_transfers.on_date(Date.today).marketer(params[:marketer_id][:id])
+      elsif params[:from].present? && params[:to].present?
+        @current_country.bank_transfers.between(params[:from], params[:to])
+      else
+        @current_country.bank_transfers.on_date(Date.today)
+      end
+    respond_to do |format|
+      format.html
+      format.xlsx
+      format.pdf do
+        render pdf: 'transfers_report',
+               layout: 'pdf'
+      end
+    end
+  end
 end

@@ -1,10 +1,11 @@
-<br>
 
 <h2 style="text-align: center;">
-   التحويلات ب<%= @current_country.name %> 
+تقرير الحوالات ب<%= @current_country.name %> 
 </h2>
-<div class="table-responsive" >
-  <table class="table">
+<p style="text-align: center;"><%= params[:delegate_id].try(:[],:id).present? ? " المندوب #{Delegate.find(params[:delegate_id][:id]).name.to_s}" : "" %></p>
+<p style="text-align: center;"><%= params[:marketer_id].try(:[],:id).present? ? " المسوق #{Marketer.find(params[:marketer_id][:id]).name.to_s}" : "" %></p>
+<div class="table" >
+<table class="table">
     <thead class="thead-light" style="text-align: center;">
       <tr>
         <th>تاريخ الحواله</th>

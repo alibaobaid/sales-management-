@@ -1,0 +1,16 @@
+ar:
+  activerecord:
+    attributes:
+      bank:
+        name: 'الاسم'
+        desc: 'الوصف'
+        balance: 'الرصيد'
+    errors:
+      models:
+        bank:
+          attributes:
+            name:
+              blank: 'لايمكن تركه فارغا'
+              taken: 'ماخوذ مسبقا'
+            balance:
+              blank: 'لا يمكن تركها فارغه'

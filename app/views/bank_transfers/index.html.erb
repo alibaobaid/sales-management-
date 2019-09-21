@@ -12,6 +12,7 @@
         <th>صنف المحول</th>
         <th>الاسم</th>
         <th>المبلغ</th>
+        <th>اسم البنك</th>
         <th>ملاحظه</th>
         <th colspan="2">
           <%= form_tag(bank_transfers_path, :method => "get", class: 'navbar-form navbar-left') do %>
@@ -34,6 +35,7 @@
           <td><%= bank_transfer.section_type %></td>
           <td><%= bank_transfer.manger&.name || bank_transfer.delegate&.name || bank_transfer.marketer&.name || bank_transfer.assistant&.name %></td>
           <td><%= bank_transfer.price %></td>
+          <td><%= bank_transfer.bank&.name %></td>
           <td><%= bank_transfer.note %></td>
           <td style="text-align: center;"><%= link_to 'تعديل', edit_bank_transfer_path(bank_transfer),class: "btn btn-light" %></td>
           <td style="text-align: center;"><%= link_to 'حذف', bank_transfer, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' }%></td>
@@ -47,3 +49,4 @@
 
 <%= link_to 'إضافة حواله', new_bank_transfer_path ,class:"btn btn-outline-success my-2 my-sm-0" %>
 <%= link_to "استخراج ملف pdf", bank_transfers_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to 'عرض التقرير ', reports_transfers_report_path, class: "btn btn-outline-success my-2 my-sm-0"%>

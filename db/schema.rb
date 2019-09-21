@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_200947) do
+ActiveRecord::Schema.define(version: 2019_09_20_185541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,21 @@ ActiveRecord::Schema.define(version: 2019_09_17_200947) do
     t.datetime "updated_at", null: false
     t.bigint "country_id"
     t.string "note"
+    t.bigint "bank_id"
     t.index ["assistant_id"], name: "index_bank_transfers_on_assistant_id"
+    t.index ["bank_id"], name: "index_bank_transfers_on_bank_id"
     t.index ["country_id"], name: "index_bank_transfers_on_country_id"
     t.index ["delegate_id"], name: "index_bank_transfers_on_delegate_id"
     t.index ["manger_id"], name: "index_bank_transfers_on_manger_id"
     t.index ["marketer_id"], name: "index_bank_transfers_on_marketer_id"
+  end
+
+  create_table "banks", force: :cascade do |t|
+    t.string "name"
+    t.float "balance", default: 0.0
+    t.string "desc"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_banks_on_country_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -152,8 +162,8 @@ ActiveRecord::Schema.define(version: 2019_09_17_200947) do
     t.integer "gallon_amount", default: 0, null: false
     t.integer "box_amount", default: 0, null: false
     t.float "final_manager_amount", default: 0.0, null: false
-    t.integer "exchange_for_delegator", default: 0
-    t.integer "exchange_for_marketer", default: 0
+    t.float "exchange_for_delegator", default: 0.0
+    t.float "exchange_for_marketer", default: 0.0
     t.index ["country_id"], name: "index_sales_operations_on_country_id"
     t.index ["delegate_id"], name: "index_sales_operations_on_delegate_id"
     t.index ["manger_id"], name: "index_sales_operations_on_manger_id"
@@ -178,10 +188,12 @@ ActiveRecord::Schema.define(version: 2019_09_17_200947) do
   add_foreign_key "access_tokens", "users"
   add_foreign_key "assistants", "countries"
   add_foreign_key "bank_transfers", "assistants"
+  add_foreign_key "bank_transfers", "banks"
   add_foreign_key "bank_transfers", "countries"
   add_foreign_key "bank_transfers", "delegates"
   add_foreign_key "bank_transfers", "mangers"
   add_foreign_key "bank_transfers", "marketers"
+  add_foreign_key "banks", "countries"
   add_foreign_key "delegates", "countries"
   add_foreign_key "deliveries", "countries"
   add_foreign_key "deliveries", "delegates"
