@@ -15,10 +15,17 @@ class DelegatesController < ApplicationController
         )
       else
         @current_country.delegates
-      end.order(name: :asc).page(params[:page]) 
-    
+      end.order_by_name.page(params[:page])
+    @box_sum = @delegates.pluck(:amount_of_box).sum
+    @gallon_sum = @delegates.pluck(:amount_of_gallon).sum
+    @needed_totail = \
+      @delegates.pluck(:for_him)
+                .inject{ |sum, n| sum += n > 0 ?  n : 0 } 
+    @required_totail = \
+      @delegates.pluck(:for_him)
+                .inject(0){ |sum, n| sum += n < 0 ?  n : 0 }
     respond_to do |format|
-      format.html
+      format.html 
       format.xlsx
       format.pdf do
         render pdf: 'Delegates',

@@ -15,7 +15,7 @@
     </thead>
 
     <tbody style="text-align: right;">
-      <% @current_country.marketers.each do |marketer| %>
+      <% @current_country.marketers.order(name: :asc).each do |marketer| %>
         <tr>
           <td><%= marketer.name %></td>
           <td><%= marketer.city %></td>
@@ -23,18 +23,22 @@
           <td><%= marketer.for_him %></td>
         </tr>
       <% end %>
-    </tbody>
-        <tfoot  style="text-align: center;">
-        <tr>
-          <td colspan="3">اجمالي المسوقين</td>
+       <tr>
+          <td>اجمالي المسوقين</td>
           <td colspan="2">اجمالي المبالغ المستحقه</td>
-          <td>صافي المبالغ المستحقه</td>
+          <td>اجمالي المبالغ المطلوبه</td>
         </tr>
         <tr>
-          <td colspan="3"><%= @marketers.count %></td>
-          <td colspan="2"><%= @marketers.where('for_him > 0').map(&:for_him).sum  %></td>
-          <td ><%= @marketers.map(&:for_him).sum  %></td>
+          <td><%= @current_country.marketers.count %></td>
+          <td colspan="2">
+            <%= @current_country.marketers.pluck(:for_him)
+                          .inject{ |sum, n| sum += n > 0 ?  n : 0 } %>
+          </td>
+          <td>
+            <%= @current_country.marketers.pluck(:for_him)
+                          .inject(0){ |sum, n| sum += n < 0 ?  n : 0 } %>
+          </td>
         </tr>
-    </tfoot>
+    </tbody>
   </table>
 </div>

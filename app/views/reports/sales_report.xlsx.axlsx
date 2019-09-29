@@ -11,7 +11,7 @@ body = wb.styles.add_style( b: true,:bg_color => "ffffff", :fg_color=>"#FF000000
   sheet.add_row ["التاريخ", "السعر", "المنطقة", "رقم العميل"], style: title
   # Create entries for each item
   @sales_operations.each do |sales_operation|
-    sheet.add_row [sales_operation.date.to_date, sales_operation.price, sales_operation.customr_city,
+    sheet.add_row [sales_operation.date, sales_operation.price, sales_operation.customr_city,
                    sales_operation.customr_no],style: body
   end
   sheet.add_row
