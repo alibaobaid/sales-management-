@@ -16,7 +16,7 @@
     </thead>
 
     <tbody style="text-align: right;" >
-      <% @current_country.delegates.each do |delegate| %>
+      <% @current_country.delegates.order_by_name.each do |delegate| %>
         <tr  >
           <td colspan="2"><%= delegate.name %></td>
           <td><%= delegate.city %></td>
@@ -26,22 +26,30 @@
           <td><%= delegate.for_him %></td>
         </tr>
       <% end %>
-    </tbody>
-    <tfoot  style="text-align: center;">
-        <tr>
+      <tr>
           <td colspan="2">اجمالي المندوبين</td>
           <td colspan="2">اجمالي العلب</td>
           <td>اجمالي الجوالين</td>
           <td>اجمالي المبالغ المستحقه</td>
-          <td>صافي المبالغ المستحقه</td>
+          <td>اجمالي المبالغ المطلوبه</td>
         </tr>
         <tr>
-          <td colspan="2"><%= @delegates.count %></td>
-          <td colspan="2"><%=@delegates.pluck(:amount_of_box).sum %></td>
-          <td><%=@delegates.pluck(:amount_of_gallon).sum %></td>
-          <td><%=@delegates.where('for_him > 0').pluck(:for_him).sum %></td>
-          <td><%=@delegates.pluck(:for_him).sum %></td>
+          <td colspan="2"><%= @current_country.delegates.count %></td>
+          <td colspan="2">
+            <%= @current_country.delegates.pluck(:amount_of_box).sum %>
+          </td>
+          <td>
+            <%= @current_country.delegates.pluck(:amount_of_gallon).sum %>
+          </td>
+          <td>
+            <%= @current_country.delegates.pluck(:for_him)
+                                .inject{ |sum, n| sum += n > 0 ?  n : 0 } %>
+          </td>
+          <td>
+            <%=@current_country.delegates.pluck(:for_him)
+                                .inject(0){ |sum, n| sum += n < 0 ?  n : 0 } %>
+          </td>
         </tr>
-    </tfoot>
+    </tbody>
   </table>
 </div>

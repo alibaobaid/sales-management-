@@ -36,4 +36,9 @@ class Delegate < ApplicationRecord
   validates :amount_of_box, presence: true
   validates :amount_of_gallon, presence: true
 
+  #Scopes
+  scope :less_than_zero, -> { where("for_him < ?", 0) }
+  scope :greater_than_zero, -> { where("for_him > ?", 0) }
+  scope :order_by_name, -> { order(name: :asc) }
+
 end

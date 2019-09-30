@@ -45,12 +45,18 @@
         <tr>
           <td colspan="3">اجمالي المسوقين</td>
           <td colspan="2">اجمالي المبالغ المستحقه</td>
-          <td>صافي المبالغ المستحقه</td>
+          <td>جمالي المبالغ المطلوبه</td>
         </tr>
         <tr>
           <td colspan="3"><%= @marketers.count %></td>
-          <td colspan="2"><%= @marketers.where('for_him > 0').map(&:for_him).sum  %></td>
-          <td ><%= @marketers.map(&:for_him).sum  %></td>
+          <td colspan="2">
+            <%= @marketers.pluck(:for_him)
+                          .inject{ |sum, n| sum += n > 0 ?  n : 0 } %>
+          </td>
+          <td >
+            <%= @marketers.pluck(:for_him)
+                          .inject(0){ |sum, n| sum += n < 0 ?  n : 0 }  %>
+          </td>
         </tr>
     </tfoot>
   </table>

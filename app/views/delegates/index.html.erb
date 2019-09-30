@@ -10,7 +10,7 @@
 <div class="table-responsive" >
   <table class="table">
     <thead class="thead-light" style="text-align: right;"  >
-      <tr  >
+      <tr >
         <th>الاسم</th>
         <th>المدينه</th>
         <th>رقم الجوال</th>
@@ -48,16 +48,16 @@
         <tr>
           <td colspan="2">اجمالي المندوبين</td>
           <td colspan="2">اجمالي العلب</td>
-          <td colspan="2">اجمالي الجوالين</td>
+          <td>اجمالي الجوالين</td>
           <td>اجمالي المبالغ المستحقه</td>
-          <td>صافي المبالغ المستحقه</td>
+          <td>اجمالي المبالغ المطلوبه</td>
         </tr>
         <tr>
           <td colspan="2"><%= @delegates.count %></td>
           <td colspan="2"><%=@delegates.pluck(:amount_of_box).sum %></td>
-          <td colspan="2"><%=@delegates.pluck(:amount_of_gallon).sum %></td>
-          <td><%=@delegates.where('for_him > 0').pluck(:for_him).sum %></td>
-          <td><%=@delegates.pluck(:for_him).sum %></td>
+          <td><%=@delegates.pluck(:amount_of_gallon).sum %></td>
+          <td><%=@needed_totail %></td>
+          <td><%=@required_totail %></td>
         </tr>
     </tfoot>
   </table>
