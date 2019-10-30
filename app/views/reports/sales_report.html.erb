@@ -11,7 +11,7 @@
           <%= collection_select :delegate_id, :id, @current_country.delegates, :id, :name,{:"data-style" => "selectpicker", multiple: true, include_blank: true}, {class: "form-control", title: "المندوب"} %>
           <%= collection_select :marketer_id, :id, @current_country.marketers, :id, :name,{:"data-style" => "selectpicker", multiple: true, include_blank: true}, {class: "form-control", title: "المسوق"} %>
           <div class="input-group-btn">
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
+            <button type="submit" class="btn btn btn-secondary my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
           </div>
         </div>
       <% end %>
@@ -83,5 +83,5 @@
     </tfoot>
   </table>
 </div>
-<%= link_to ' استخراج اكسل',"/reports/sales_report.xlsx?from=#{params[:from]}&to=#{params[:to]}&delegate_id%5Bid%5D=#{params[:delegate_id].try(:[],:id)}&marketer_id%5Bid%5D=#{params[:marketer_id].try(:[],:id)}",class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= link_to 'استخراج pdf',"/reports/sales_report.pdf?from=#{params[:from]}&to=#{params[:to]}&delegate_id%5Bid%5D=#{params[:delegate_id].try(:[],:id)}&marketer_id%5Bid%5D=#{params[:marketer_id].try(:[],:id)}",class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to ' استخراج اكسل',"/reports/sales_report.xlsx?from=#{params[:from]}&to=#{params[:to]}&delegate_id%5Bid%5D=#{params[:delegate_id].try(:[],:id)}&marketer_id%5Bid%5D=#{params[:marketer_id].try(:[],:id)}",class: "btn btn btn-secondary my-2 my-sm-0" %>
+<%= link_to 'استخراج pdf',"/reports/sales_report.pdf?from=#{params[:from]}&to=#{params[:to]}&delegate_id%5Bid%5D=#{params[:delegate_id].try(:[],:id)}&marketer_id%5Bid%5D=#{params[:marketer_id].try(:[],:id)}",class: "btn btn btn-secondary my-2 my-sm-0" %>
