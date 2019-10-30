@@ -21,7 +21,7 @@
                 <div class="input-group">
                   <%= search_field_tag :search, params[:search], placeholder: "البحث", class: "form-control" %>
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
+                    <button type="submit" class="btn btn btn-secondary my-2 my-sm-0"><span class="glyphicon glyphicon-search"></span> بحث</button>
                   </div>
                 </div>
           <% end %>
@@ -64,6 +64,6 @@
 
 <br>
 
-<%= link_to 'إضافة مسوق', new_marketer_path, class: "btn btn-outline-success my-2 my-sm-0"%>
-<%= link_to "استخراج ملف اكسل", marketers_path(format: "xlsx"),class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= link_to "استخراج ملف pdf", marketers_path(format: "pdf"),class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= link_to 'إضافة مسوق', new_marketer_path, class: "btn btn btn-secondary my-2 my-sm-0"%>
+<%= link_to "استخراج ملف اكسل", marketers_path(format: "xlsx"),class: "btn btn btn-secondary my-2 my-sm-0" %>
+<%= link_to "استخراج ملف pdf", marketers_path(format: "pdf"),class: "btn btn btn-secondary my-2 my-sm-0" %>

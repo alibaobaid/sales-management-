@@ -55,14 +55,14 @@
 # Assistant.all.update_all(for_him: 0, his_amount: 0)
 # Manger.all.update_all(final_manager_amount: 0, for_him:0, to_him: 0)
 
-Country.all.each do |country|
-  next if country.name == 'السعوديه'
-  country.bank_transfers.each{|record| record.destroy  }
-  country.manger_discounts.each{|record| record.destroy  }
-  country.product_discounts.each{|record| record.destroy  }
-  country.sales_operations.each{|sales_operation| sales_operation.destroy }
-  country.deliveries.each{|delivery| delivery.destroy }
-  country.delegates.each{|delivery| delivery.destroy }
-  country.marketers.each{|delivery| delivery.destroy }
-  country.assistants.each{|delivery| delivery.destroy }
-end
+# Country.all.each do |country|
+#   next if country.name == 'السعوديه'
+#   country.bank_transfers.each{|record| record.destroy  }
+#   country.manger_discounts.each{|record| record.destroy  }
+#   country.product_discounts.each{|record| record.destroy  }
+#   country.sales_operations.each{|sales_operation| sales_operation.destroy }
+#   country.deliveries.each{|delivery| delivery.destroy }
+#   country.delegates.each{|delivery| delivery.destroy }
+#   country.marketers.each{|delivery| delivery.destroy }
+#   country.assistants.each{|delivery| delivery.destroy }
+# end
