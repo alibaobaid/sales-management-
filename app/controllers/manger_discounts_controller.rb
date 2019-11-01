@@ -82,6 +82,6 @@ class MangerDiscountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def manger_discount_params
-      params.require(:manger_discount).permit(:manger_id, :Desc, :value, :date_of_discount)
+      params.require(:manger_discount).permit(:manger_id, :Desc, :value, :date_of_discount, :bank_id)
     end    
 end

@@ -10,6 +10,7 @@
 #  updated_at       :datetime         not null
 #  country_id       :bigint(8)
 #  manger_id        :bigint(8)
+#  bank_id        :bigint(8)
 #
 # Indexes
 #
@@ -26,6 +27,8 @@ class MangerDiscount < ApplicationRecord
   # Associations
   belongs_to :manger
   belongs_to :country
+  belongs_to :bank
+
 
   # Validations
   validates :value,
@@ -33,28 +36,32 @@ class MangerDiscount < ApplicationRecord
              presence: true
 
   # Callbacks
-  after_create :update_manger_account
-  after_update :update_manger_account_changes, if: :saved_change_to_value?
+  after_create :update_manger_and_bank_account
+  after_update :update_manger_and_bank_account_changes, if: :saved_change_to_value?
   after_destroy :reverse_changes
 
-  def update_manger_account
+  def update_manger_and_bank_account
     manger.update(for_him: manger.for_him.to_i - value)
     manger.update(to_him: manger.to_him.to_i - value)
     manger.update(final_manager_amount: manger.final_manager_amount.to_i - value)
+    bank.update(balance: bank.balance.to_i - value) if bank.present?
   end
 
-  def update_manger_account_changes
+  def update_manger_and_bank_account_changes
     manger.update(for_him: manger.for_him.to_i + value_before_last_save)
     manger.update(to_him: manger.to_him.to_i + value_before_last_save)
     manger.update(final_manager_amount: manger.final_manager_amount.to_i + value_before_last_save)
+    bank.update(balance: bank.balance.to_i + value_before_last_save) if bank.present?
     manger.update(for_him: manger.for_him.to_i - value)
     manger.update(to_him: manger.to_him.to_i - value)
     manger.update(final_manager_amount: manger.final_manager_amount.to_i - value)
+    bank.update(balance: bank.balance.to_i - value) if bank.present?
   end
 
   def reverse_changes
     manger.update(for_him: manger.for_him.to_i + value)
     manger.update(to_him: manger.to_him.to_i + value)
     manger.update(final_manager_amount: manger.final_manager_amount.to_i + value)
+    bank.update(balance: bank.balance.to_i + value_before_last_save) if bank.present?
   end  
 end

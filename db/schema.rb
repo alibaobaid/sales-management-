@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_20_185541) do
+ActiveRecord::Schema.define(version: 2019_11_01_064506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(version: 2019_09_20_185541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "country_id"
+    t.bigint "bank_id"
+    t.index ["bank_id"], name: "index_manger_discounts_on_bank_id"
     t.index ["country_id"], name: "index_manger_discounts_on_country_id"
     t.index ["manger_id"], name: "index_manger_discounts_on_manger_id"
   end
@@ -197,6 +199,7 @@ ActiveRecord::Schema.define(version: 2019_09_20_185541) do
   add_foreign_key "delegates", "countries"
   add_foreign_key "deliveries", "countries"
   add_foreign_key "deliveries", "delegates"
+  add_foreign_key "manger_discounts", "banks"
   add_foreign_key "manger_discounts", "countries"
   add_foreign_key "manger_discounts", "mangers"
   add_foreign_key "mangers", "countries"

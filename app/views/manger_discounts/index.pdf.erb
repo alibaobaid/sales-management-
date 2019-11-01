@@ -11,6 +11,7 @@
         <th>سبب صرف المبلغ</th>
         <th>المبلغ</th>
         <th>تاريخ الصرف</th>
+        <th>اسم البنك</th>
       </tr>
     </thead>
 
@@ -20,6 +21,7 @@
           <td><%= manger_discount.Desc %></td>
           <td><%= manger_discount.value %></td>
           <td><%= manger_discount.date_of_discount %></td>
+          <td><%= manger_discount.bank&.name %></td>
         </tr>
       <% end %>
     </tbody>
