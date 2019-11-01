@@ -99,6 +99,6 @@ class BankTransfersController < ApplicationController
     end
 
     def bank_transfer_update_params
-      params.require(:bank_transfer).permit(:date_of_transfer, :price, :note, :bank_id)      
+      params.require(:bank_transfer).permit(:date_of_transfer, :price, :note)      
     end 
 end

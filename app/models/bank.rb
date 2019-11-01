@@ -21,6 +21,8 @@ class Bank < ApplicationRecord
   # Associations
   belongs_to :country
   has_many :bank_transfers, dependent: :destroy
+  has_many :manger_discounts, dependent: :destroy
+
 
   
   # Validations

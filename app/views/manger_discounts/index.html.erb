@@ -11,6 +11,7 @@
         <th>سبب صرف المبلغ</th>
         <th>المبلغ</th>
         <th>تاريخ الصرف</th>
+        <th>اسم البنك</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -21,6 +22,7 @@
           <td><%= manger_discount.Desc %></td>
           <td><%= manger_discount.value %></td>
           <td><%= manger_discount.date_of_discount %></td>
+          <td><%= manger_discount.bank&.name %></td>
           <td><%= link_to 'تعديل', edit_manger_discount_path(manger_discount), class: "btn btn-light" %></td>
           <td><%= link_to 'حذف', manger_discount, method: :delete, class:"btn btn-light", data: { confirm:'هل انت متاكد؟' } %></td>
         </tr>
