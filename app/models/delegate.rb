@@ -29,6 +29,8 @@ class Delegate < ApplicationRecord
   has_many :sales_operations , dependent: :destroy, inverse_of: :delegate
   has_many :bank_transfers, dependent: :destroy
   has_many :product_discounts, dependent: :destroy
+  has_many :external_transfers, as: :sender, dependent: :destroy
+  has_many :external_transfers, as: :receiver, dependent: :destroy
   belongs_to :country       
   # Validations
   validates :name, presence: true, uniqueness: { scope: [:country_id] }

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   end
   resources :mangers
   resources :assistants
+  resources :external_employees
+  resources :external_transfers
   resources :marketers
   resources :deliveries
   resources :delegates

@@ -28,6 +28,9 @@
             <li class="<%= params[:controller] == 'assistants'? "nav-item active" : "nav-item" %>">
               <a class="nav-link" href="/assistants#index"> المساعدين</a>
             </li>
+            <li class="<%= params[:controller] == 'external_employees'? "nav-item active" : "nav-item" %>">
+              <a class="nav-link" href="/external_employees#index"> الموظفين الخارجين</a>
+            </li>
             <li class="<%= params[:controller] == 'deliveries'? "nav-item active" : "nav-item" %>">
               <a class="nav-link" href="/deliveries#index"> تسليم البضائع</a>
             </li>
@@ -42,6 +45,9 @@
             </li>
             <li class="<%= params[:controller] == 'manger_discounts'? "nav-item active" : "nav-item"%>">
               <a class="nav-link" href="/manger_discounts#index">صرفيات المدير</a>
+            </li>
+            <li class="<%= params[:controller] == 'external_transfers'? "nav-item active" : "nav-item"%>">
+              <a class="nav-link" href="/external_transfers#index">حوالات خارجيه</a>
             </li>
             <li class="<%= params[:controller] == 'product_discounts'? "nav-item active" : "nav-item"%>">
               <a class="nav-link" href="/product_discounts#index">البضائع المصروفه</a>

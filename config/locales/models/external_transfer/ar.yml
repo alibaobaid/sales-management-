@@ -1,0 +1,14 @@
+ar:
+  activerecord:
+    attributes:
+      external_transfer:
+        date_of_transfer: 'تاريخ الحواله'
+        price: 'السعر'
+    errors:
+      models:
+        external_transfer:
+          attributes:
+            date_of_transfer:
+              blank: 'لا يمكن تركها فارغا'
+            price:
+              blank: 'لا يمكن تركه فارغا'

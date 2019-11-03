@@ -1,0 +1,35 @@
+<br>
+<br>
+<h2 style="text-align: center;"> 
+  الموظفين الخارجين  ب<%= @current_country.name %>
+</h2>
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>الاسم</th>
+        <th>رقم الجوال</th>
+        <th>المبلغ المستحق</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% @external_employees.each do |external_employee| %>
+        <tr>
+          <td><%= external_employee.name %></td>
+          <td><%= external_employee.phone_NO %></td>
+          <td><%= external_employee.for_him %></td>
+          <td><%= link_to 'تعديل', edit_external_employee_path(external_employee), class: "btn btn-light" %></td>
+          <td><%= link_to 'حذف', external_employee, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة', new_external_employee_path, class: "btn btn btn-secondary my-2 my-sm-0"%>
+<%= link_to "استخراج ملف pdf", external_employees_path(format: "pdf"),class: "btn btn btn-secondary my-2 my-sm-0" %>
