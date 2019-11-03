@@ -62,6 +62,6 @@ class MangerDiscount < ApplicationRecord
     manger.update(for_him: manger.for_him.to_i + value)
     manger.update(to_him: manger.to_him.to_i + value)
     manger.update(final_manager_amount: manger.final_manager_amount.to_i + value)
-    bank.update(balance: bank.balance.to_i + value_before_last_save) if bank.present?
-  end  
+    bank.update(balance: bank.balance.to_i + value) if bank.present?
+  end
 end
