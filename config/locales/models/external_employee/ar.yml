@@ -1,0 +1,13 @@
+ar:
+  activerecord:
+    attributes:
+      external_employee:
+        name: 'الاسم'
+        city: 'المدينة'
+    errors:
+      models:
+        external_employee:
+          attributes:
+            name:
+              blank: 'لايمكن تركه فارغا'
+              taken: 'ماخوذ مسبقا'

@@ -1,0 +1,29 @@
+<br>
+
+<h2 style="text-align: center;"> 
+    الموظفين الخارجين  ب<%= @current_country.name %>
+</h2>
+<br>
+
+
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: right;">
+      <tr>
+        <th>الاسم</th>
+        <th>رقم الجوال</th>
+        <th>المبلغ المستحق</th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: right;">
+      <% @external_employees.each do |external_employee| %>
+        <tr>
+          <td><%= external_employee.name %></td>
+          <td><%= external_employee.phone_NO %></td>
+          <td><%= external_employee.for_him %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

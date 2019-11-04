@@ -1,0 +1,36 @@
+<br>
+
+<h2 style="text-align: center;">
+   الحويلات الخارجيه ب<%= @current_country.name %> 
+</h2>
+<div class="table-responsive" >
+  <table class="table">
+    <thead class="thead-light" style="text-align: center;">
+      <tr>
+        <th>تاريخ الحواله</th>
+        <th>اسم المرسل</th>
+        <th>المبلغ</th>
+        <th>اسم المستلم</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody style="text-align: center;">
+      <% @external_transfers.each do |external_transfer| %>
+        <tr>
+          <td><%= external_transfer.date_of_transfer.to_date %></td>
+          <td><%= external_transfer.sender.name %></td>
+          <td><%= external_transfer.price %></td>
+          <td><%= external_transfer.receiver.name %></td>
+          <td style="text-align: center;"><%= link_to 'تعديل', edit_external_transfer_path(external_transfer),class: "btn btn-light" %></td>
+          <td style="text-align: center;"><%= link_to 'حذف', external_transfer, method: :delete, class: "btn btn-light", data: { confirm: 'هل انت متاكد؟' }%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'إضافة حواله', new_external_transfer_path ,class:"btn btn btn-secondary my-2 my-sm-0" %>
+<%= link_to "استخراج ملف pdf", external_transfers_path(format: "pdf"),class: "btn btn btn-secondary my-2 my-sm-0" %>

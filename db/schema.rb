@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_064506) do
+ActiveRecord::Schema.define(version: 2019_11_03_061715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,27 @@ ActiveRecord::Schema.define(version: 2019_11_01_064506) do
     t.bigint "country_id"
     t.index ["country_id"], name: "index_deliveries_on_country_id"
     t.index ["delegate_id"], name: "index_deliveries_on_delegate_id"
+  end
+
+  create_table "external_employees", force: :cascade do |t|
+    t.string "name"
+    t.float "for_him"
+    t.string "phone_NO"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_external_employees_on_country_id"
+  end
+
+  create_table "external_transfers", force: :cascade do |t|
+    t.date "date_of_transfer"
+    t.string "sender_type"
+    t.bigint "sender_id"
+    t.string "receiver_type"
+    t.bigint "receiver_id"
+    t.bigint "country_id"
+    t.float "price"
+    t.index ["country_id"], name: "index_external_transfers_on_country_id"
+    t.index ["receiver_type", "receiver_id"], name: "index_external_transfers_on_receiver_type_and_receiver_id"
+    t.index ["sender_type", "sender_id"], name: "index_external_transfers_on_sender_type_and_sender_id"
   end
 
   create_table "manger_discounts", force: :cascade do |t|
@@ -199,6 +220,8 @@ ActiveRecord::Schema.define(version: 2019_11_01_064506) do
   add_foreign_key "delegates", "countries"
   add_foreign_key "deliveries", "countries"
   add_foreign_key "deliveries", "delegates"
+  add_foreign_key "external_employees", "countries"
+  add_foreign_key "external_transfers", "countries"
   add_foreign_key "manger_discounts", "banks"
   add_foreign_key "manger_discounts", "countries"
   add_foreign_key "manger_discounts", "mangers"

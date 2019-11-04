@@ -20,8 +20,20 @@ class Country < ApplicationRecord
   has_many :sales_operations, dependent: :destroy
   has_many :users, dependent: :destroy
   has_many :banks, dependent: :destroy
+  has_many :external_employees, dependent: :destroy
+  has_many :external_transfers, dependent: :destroy
+
 
 
   # Validations
   validates :name, presence: true, uniqueness: true
+
+  def employees_hash
+    [
+      ['مندوب', 'Delegate'],
+      ['مسوق', 'Marketer'],
+      ['مساعد','Assistant'],
+      ['موظف خارجي','ExternalEmployee']
+    ]
+  end
 end
