@@ -22,24 +22,24 @@
       <%= form.collection_select(:sender_type, @current_country.employees_hash, :second, :first, {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "نوع الموضف", id:"type", onchange: "myfunction()"})  %>
     </div>
 
-    <div class="form-group", id ="delegate", style="display: block">
+    <div class="form-group", id ="delegate", style="display: none">
       <%= form.label "حدد المندوب", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:sender_id, @current_country.delegates, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
+      <%= form.collection_select(:sender_id, @current_country.delegates, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "المندوب", id:'delegate_id'})  %>
     </div>
 
     <div class="form-group", id="marketer", style="display: none">
       <%= form.label "حدد المسوق", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:sender_id, @current_country.marketers, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
+      <%= form.collection_select(:sender_id, @current_country.marketers, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "المسوق", id:'marketer_id'})  %>
     </div>
 
     <div class="form-group", id="assistant", style="display: none">
       <%= form.label "حدد المساعد", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:sender_id, @current_country.assistants, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المساعد"})  %>
+      <%= form.collection_select(:sender_id, @current_country.assistants, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "المساعد", id:'assistant_id'})  %>
     </div>
 
     <div class="form-group", id="external_employee", style="display: none">
       <%= form.label "حدد الموظف الخارجي", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:sender_id, @current_country.external_employees, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "حدد الموظف الخارجي"})  %>
+      <%= form.collection_select(:sender_id, @current_country.external_employees, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "حدد الموظف الخارجي", id:'external_employee_id'})  %>
     </div>
 
     <div class="form-group">
@@ -52,24 +52,24 @@
       <%= form.collection_select(:receiver_type, @current_country.employees_hash, :second, :first, {:"data-style" => "form-control", multiple: true}, {class: "form-control", title: "نوع الموضف", id:"type_2", onchange: "myfunction_2()"})  %>
     </div>
 
-    <div class="form-group", id ="delegate_2", style="display: block">
+    <div class="form-group", id ="delegate_2", style="display: none">
       <%= form.label "حدد المندوب", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:receiver_id, @current_country.delegates, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المندوب"})  %>
+      <%= form.collection_select(:receiver_id, @current_country.delegates, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "المندوب", id:'delegate_id_2'})  %>
     </div>
 
     <div class="form-group", id="marketer_2", style="display: none">
       <%= form.label "حدد المسوق", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:receiver_id, @current_country.marketers, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المسوق"})  %>
+      <%= form.collection_select(:receiver_id, @current_country.marketers, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "المسوق", id:'marketer_id_2'})  %>
     </div>
 
     <div class="form-group", id="assistant_2", style="display: none">
       <%= form.label "حدد المساعد", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:receiver_id, @current_country.assistants, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "المساعد"})  %>
+      <%= form.collection_select(:receiver_id, @current_country.assistants, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "المساعد", id:'assistant_id_2'})  %>
     </div>
 
     <div class="form-group", id="external_employee_2", style="display: none">
       <%= form.label "حدد الموظف الخارجي", style: "text-align: right; float: right"%>
-      <%= form.collection_select(:sender_id, @current_country.external_employees, :id, :name, {:"data-style" => "selectpicker", multiple: true}, {class: "form-control", title: "حدد الموظف الخارجي"})  %>
+      <%= form.collection_select(:receiver_id, @current_country.external_employees, :id, :name, {:"data-style" => "selectpicker", multiple: true, null: true}, {class: "form-control", title: "حدد الموظف الخارجي", id:'external_employee_id_2'})  %>
     </div>
 
     <div class="form-group">
@@ -82,33 +82,49 @@
   function myfunction() {
     var type = document.getElementById("type")
     var delegate = document.getElementById("delegate")
+    var delegate_id = document.getElementById("delegate_id")
     var marketer = document.getElementById("marketer")
+    var marketer_id = document.getElementById("marketer_id")
     var assistant = document.getElementById("assistant")
+    var assistant_id = document.getElementById("assistant_id")
     var external_employee = document.getElementById("external_employee")
+    var external_employee_id = document.getElementById("external_employee_id")
 
     switch(type.value) {
       case "Delegate":
         delegate.style.display="block"
         marketer.style.display="none"
+        marketer_id.value = null
         assistant.style.display="none"
+        assistant_id.value = null
         external_employee.style.display="none"
+        external_employee_id.value = null
         break;
       case "Marketer":
         delegate.style.display="none"
+        delegate_id.value = null
         marketer.style.display="block"
         assistant.style.display="none"
+        assistant_id.value = null
         external_employee.style.display="none"
+        external_employee_id.value = null
         break;
       case "Assistant":
         delegate.style.display="none"
+        delegate_id.value = null
         marketer.style.display="none"
+        marketer_id.value = null
         assistant.style.display="block"
         external_employee.style.display="none"
+        external_employee_id.value = null
         break;
       case "ExternalEmployee":
         delegate.style.display="none"
+        delegate_id.value = null
         marketer.style.display="none"
+        marketer_id.value = null
         assistant.style.display="none"
+        assistant_id.value = null
         external_employee.style.display="block"
         break;
        }
@@ -117,32 +133,48 @@
   function myfunction_2() {
     var type = document.getElementById("type_2")
     var delegate = document.getElementById("delegate_2")
+    var delegate_id = document.getElementById("delegate_id_2")
     var marketer = document.getElementById("marketer_2")
+    var marketer_id = document.getElementById("marketer_id_2")
     var assistant = document.getElementById("assistant_2")
+    var assistant_id = document.getElementById("assistant_id_2")
     var external_employee = document.getElementById("external_employee_2")
+    var external_employee_id = document.getElementById("external_employee_id_2")
     switch(type.value) {
       case "Delegate":
         delegate.style.display="block"
         marketer.style.display="none"
+        marketer_id.value = null
         assistant.style.display="none"
+        assistant_id.value = null
         external_employee.style.display="none"
+        external_employee_id.value = null
         break;
       case "Marketer":
         delegate.style.display="none"
+        delegate_id.value = null
         marketer.style.display="block"
         assistant.style.display="none"
+        assistant_id.value = null
         external_employee.style.display="none"
+        external_employee_id.value = null
         break;
       case "Assistant":
         delegate.style.display="none"
+        delegate_id.value = null
         marketer.style.display="none"
+        marketer_id.value = null
         assistant.style.display="block"
         external_employee.style.display="none"
+        external_employee_id.value = null
         break;
       case "ExternalEmployee":
         delegate.style.display="none"
+        delegate_id.value = null
         marketer.style.display="none"
+        marketer_id.value = null
         assistant.style.display="none"
+        assistant_id.value = null
         external_employee.style.display="block"
         break;
        }
