@@ -72,20 +72,20 @@ class BankTransfer < ApplicationRecord
     if transfer_type == "ارسال"
       add_price_to_bank_and_manger
       if section_type == "مندوب"
-        delegate.update(for_him: delegate.for_him.to_i + price)
+        delegate.update(for_him: delegate.for_him.to_f + price)
       elsif section_type == "مسوق"
-        marketer.update(for_him: marketer.for_him.to_i + price)
+        marketer.update(for_him: marketer.for_him.to_f + price)
       elsif section_type == "مساعد"
-        assistant.update(for_him: assistant.for_him.to_i + price)
+        assistant.update(for_him: assistant.for_him.to_f + price)
       end
     elsif transfer_type == "استلام"
       remove_price_from_bank_and_manger
       if section_type == "مندوب"
-        delegate.update(for_him: delegate.for_him.to_i - price)
+        delegate.update(for_him: delegate.for_him.to_f - price)
       elsif section_type == "مسوق"
-        marketer.update(for_him: marketer.for_him.to_i - price)
+        marketer.update(for_him: marketer.for_him.to_f - price)
       elsif section_type == "مساعد"
-        assistant.update(for_him: assistant.for_him.to_i - price)
+        assistant.update(for_him: assistant.for_him.to_f - price)
       end
     end
   end
@@ -95,20 +95,20 @@ class BankTransfer < ApplicationRecord
     if transfer_type == "استلام"
       add_price_to_bank_and_manger
       if section_type == "مندوب"
-        delegate.update(for_him: delegate.for_him.to_i + price)
+        delegate.update(for_him: delegate.for_him.to_f + price)
       elsif section_type == "مسوق"
-        marketer.update(for_him: marketer.for_him.to_i + price)
+        marketer.update(for_him: marketer.for_him.to_f + price)
       elsif section_type == "مساعد"
-        assistant.update(for_him: assistant.for_him.to_i + price)
+        assistant.update(for_him: assistant.for_him.to_f + price)
       end
     elsif transfer_type == "ارسال"
       remove_price_from_bank_and_manger
       if section_type == "مندوب"
-        delegate.update(for_him: delegate.for_him.to_i - price)
+        delegate.update(for_him: delegate.for_him.to_f - price)
       elsif section_type == "مسوق"
-        marketer.update(for_him: marketer.for_him.to_i - price)
+        marketer.update(for_him: marketer.for_him.to_f - price)
       elsif section_type == "مساعد"
-        assistant.update(for_him: assistant.for_him.to_i - price)
+        assistant.update(for_him: assistant.for_him.to_f - price)
       end
     end
   end
@@ -124,53 +124,53 @@ class BankTransfer < ApplicationRecord
   def update_price_of_employee_changes
     if transfer_type == "ارسال"
       if section_type == "مندوب"
-        delegate.update(for_him: delegate.for_him.to_i - price_before_last_save)
-        delegate.update(for_him: delegate.for_him.to_i + price)
+        delegate.update(for_him: delegate.for_him.to_f - price_before_last_save)
+        delegate.update(for_him: delegate.for_him.to_f + price)
       elsif section_type == "مسوق"
-        marketer.update(for_him: marketer.for_him.to_i - price_before_last_save)
-        marketer.update(for_him: marketer.for_him.to_i + price)
+        marketer.update(for_him: marketer.for_him.to_f - price_before_last_save)
+        marketer.update(for_him: marketer.for_him.to_f + price)
       elsif section_type == "مساعد"
-        assistant.update(for_him: assistant.for_him.to_i - price_before_last_save)
-        assistant.update(for_him: assistant.for_him.to_i + price)
+        assistant.update(for_him: assistant.for_him.to_f - price_before_last_save)
+        assistant.update(for_him: assistant.for_him.to_f + price)
       end
     elsif transfer_type == "استلام"
       if section_type == "مندوب"
-        delegate.update(for_him: delegate.for_him.to_i + price_before_last_save)
-        delegate.update(for_him: delegate.for_him.to_i - price)
+        delegate.update(for_him: delegate.for_him.to_f + price_before_last_save)
+        delegate.update(for_him: delegate.for_him.to_f - price)
       elsif section_type == "مسوق"
-        marketer.update(for_him: marketer.for_him.to_i + price_before_last_save)
-        marketer.update(for_him: marketer.for_him.to_i - price)
+        marketer.update(for_him: marketer.for_him.to_f + price_before_last_save)
+        marketer.update(for_him: marketer.for_him.to_f - price)
       elsif section_type == "مساعد"
-        assistant.update(for_him: assistant.for_him.to_i + price_before_last_save)
-        assistant.update(for_him: assistant.for_him.to_i - price)
+        assistant.update(for_him: assistant.for_him.to_f + price_before_last_save)
+        assistant.update(for_him: assistant.for_him.to_f - price)
       end
     end
   end
   
   def add_price_to_bank_and_manger
     default_manger = Manger.where(country_id: self.country_id).first
-    bank.update(balance: bank.balance.to_i + price) if bank.present?
-    default_manger.update(to_him: default_manger.to_him.to_i + price)
+    bank.update(balance: bank.balance.to_f + price) if bank.present?
+    default_manger.update(to_him: default_manger.to_him.to_f + price)
   end
 
   def remove_price_from_bank_and_manger
     default_manger = Manger.where(country_id: self.country_id).first
-    bank.update(balance: bank.balance.to_i - price) if bank.present?
-    default_manger.update(to_him: default_manger.to_him.to_i - price)
+    bank.update(balance: bank.balance.to_f - price) if bank.present?
+    default_manger.update(to_him: default_manger.to_him.to_f - price)
   end
 
   def update_bank_and_manager
     default_manger = Manger.where(country_id: self.country_id).first
     if transfer_type == "ارسال"
-      default_manger.update(to_him: default_manger.to_him.to_i - price_before_last_save)
-      default_manger.update(to_him: default_manger.to_him.to_i + price)
-      bank.update(balance: bank.balance.to_i - price_before_last_save) if bank.present?
-      bank.update(balance: bank.balance.to_i + price) if bank.present?
+      default_manger.update(to_him: default_manger.to_him.to_f - price_before_last_save)
+      default_manger.update(to_him: default_manger.to_him.to_f + price)
+      bank.update(balance: bank.balance.to_f - price_before_last_save) if bank.present?
+      bank.update(balance: bank.balance.to_f + price) if bank.present?
     else
-      default_manger.update(to_him: default_manger.to_him.to_i + price_before_last_save)
-      default_manger.update(to_him: default_manger.to_him.to_i - price)
-      bank.update(balance: bank.balance.to_i + price_before_last_save) if bank.present?
-      bank.update(balance: bank.balance.to_i - price) if bank.present?
+      default_manger.update(to_him: default_manger.to_him.to_f + price_before_last_save)
+      default_manger.update(to_him: default_manger.to_him.to_f - price)
+      bank.update(balance: bank.balance.to_f + price_before_last_save) if bank.present?
+      bank.update(balance: bank.balance.to_f - price) if bank.present?
     end
   end
 end

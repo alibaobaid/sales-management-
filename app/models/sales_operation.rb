@@ -91,21 +91,21 @@ class SalesOperation < ApplicationRecord
   end
 
   def update_amount_of_delegate
-    delegate.update(amount_of_box: delegate.amount_of_box.to_i - box_amount)
-    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - gallon_amount)
+    delegate.update(amount_of_box: delegate.amount_of_box.to_f - box_amount)
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f - gallon_amount)
   end
 
   def update_delegate_value
-    delegate.update(for_him: delegate.for_him.to_i + (delegate_commission - price))
+    delegate.update(for_him: delegate.for_him.to_f + (delegate_commission - price))
   end
 
   def update_marketrt_value
-    marketer.update(for_him: marketer.for_him.to_i + marketer_commission)
+    marketer.update(for_him: marketer.for_him.to_f + marketer_commission)
   end
 
   def update_manager_value
-    manger.update(for_him: manger.for_him.to_i + manager_commission)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i + final_manager_amount)
+    manger.update(for_him: manger.for_him.to_f + manager_commission)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f + final_manager_amount)
   end
 
   # this methods is for create bank transfer if the the price is entred within sale operation
@@ -121,19 +121,19 @@ class SalesOperation < ApplicationRecord
 
   def update_assistants
     country.assistants.each do |assistant|
-      assistant.update(for_him: assistant.for_him.to_i + assistant.his_amount.to_i)
+      assistant.update(for_him: assistant.for_him.to_f + assistant.his_amount.to_f)
     end
   end
 
   def reverse_chnages
-    delegate.update(amount_of_box: delegate.amount_of_box.to_i + box_amount)
-    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + gallon_amount)
-    delegate.update(for_him: delegate.for_him.to_i - (delegate_commission - price))
-    marketer.update(for_him: marketer.for_him.to_i - marketer_commission)
-    manger.update(for_him: manger.for_him.to_i - manager_commission)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i - final_manager_amount)
+    delegate.update(amount_of_box: delegate.amount_of_box.to_f + box_amount)
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f + gallon_amount)
+    delegate.update(for_him: delegate.for_him.to_f - (delegate_commission - price))
+    marketer.update(for_him: marketer.for_him.to_f - marketer_commission)
+    manger.update(for_him: manger.for_him.to_f - manager_commission)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f - final_manager_amount)
     country.assistants.each do |assistant|
-      assistant.update(for_him: assistant.for_him.to_i - assistant.his_amount.to_i)
+      assistant.update(for_him: assistant.for_him.to_f - assistant.his_amount.to_f)
     end
   end
 
@@ -142,27 +142,27 @@ class SalesOperation < ApplicationRecord
   end
 
   def update_amount_of_delegate_changes
-    delegate.update(amount_of_box: delegate.amount_of_box.to_i + box_amount_before_last_save)
-    delegate.update(amount_of_box: delegate.amount_of_box.to_i - box_amount)
-    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + gallon_amount_before_last_save )
-    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - gallon_amount )
+    delegate.update(amount_of_box: delegate.amount_of_box.to_f + box_amount_before_last_save)
+    delegate.update(amount_of_box: delegate.amount_of_box.to_f - box_amount)
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f + gallon_amount_before_last_save )
+    delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f - gallon_amount )
   end
 
   def update_delegate_value_changes
-    delegate.update(for_him: delegate.for_him.to_i - (delegate_commission_before_last_save - price_before_last_save))
-    delegate.update(for_him: delegate.for_him.to_i + (delegate_commission - price))
+    delegate.update(for_him: delegate.for_him.to_f - (delegate_commission_before_last_save - price_before_last_save))
+    delegate.update(for_him: delegate.for_him.to_f + (delegate_commission - price))
   end
 
   def update_marketrt_value_changes
-    marketer.update(for_him: marketer.for_him.to_i - marketer_commission_before_last_save )
-    marketer.update(for_him: marketer.for_him.to_i + marketer_commission )
+    marketer.update(for_him: marketer.for_him.to_f - marketer_commission_before_last_save )
+    marketer.update(for_him: marketer.for_him.to_f + marketer_commission )
   end
 
   def update_manager_value_changes
-    manger.update(for_him: manger.for_him.to_i - manager_commission_before_last_save)
-    manger.update(for_him: manger.for_him.to_i + manager_commission)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i - final_manager_amount_before_last_save)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i + final_manager_amount)
+    manger.update(for_him: manger.for_him.to_f - manager_commission_before_last_save)
+    manger.update(for_him: manger.for_him.to_f + manager_commission)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f - final_manager_amount_before_last_save)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f + final_manager_amount)
   end
 
   def assistants_amount

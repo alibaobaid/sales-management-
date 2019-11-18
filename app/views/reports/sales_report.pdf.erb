@@ -41,7 +41,7 @@
             <%= @sales_operations.pluck(:manager_commission).sum  %>
           </td>
           <td>
-            <%= @sales_operations.first&.manger&.for_him.to_i - @sales_operations.pluck(:manager_commission).sum  %>
+            <%= @sales_operations.first&.manger&.for_him.to_f - @sales_operations.pluck(:manager_commission).sum  %>
           </td>
           <td>
             <%= BankTransfer.where(country_id: @current_country.id).
@@ -50,7 +50,7 @@
                              pluck(:price).sum  %>
           </td>
           <td>
-            <%= @sales_operations.first&.manger&.for_him.to_i %>
+            <%= @sales_operations.first&.manger&.for_him.to_f %>
           </td>
           <td><%= @sales_operations.pluck(:gallon_amount).sum  %></td>
           <td><%= @sales_operations.pluck(:box_amount).sum %></td>
