@@ -39,27 +39,27 @@ class Delivery < ApplicationRecord
   # instance method
   def set_amount_to_delegate
     if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f + commodity_amount )
     else 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f + commodity_amount )
     end
   end
 
   def update_delegate_account_changes
     if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount_before_last_save )
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i + commodity_amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f - commodity_amount_before_last_save )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f + commodity_amount )
     else
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount_before_last_save ) 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + commodity_amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f - commodity_amount_before_last_save ) 
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f + commodity_amount )
     end
   end
 
   def reveres_changes
     if commodity_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i - commodity_amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f - commodity_amount )
     else 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - commodity_amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f - commodity_amount )
     end
   end
 

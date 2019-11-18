@@ -41,27 +41,27 @@ class MangerDiscount < ApplicationRecord
   after_destroy :reverse_changes
 
   def update_manger_and_bank_account
-    manger.update(for_him: manger.for_him.to_i - value)
-    manger.update(to_him: manger.to_him.to_i - value)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i - value)
-    bank.update(balance: bank.balance.to_i - value) if bank.present?
+    manger.update(for_him: manger.for_him.to_f - value)
+    manger.update(to_him: manger.to_him.to_f - value)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f - value)
+    bank.update(balance: bank.balance.to_f - value) if bank.present?
   end
 
   def update_manger_and_bank_account_changes
-    manger.update(for_him: manger.for_him.to_i + value_before_last_save)
-    manger.update(to_him: manger.to_him.to_i + value_before_last_save)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i + value_before_last_save)
-    bank.update(balance: bank.balance.to_i + value_before_last_save) if bank.present?
-    manger.update(for_him: manger.for_him.to_i - value)
-    manger.update(to_him: manger.to_him.to_i - value)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i - value)
-    bank.update(balance: bank.balance.to_i - value) if bank.present?
+    manger.update(for_him: manger.for_him.to_f + value_before_last_save)
+    manger.update(to_him: manger.to_him.to_f + value_before_last_save)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f + value_before_last_save)
+    bank.update(balance: bank.balance.to_f + value_before_last_save) if bank.present?
+    manger.update(for_him: manger.for_him.to_f - value)
+    manger.update(to_him: manger.to_him.to_f - value)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f - value)
+    bank.update(balance: bank.balance.to_f - value) if bank.present?
   end
 
   def reverse_changes
-    manger.update(for_him: manger.for_him.to_i + value)
-    manger.update(to_him: manger.to_him.to_i + value)
-    manger.update(final_manager_amount: manger.final_manager_amount.to_i + value)
-    bank.update(balance: bank.balance.to_i + value) if bank.present?
+    manger.update(for_him: manger.for_him.to_f + value)
+    manger.update(to_him: manger.to_him.to_f + value)
+    manger.update(final_manager_amount: manger.final_manager_amount.to_f + value)
+    bank.update(balance: bank.balance.to_f + value) if bank.present?
   end
 end

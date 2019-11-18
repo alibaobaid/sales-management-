@@ -42,27 +42,27 @@ class ProductDiscount < ApplicationRecord
 
   def update_delegate_account
     if product_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i - amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f - amount )
     else 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f - amount )
     end
   end
 
   def update_delegate_account_changes
     if product_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i + amount_before_last_save )
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i - amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f + amount_before_last_save )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f - amount )
     else
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + amount_before_last_save ) 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i - amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f + amount_before_last_save ) 
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f - amount )
     end
   end
 
   def reveres_changes
     if product_type == 'علب'
-      delegate.update(amount_of_box: delegate.amount_of_box.to_i + amount )
+      delegate.update(amount_of_box: delegate.amount_of_box.to_f + amount )
     else 
-      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_i + amount )
+      delegate.update(amount_of_gallon: delegate.amount_of_gallon.to_f + amount )
     end
   end
 
