@@ -262,6 +262,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   annotate
@@ -299,7 +300,7 @@ DEPENDENCIES
   wkhtmltopdf-binary
 
 RUBY VERSION
-   ruby 2.6.1p33
+   ruby 2.7.2p137
 
 BUNDLED WITH
-   2.0.2
+   2.2.0
